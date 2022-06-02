@@ -15,7 +15,7 @@ mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockito" }
 kotlin-testing = [ "kotest-junit5-jvm", "kotest-assertions-core-jvm", "mockito-core" ]
 
 [plugins]
-android = "com.android.application:7.0.0"
+android = "com.android.application:7.2.1"
 dokka = { id = "org.jetbrains.dokka", version.ref = "kotlin" }
 gitSemVer = { id = "org.danilopianini.git-sensitive-semantic-versioning", version = "0.3.0" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
