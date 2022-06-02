@@ -1,3 +1,13 @@
+@file:Suppress("UnstableApiUsage")
+
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+    }
+}
+
 plugins {
     id("com.gradle.enterprise") version "3.10.1"
     id("org.danilopianini.gradle-pre-commit-git-hooks") version "1.0.11"
@@ -16,5 +26,4 @@ gitHooks {
     createHooks()
 }
 
-rootProject.name = "Template-for-Kotlin-JVM-Projects"
-enableFeaturePreview("VERSION_CATALOGS")
+rootProject.name = "Template-for-Kotlin-Multiplatform-Projects"
