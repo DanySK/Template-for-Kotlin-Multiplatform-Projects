@@ -4,3 +4,4 @@ build/
 .vscode
 bin
 kotlin-js-store
+*.hprof
