@@ -1,4 +1,5 @@
 [versions]
+android-plugins = "7.0.0"
 kotest = "5.3.0"
 kotlin = "1.6.21"
 mockito = "4.6.0"
@@ -15,12 +16,13 @@ mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockito" }
 kotlin-testing = [ "kotest-junit5-jvm", "kotest-assertions-core-jvm", "mockito-core" ]
 
 [plugins]
-android = "com.android.application:7.0.0"
+android-application = { id = "com.android.application", version.ref = "android-plugins" }
+android-library = { id = "com.android.library", version.ref = "android-plugins" }
 dokka = { id = "org.jetbrains.dokka", version.ref = "kotlin" }
 gitSemVer = { id = "org.danilopianini.git-sensitive-semantic-versioning", version = "0.3.0" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-qa = { id = "org.danilopianini.gradle-kotlin-qa", version = "0.19.0" }
 multiJvmTesting = { id = "org.danilopianini.multi-jvm-test-plugin", version = "0.4.0" }
-publishOnCentral = { id = "org.danilopianini.publish-on-central", version = "0.7.19" }
+publishOnCentral = { id = "org.danilopianini.publish-on-central", version = "0.8.0" }
 taskTree = { id = "com.dorongold.task-tree", version = "2.1.0" }
