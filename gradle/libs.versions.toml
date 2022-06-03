@@ -1,5 +1,5 @@
 [versions]
-android-plugins = "7.0.0"
+android-plugins = "7.0.4"
 kotest = "5.3.0"
 kotlin = "1.6.21"
 mockito = "4.6.0"
