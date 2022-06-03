@@ -2,7 +2,7 @@
 android-plugins = "7.0.0"
 kotest = "5.3.0"
 kotlin = "1.6.21"
-mockito = "4.6.0"
+mockito = "4.6.1"
 
 [libraries]
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
