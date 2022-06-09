@@ -139,14 +139,3 @@ publishOnCentral {
         }
     }
 }
-
-publishing {
-    publications.configureEach {
-        if (this is MavenPublication) {
-            project.configure<SigningExtension> {
-                runCatching { sign(this@configureEach) }
-            }
-            println("$name -> ${pom.packaging}")
-        }
-    }
-}
