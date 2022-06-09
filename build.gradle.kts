@@ -31,7 +31,7 @@ kotlin {
             useJUnitPlatform()
         }
     }
-    js(BOTH) {
+    js(IR) {
         browser()
         nodejs()
     }
@@ -73,12 +73,17 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation(kotlin("stdlib"))
+                implementation(libs.kotlin.stdlib)
             }
         }
         val commonTest by getting {
             dependencies {
-                implementation(kotlin("test"))
+                implementation(libs.bundles.kotlin.testing.common)
+            }
+        }
+        val jvmTest by getting {
+            dependencies {
+                implementation(libs.bundles.kotlin.testing.jvm)
             }
         }
         val nativeMain by getting {
