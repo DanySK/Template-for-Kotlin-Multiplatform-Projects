@@ -4,20 +4,13 @@ import org.danilopianini.gradle.mavencentral.JavadocJar
 import org.jetbrains.kotlin.gradle.plugin.KotlinTarget
 import org.jetbrains.kotlin.util.capitalizeDecapitalize.toLowerCaseAsciiOnly
 
-//buildscript {
-//    dependencies {
-//        classpath("com.android.tools.build:gradle:7.0.0")
-//    }
-//}
-
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    alias(libs.plugins.android.library)
-//    id("com.quittle.setup-android-sdk") version "3.0.0"
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.dokka)
     alias(libs.plugins.gitSemVer)
     alias(libs.plugins.kotlin.qa)
+    alias(libs.plugins.multiJvmTesting)
     alias(libs.plugins.publishOnCentral)
     alias(libs.plugins.taskTree)
 }
@@ -27,23 +20,6 @@ group = "org.danilopianini"
 repositories {
     google()
     mavenCentral()
-}
-
-android {
-    compileSdk = 32
-    defaultConfig {
-        minSdk = 21
-        targetSdk = 32
-    }
-    sourceSets["main"].manifest.srcFile("src/androidMain/res/AndroidManifest.xml")
-    buildToolsVersion = "30.0.2"
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-    buildFeatures {
-        viewBinding = true
-    }
 }
 
 kotlin {
@@ -62,24 +38,6 @@ kotlin {
         browser()
         nodejs()
     }
-    android()
-//    androidNativeArm32()
-//    androidNativeArm64()
-//    androidNativeX86()
-//    androidNativeX64()
-//    iosArm32()
-//    iosArm64()
-//    iosX64()
-//    iosSimulatorArm64()
-//    watchosArm32()
-//    watchosArm64()
-//    watchosX86()
-//    watchosX64()
-//    watchosSimulatorArm64()
-//    tvosArm64()
-//    tvosX64()
-//    tvosSimulatorArm64()
-//    wasm32()
     val hostOs = System.getProperty("os.name").trim().toLowerCaseAsciiOnly()
     val hostArch = System.getProperty("os.arch").trim().toLowerCaseAsciiOnly()
     val nativeTarget: (String, org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget.() -> Unit) -> KotlinTarget =
@@ -99,8 +57,20 @@ kotlin {
         binaries {
             sharedLib()
             staticLib()
-            // Disable if there is no executable
-            executable()
+            // Remove if it is not executable
+            "main".let { executable ->
+                executable {
+                    entryPoint = executable
+                }
+                // Enable wasm32
+                wasm32 {
+                    binaries {
+                        executable {
+                            entryPoint = executable
+                        }
+                    }
+                }
+            }
         }
     }
     sourceSets {
@@ -114,27 +84,6 @@ kotlin {
                 implementation(kotlin("test"))
             }
         }
-        val commonJvmMain by creating {
-            dependsOn(commonMain)
-        }
-        val commonJvmTest by creating {
-            dependsOn(commonJvmMain)
-            dependsOn(commonTest)
-        }
-        val jvmMain by getting {
-            dependsOn(commonJvmMain)
-        }
-        val jvmTest by getting {
-            dependsOn(commonJvmTest)
-        }
-        val androidMain by getting {
-            dependsOn(commonJvmMain)
-        }
-        val androidTest by getting {
-            dependsOn(commonJvmTest)
-        }
-        val jsMain by getting
-        val jsTest by getting
         val nativeMain by getting {
             dependsOn(commonMain)
         }
@@ -150,8 +99,6 @@ kotlin {
         }
     }
 }
-
-tasks.register<Jar>("jar")
 
 tasks.dokkaJavadoc {
     enabled = false
@@ -189,6 +136,17 @@ publishOnCentral {
                     }
                 }
             }
+        }
+    }
+}
+
+publishing {
+    publications.configureEach {
+        if (this is MavenPublication) {
+            project.configure<SigningExtension> {
+                runCatching { sign(this@configureEach) }
+            }
+            println("$name -> ${pom.packaging}")
         }
     }
 }
