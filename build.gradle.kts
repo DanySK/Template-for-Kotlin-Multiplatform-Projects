@@ -100,9 +100,11 @@ kotlin {
 tasks.dokkaJavadoc {
     enabled = false
 }
-tasks.withType<JavadocJar> {
-    dependsOn(tasks.dokkaHtml.get())
-    from(tasks.dokkaHtml.get().outputDirectory)
+
+tasks.withType<JavadocJar>().configureEach {
+    val dokka = tasks.dokkaHtml.get()
+    dependsOn(dokka)
+    from(dokka.outputDirectory)
 }
 
 signing {
