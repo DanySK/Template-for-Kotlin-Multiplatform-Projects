@@ -30,9 +30,6 @@ kotlin {
         testRuns["test"].executionTask.configure {
             useJUnitPlatform()
         }
-        jvmToolchain {
-            // TODO
-        }
     }
     js(BOTH) {
         browser()
