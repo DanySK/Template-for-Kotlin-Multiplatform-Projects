@@ -123,7 +123,7 @@ signing {
 }
 
 publishOnCentral {
-    projectLongName.set("Template Kotlin Multiplatform Project")
+    projectLongName.set("Template for Kotlin Multiplatform Project")
     projectDescription.set("A template repository for Kotlin Multiplatform projects")
     repository("https://maven.pkg.github.com/danysk/${rootProject.name}".toLowerCase()) {
         user.set("DanySK")
