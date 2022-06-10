@@ -1,7 +1,13 @@
 var publishCmd = `
 git tag -a -f \${nextRelease.version} \${nextRelease.version} -F CHANGELOG.md || exit 1
 git push --force origin \${nextRelease.version} || exit 2
-./gradlew releaseKotlinMavenOnMavenCentralNexus || exit 3
+./gradlew releaseKotlinMultiplatformOnMavenCentralNexus || exit 3
+./gradlew releaseJvmOnMavenCentralNexus || exit 4
+./gradlew releaseJsOnMavenCentralNexus || exit 5
+./gradlew releaseNativeOnMavenCentralNexus || exit 6
+./gradlew releaseWasm32OnMavenCentralNexus || exit 7
+./gradlew releaseKotlinMavenOnMavenCentralNexus || exit 8
+./gradlew publishJsPackageToNpmjsRegistry || exit 9
 ./gradlew publishKotlinMavenPublicationToGithubRepository || true
 `
 var config = require('semantic-release-preconfigured-conventional-commits');

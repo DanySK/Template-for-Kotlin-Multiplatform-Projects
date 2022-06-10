@@ -11,6 +11,7 @@ plugins {
     alias(libs.plugins.gitSemVer)
     alias(libs.plugins.kotlin.qa)
     alias(libs.plugins.multiJvmTesting)
+    alias(libs.plugins.npm.publish)
     alias(libs.plugins.publishOnCentral)
     alias(libs.plugins.taskTree)
 }
@@ -34,6 +35,7 @@ kotlin {
     js(IR) {
         browser()
         nodejs()
+        binaries.library()
     }
     val hostOs = System.getProperty("os.name").trim().toLowerCaseAsciiOnly()
     val hostArch = System.getProperty("os.arch").trim().toLowerCaseAsciiOnly()
@@ -121,8 +123,8 @@ signing {
 }
 
 publishOnCentral {
-    projectLongName.set("Template Kotlin JVM Project")
-    projectDescription.set("A template repository for Kotlin JVM projects")
+    projectLongName.set("Template Kotlin Multiplatform Project")
+    projectDescription.set("A template repository for Kotlin Multiplatform projects")
     repository("https://maven.pkg.github.com/danysk/${rootProject.name}".toLowerCase()) {
         user.set("DanySK")
         password.set(System.getenv("GITHUB_TOKEN"))
@@ -140,6 +142,17 @@ publishOnCentral {
                     }
                 }
             }
+        }
+    }
+}
+
+npmPublish {
+    registries {
+        register("npmjs") {
+            uri.set("https://registry.npmjs.org")
+            val npmToken: String? by project
+            authToken.set(npmToken)
+            dry.set(npmToken.isNullOrBlank())
         }
     }
 }
