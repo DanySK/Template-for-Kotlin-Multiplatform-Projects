@@ -1,9 +1,8 @@
-# TODO LIST
+# A template for Kotlin multiplatform projects 
 
-1. Rename the project in `settings.gradle.kts`
-1. Change the project name and description in the `publishOnCentral` block in `build.gradle.kts`
-1. Configure the repository to have the following variables set:
-  * ORG_GRADLE_PROJECT_signingKey
-  * ORG_GRADLE_PROJECT_signingPassword
-  * MAVEN_CENTRAL_USERNAME
-  * MAVEN_CENTRAL_PASSWORD
+## Features
+* Automatic publish on Maven Central
+* Automatic QA
+* Pre-configured Kotest multiplatform
+* Pre-configured Renovate
+* Pre-configured semantic release for conventional commits
