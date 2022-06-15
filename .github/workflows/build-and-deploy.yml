@@ -45,7 +45,7 @@ jobs:
           should-deploy: >-
             ${{
               runner.os == 'Linux'
-              && contains(github.repository, 'DanySK/Template-for-Kotlin-JVM-Projects')
+              && contains(github.repository, 'DanySK/')
               && contains('push workflow_dispatch', github.event_name)
             }}
           maven-central-password: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
