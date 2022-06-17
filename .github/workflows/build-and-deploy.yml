@@ -51,7 +51,7 @@ jobs:
       - build
     runs-on: ubuntu-latest
     if: >-
-      contains(github.repository, 'DanySK/Template-for-Kotlin-JVM-Projects')
+      contains(github.repository, 'DanySK/')
       && contains('push workflow_dispatch', github.event_name)
     steps:
       - name: Checkout
