@@ -32,15 +32,7 @@ jobs:
         with:
           # Dry-deployment
           deploy-command: >-
-            ./gradlew
-            closeKotlinMultiplatformOnMavenCentralNexus
-            closeJvmOnMavenCentralNexus 
-            closeJsOnMavenCentralNexus
-            closeNativeOnMavenCentralNexus
-            closeWasm32OnMavenCentralNexus
-            closeKotlinMavenOnMavenCentralNexus
-            publishJsPackageToNpmjsRegistry
-            --parallel
+            ./gradlew uploadAll close --parallel
           should-run-codecov: ${{ runner.os == 'Linux' }}
           should-deploy: >-
             ${{
