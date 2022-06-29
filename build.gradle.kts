@@ -1,7 +1,6 @@
 @file:Suppress("UnstableApiUsage")
 
 import org.danilopianini.gradle.mavencentral.JavadocJar
-import org.danilopianini.gradle.mavencentral.configurePomForMavenCentral
 import org.jetbrains.kotlin.gradle.plugin.KotlinTarget
 import org.jetbrains.kotlin.util.capitalizeDecapitalize.toLowerCaseAsciiOnly
 
