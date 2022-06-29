@@ -1,6 +1,7 @@
 @file:Suppress("UnstableApiUsage")
 
 import org.danilopianini.gradle.mavencentral.JavadocJar
+import org.danilopianini.gradle.mavencentral.configurePomForMavenCentral
 import org.jetbrains.kotlin.gradle.plugin.KotlinTarget
 import org.jetbrains.kotlin.util.capitalizeDecapitalize.toLowerCaseAsciiOnly
 
@@ -153,6 +154,16 @@ npmPublish {
             val npmToken: String? by project
             authToken.set(npmToken)
             dry.set(npmToken.isNullOrBlank())
+        }
+    }
+}
+
+publishing {
+    publications {
+        publications.withType<MavenPublication>().configureEach {
+            if ("OSSRH" !in name) {
+                artifact(tasks.javadocJar)
+            }
         }
     }
 }
