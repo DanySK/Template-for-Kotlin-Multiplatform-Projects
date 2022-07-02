@@ -32,7 +32,7 @@ gitSemVer = { id = "org.danilopianini.git-sensitive-semantic-versioning", versio
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-qa = "org.danilopianini.gradle-kotlin-qa:0.19.1"
-multiJvmTesting = "org.danilopianini.multi-jvm-test-plugin:0.4.3"
+multiJvmTesting = "org.danilopianini.multi-jvm-test-plugin:0.4.4"
 npm-publish = "dev.petuska.npm.publish:3.0.1"
 publishOnCentral = "org.danilopianini.publish-on-central:2.0.2"
 taskTree = "com.dorongold.task-tree:2.1.0"
