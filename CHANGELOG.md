@@ -1,3 +1,22 @@
+## [0.1.4](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/compare/0.1.3...0.1.4) (2022-07-29)
+
+
+### Bug Fixes
+
+* **build:** make the project name lowercase, as npm does not suppor uppercase anymore ([ea051c8](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/ea051c83beefc69f14b375040836b3d952409926))
+
+
+### Dependency updates
+
+* **deps:** update plugin multijvmtesting to v0.4.9 ([eff0432](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/eff0432c04562e64613b0d6db108cba8038fea09))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v1.0.18 ([5c8564c](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/5c8564ca1036d5f4ddb9e37b115c1916911aee59))
+
+
+### Build and continuous integration
+
+* configure mergify ([494a427](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/494a427c9204f37c0550b1c5ec5125e6fed31df2))
+* do not run the pipeline on changes to .mergify.yml ([a9fbdb4](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/a9fbdb425edbe268b1ef79417d18462b3c7aeffb))
+
 ## [0.1.3](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/compare/0.1.2...0.1.3) (2022-07-28)
 
 
