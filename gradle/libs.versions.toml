@@ -1,6 +1,6 @@
 [versions]
 android-plugins = "7.0.0"
-kotest = "5.5.3"
+kotest = "5.5.4"
 kotlin = "1.7.20"
 
 [libraries]
