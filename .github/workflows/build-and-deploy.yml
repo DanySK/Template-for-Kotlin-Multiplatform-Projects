@@ -7,7 +7,7 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [windows, macos, ubuntu]
+        os: [ macos]
     runs-on: ${{ matrix.os }}-latest
     concurrency:
       group: build-${{ github.workflow }}-${{ matrix.os }}-${{ github.event.number || github.ref }}
@@ -21,15 +21,16 @@ jobs:
           deploy-command: >-
             ./gradlew uploadAll close --parallel
           should-run-codecov: ${{ runner.os == 'Linux' }}
-          should-deploy: >-
-            ${{
-              runner.os == 'Linux'
-              && !github.event.repository.fork
-              && (
-                github.event_name != 'pull_request'
-                || github.event.pull_request.head.repo.full_name == github.repository
-              )
-            }}
+          should-deploy: true
+#            ${{
+#              runner.os == 'Linux'
+#              && !github.event.repository.fork
+#              && (
+#                github.event_name != 'pull_request'
+#                || github.event.pull_request.head.repo.full_name == github.repository
+#              )
+#            }}
+          maven-central-username: nicolasfarabegoli
           maven-central-password: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
           signing-key: ${{ secrets.SIGNING_KEY }}
           signing-password: ${{ secrets.SIGNING_PASSWORD }}
@@ -39,7 +40,7 @@ jobs:
       group: release
     needs:
       - build
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     if: >-
       !github.event.repository.fork
       && (

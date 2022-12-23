@@ -1,8 +1,7 @@
 @file:Suppress("UnstableApiUsage")
 
 import org.danilopianini.gradle.mavencentral.JavadocJar
-import org.jetbrains.kotlin.gradle.plugin.KotlinTarget
-import org.jetbrains.kotlin.util.capitalizeDecapitalize.toLowerCaseAsciiOnly
+import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
@@ -37,22 +36,10 @@ kotlin {
         nodejs()
         binaries.library()
     }
-    val hostOs = System.getProperty("os.name").trim().toLowerCaseAsciiOnly()
-    val hostArch = System.getProperty("os.arch").trim().toLowerCaseAsciiOnly()
-    val nativeTarget: (String, org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget.() -> Unit) -> KotlinTarget =
-        when (hostOs to hostArch) {
-            "linux" to "aarch64" -> ::linuxArm64
-            "linux" to "amd64" -> ::linuxX64
-            "linux" to "arm", "linux" to "arm32" -> ::linuxArm32Hfp
-            "linux" to "mips", "linux" to "mips32" -> ::linuxMips32
-            "linux" to "mipsel", "linux" to "mips32el" -> ::linuxMipsel32
-            "mac os x" to "aarch64" -> ::macosArm64
-            "mac os x" to "amd64", "mac os x" to "x86_64" -> ::macosX64
-            "windows" to "amd64", "windows server 2022" to "amd64" -> ::mingwX64
-            "windows" to "x86" -> ::mingwX86
-            else -> throw GradleException("Host OS '$hostOs' with arch '$hostArch' is not supported in Kotlin/Native.")
-        }
-    nativeTarget("native") {
+
+    val nativeSetup: KotlinNativeTarget.() -> Unit = {
+        compilations["main"].defaultSourceSet.dependsOn(sourceSets["nativeMain"])
+        compilations["test"].defaultSourceSet.dependsOn(sourceSets["nativeTest"])
         binaries {
             sharedLib()
             staticLib()
@@ -62,16 +49,17 @@ kotlin {
                     entryPoint = executable
                 }
                 // Enable wasm32
-                wasm32 {
-                    binaries {
-                        executable {
-                            entryPoint = executable
-                        }
-                    }
-                }
+//                wasm32 {
+//                    binaries {
+//                        executable {
+//                            entryPoint = executable
+//                        }
+//                    }
+//                }
             }
         }
     }
+
     sourceSets {
         val commonMain by getting {
             dependencies {
@@ -88,13 +76,23 @@ kotlin {
                 implementation(libs.bundles.kotlin.testing.jvm)
             }
         }
-        val nativeMain by getting {
+        val nativeMain by creating {
             dependsOn(commonMain)
         }
-        val nativeTest by getting {
+        val nativeTest by creating {
             dependsOn(commonTest)
         }
     }
+
+    js { nodejs() }
+
+    linuxX64(nativeSetup)
+    mingwX64(nativeSetup)
+    macosX64(nativeSetup)
+    macosArm64(nativeSetup)
+    ios(nativeSetup)
+    tvos(nativeSetup)
+
     targets.all {
         compilations.all {
             kotlinOptions {
