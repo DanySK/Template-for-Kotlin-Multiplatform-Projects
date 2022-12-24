@@ -6,6 +6,7 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
+    alias(libs.plugins.kotest.multiplatform)
     alias(libs.plugins.dokka)
     alias(libs.plugins.gitSemVer)
     alias(libs.plugins.kotlin.qa)
@@ -61,11 +62,7 @@ kotlin {
     }
 
     sourceSets {
-        val commonMain by getting {
-            dependencies {
-                implementation(libs.kotlin.stdlib)
-            }
-        }
+        val commonMain by getting
         val commonTest by getting {
             dependencies {
                 implementation(libs.bundles.kotlin.testing.common)
@@ -73,7 +70,7 @@ kotlin {
         }
         val jvmTest by getting {
             dependencies {
-                implementation(libs.bundles.kotlin.testing.jvm)
+                implementation(libs.kotest.runner.junit5)
             }
         }
         val nativeMain by creating {
