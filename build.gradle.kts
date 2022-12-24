@@ -23,6 +23,16 @@ repositories {
     mavenCentral()
 }
 
+val binarySetup: KotlinNativeTarget.() -> Unit = {
+    binaries {
+        sharedLib()
+        staticLib()
+        "main".let {
+            executable { entryPoint = it }
+        }
+    }
+}
+
 kotlin {
     jvm {
         compilations.all {
@@ -32,37 +42,65 @@ kotlin {
             useJUnitPlatform()
         }
     }
+
     js(IR) {
         browser()
         nodejs()
         binaries.library()
     }
 
-    val nativeSetup: KotlinNativeTarget.() -> Unit = {
-        compilations["main"].defaultSourceSet.dependsOn(sourceSets["nativeMain"])
-        compilations["test"].defaultSourceSet.dependsOn(sourceSets["nativeTest"])
-        binaries {
-            sharedLib()
-            staticLib()
-            // Remove if it is not executable
-            "main".let { executable ->
-                executable {
-                    entryPoint = executable
-                }
-                // Enable wasm32
-//                wasm32 {
-//                    binaries {
-//                        executable {
-//                            entryPoint = executable
-//                        }
-//                    }
-//                }
-            }
-        }
-    }
+    linuxX64(binarySetup)
+    linuxArm64(binarySetup)
+    linuxArm32Hfp(binarySetup)
+
+    mingwX64(binarySetup)
+    mingwX86(binarySetup)
+
+    macosX64(binarySetup)
+    macosArm64(binarySetup)
+
+    ios(binarySetup)
+    iosArm32(binarySetup)
+    iosSimulatorArm64(binarySetup)
+    tvos(binarySetup)
+    tvosSimulatorArm64(binarySetup)
+    watchos(binarySetup)
+    watchosX86(binarySetup)
+    watchosSimulatorArm64(binarySetup)
 
     sourceSets {
-        val commonMain by getting
+        // Main source sets
+        val commonMain by getting { }
+
+        val nativeMain by creating {
+            dependsOn(commonMain)
+        }
+
+        val macosX64Main by getting { dependsOn(nativeMain) }
+        val macosArm64Main by getting { dependsOn(nativeMain) }
+
+        val mingwX64Main by getting { dependsOn(nativeMain) }
+        val mingwX86Main by getting { dependsOn(nativeMain) }
+
+        val linuxX64Main by getting { dependsOn(nativeMain) }
+        val linuxArm64Main by getting { dependsOn(nativeMain) }
+        val linuxArm32HfpMain by getting { dependsOn(nativeMain) }
+
+        val iosX64Main by getting { dependsOn(nativeMain) }
+        val iosArm64Main by getting { dependsOn(nativeMain) }
+        val iosArm32Main by getting { dependsOn(nativeMain) }
+        val iosSimulatorArm64Main by getting { dependsOn(nativeMain) }
+
+        val watchosArm32Main by getting { dependsOn(nativeMain) }
+        val watchosArm64Main by getting { dependsOn(nativeMain) }
+        val watchosX86Main by getting { dependsOn(nativeMain) }
+        val watchosX64Main by getting { dependsOn(nativeMain) }
+        val watchosSimulatorArm64Main by getting { dependsOn(nativeMain) }
+
+        val tvosMain by getting { dependsOn(nativeMain) }
+        val tvosSimulatorArm64Main by getting { dependsOn(nativeMain) }
+
+        // Test sourcesets
         val commonTest by getting {
             dependencies {
                 implementation(libs.bundles.kotlin.testing.common)
@@ -70,25 +108,43 @@ kotlin {
         }
         val jvmTest by getting {
             dependencies {
+                implementation(libs.bundles.kotest.common)
                 implementation(libs.kotest.runner.junit5)
             }
         }
-        val nativeMain by creating {
-            dependsOn(commonMain)
+        val jsTest by getting {
+            dependencies {
+                implementation(libs.bundles.kotest.common)
+            }
         }
         val nativeTest by creating {
             dependsOn(commonTest)
+            dependencies {
+                implementation(libs.bundles.kotest.common)
+            }
         }
+
+        val macosX64Test by getting { dependsOn(nativeTest) }
+        val macosArm64Test by getting { dependsOn(nativeTest) }
+
+        val mingwX64Test by getting { dependsOn(nativeTest) }
+
+        val linuxX64Test by getting { dependsOn(nativeTest) }
+
+        val iosX64Test by getting { dependsOn(nativeTest) }
+        val iosArm64Test by getting { dependsOn(nativeTest) }
+        val iosArm32Test by getting { dependsOn(nativeTest) }
+        val iosSimulatorArm64Test by getting { dependsOn(nativeTest) }
+
+        val watchosArm32Test by getting { dependsOn(nativeTest) }
+        val watchosArm64Test by getting { dependsOn(nativeTest) }
+        val watchosX86Test by getting { dependsOn(nativeTest) }
+        val watchosX64Test by getting { dependsOn(nativeTest) }
+        val watchosSimulatorArm64Test by getting { dependsOn(nativeTest) }
+
+        val tvosTest by getting { dependsOn(nativeTest) }
+        val tvosSimulatorArm64Test by getting { dependsOn(nativeTest) }
     }
-
-    js { nodejs() }
-
-    linuxX64(nativeSetup)
-    mingwX64(nativeSetup)
-    macosX64(nativeSetup)
-    macosArm64(nativeSetup)
-    ios(nativeSetup)
-    tvos(nativeSetup)
 
     targets.all {
         compilations.all {
