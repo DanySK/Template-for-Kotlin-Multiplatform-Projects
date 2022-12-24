@@ -13,10 +13,12 @@ kotlin-test-common = { module = "org.jetbrains.kotlin:kotlin-test-common", versi
 kotlin-test-annotations-common = { module = "org.jetbrains.kotlin:kotlin-test-annotations-common", version.ref = "kotlin" }
 
 [bundles]
-kotlin-testing-common = [
+kotest-common = [
     "kotest-assertions-core",
     "kotest-framework-engine",
     "kotest-framework-datatest",
+]
+kotlin-testing-common = [
     "kotlin-test-common",
     "kotlin-test-annotations-common",
 ]
