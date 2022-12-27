@@ -96,9 +96,10 @@ kotlin {
     iosSimulatorArm64(binarySetup)
     tvos(binarySetup)
     tvosSimulatorArm64(binarySetup)
-    watchos(binarySetup)
-    watchosX86(binarySetup)
-    watchosSimulatorArm64(binarySetup)
+//    Disabled due to https://youtrack.jetbrains.com/issue/KT-54814
+//    watchos(binarySetup)
+//    watchosX86(binarySetup)
+//    watchosSimulatorArm64(binarySetup)
 
     targets.all {
         compilations.all {
