@@ -7,7 +7,7 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [ macos ]
+        os: [ macos, windows, ubuntu ]
     runs-on: ${{ matrix.os }}-latest
     concurrency:
       group: build-${{ github.workflow }}-${{ matrix.os }}-${{ github.event.number || github.ref }}
@@ -20,10 +20,11 @@ jobs:
           # Dry-deployment
           deploy-command: >-
             ./gradlew uploadAll close --parallel
-          should-run-codecov: true
+          should-run-codecov: ${{ runner.os == 'Linux' }}
           should-deploy: >-
             ${{
-              !github.event.repository.fork
+              runner.os == 'macOS'
+              && !github.event.repository.fork
               && (
                 github.event_name != 'pull_request'
                 || github.event.pull_request.head.repo.full_name == github.repository
@@ -51,6 +52,8 @@ jobs:
         with:
           token: ${{ secrets.DEPLOYMENT_TOKEN }}
       - uses: DanySK/build-check-deploy-gradle-action@2.1.19
+        env:
+          ORG_GRADLE_PROJECT_releaseStage: true
         with:
           build-command: true
           check-command: true
