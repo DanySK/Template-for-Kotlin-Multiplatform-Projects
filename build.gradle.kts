@@ -74,10 +74,9 @@ kotlin {
 
     val releaseStage: String? by project
 
-    /* Enable the following target only on release stage on macos, since that platforms are not supported by kotest.
-       NOTE: the following platforms can be enabled with the gradle property `releaseMultiplatform`.
-       Please, check the compatibility of the libraries defined in `commonMain` before release the artifacts with the
-        following platform.
+    /*
+       Enable the following target only on release stage on macos, since that platforms are not supported by kotest.
+       NOTE: the following platforms can be enabled with the gradle property `releaseStage`.
      */
     if (releaseStage.toBoolean()) {
         linuxArm64(binarySetup)
