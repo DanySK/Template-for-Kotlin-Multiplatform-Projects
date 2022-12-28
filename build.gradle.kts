@@ -2,6 +2,8 @@
 
 import org.danilopianini.gradle.mavencentral.JavadocJar
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
+import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
+import org.gradle.internal.os.OperatingSystem
 
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
@@ -23,16 +25,34 @@ repositories {
     mavenCentral()
 }
 
-val binarySetup: KotlinNativeTarget.() -> Unit = {
-    compilations["main"].defaultSourceSet.dependsOn(kotlin.sourceSets["nativeMain"])
-    compilations["test"].defaultSourceSet.dependsOn(kotlin.sourceSets["nativeTest"])
-    binaries {
-        sharedLib()
-        staticLib()
-        "main".let {
-            executable { entryPoint = it }
-        }
-    }
+fun KotlinMultiplatformExtension.configureDarwinCompatiblePlatforms(nativeSetup: KotlinNativeTarget.() -> Unit) {
+    macosX64(nativeSetup)
+    macosArm64(nativeSetup)
+
+    ios(nativeSetup)
+    iosSimulatorArm64(nativeSetup)
+    tvos(nativeSetup)
+    tvosSimulatorArm64(nativeSetup)
+    // If watchos fails is due to https://youtrack.jetbrains.com/issue/KT-54814
+    watchos(nativeSetup)
+    watchosSimulatorArm64(nativeSetup)
+}
+
+fun KotlinMultiplatformExtension.configureWindowsCompatiblePlatforms(nativeSetup: KotlinNativeTarget.() -> Unit) {
+    mingwX64(nativeSetup)
+}
+
+fun KotlinMultiplatformExtension.configureLinuxCompatiblePlatforms(nativeSetup: KotlinNativeTarget.() -> Unit) {
+    linuxX64(nativeSetup)
+}
+
+fun KotlinMultiplatformExtension.configureAllPlatforms(nativeSetup: KotlinNativeTarget.() -> Unit) {
+    configureLinuxCompatiblePlatforms(nativeSetup)
+    configureWindowsCompatiblePlatforms(nativeSetup)
+    configureDarwinCompatiblePlatforms(nativeSetup)
+    linuxArm32Hfp(nativeSetup)
+    linuxArm64(nativeSetup)
+    mingwX86(nativeSetup)
 }
 
 kotlin {
@@ -74,32 +94,27 @@ kotlin {
 
     val releaseStage: String? by project
 
-    /*
-       Enable the following target only on release stage on macos, since that platforms are not supported by kotest.
-       NOTE: the following platforms can be enabled with the gradle property `releaseStage`.
-     */
-    if (releaseStage.toBoolean()) {
-        linuxArm64(binarySetup)
-        linuxArm32Hfp(binarySetup)
-        mingwX86(binarySetup)
+    val binarySetup: KotlinNativeTarget.() -> Unit = {
+        compilations["main"].defaultSourceSet.dependsOn(sourceSets["nativeMain"])
+        compilations["test"].defaultSourceSet.dependsOn(sourceSets["nativeTest"])
+        binaries {
+            sharedLib()
+            staticLib()
+            "main".let {
+                executable { entryPoint = it }
+            }
+        }
     }
 
-    linuxX64(binarySetup)
-
-    mingwX64(binarySetup)
-
-    macosX64(binarySetup)
-    macosArm64(binarySetup)
-
-    ios(binarySetup)
-    iosArm32(binarySetup)
-    iosSimulatorArm64(binarySetup)
-    tvos(binarySetup)
-    tvosSimulatorArm64(binarySetup)
-//    Disabled due to https://youtrack.jetbrains.com/issue/KT-54814
-//    watchos(binarySetup)
-//    watchosX86(binarySetup)
-//    watchosSimulatorArm64(binarySetup)
+    when (OperatingSystem.current() to releaseStage.toBoolean()) {
+        OperatingSystem.LINUX to false -> configureLinuxCompatiblePlatforms(binarySetup)
+        OperatingSystem.WINDOWS to false -> configureWindowsCompatiblePlatforms(binarySetup)
+        OperatingSystem.MAC_OS to false -> configureDarwinCompatiblePlatforms(binarySetup)
+        OperatingSystem.MAC_OS to true -> configureAllPlatforms(binarySetup)
+        else -> throw GradleException(
+            "To cross-compile for all the platforms, a `macos` runner should be used"
+        )
+    }
 
     targets.all {
         compilations.all {
