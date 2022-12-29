@@ -25,34 +25,54 @@ repositories {
     mavenCentral()
 }
 
-fun KotlinMultiplatformExtension.configureDarwinCompatiblePlatforms(nativeSetup: KotlinNativeTarget.() -> Unit) {
-    macosX64(nativeSetup)
-    macosArm64(nativeSetup)
-
-    ios(nativeSetup)
-    iosSimulatorArm64(nativeSetup)
-    tvos(nativeSetup)
-    tvosSimulatorArm64(nativeSetup)
-    // If watchos fails is due to https://youtrack.jetbrains.com/issue/KT-54814
-    watchos(nativeSetup)
-    watchosSimulatorArm64(nativeSetup)
+fun KotlinNativeTarget.binarySetup() {
+    compilations["main"].defaultSourceSet.dependsOn(kotlin.sourceSets["nativeMain"])
+    compilations["test"].defaultSourceSet.dependsOn(kotlin.sourceSets["nativeTest"])
+    binaries {
+        sharedLib()
+        staticLib()
+        "main".let {
+            executable { entryPoint = it }
+        }
+    }
 }
 
-fun KotlinMultiplatformExtension.configureWindowsCompatiblePlatforms(nativeSetup: KotlinNativeTarget.() -> Unit) {
-    mingwX64(nativeSetup)
+fun KotlinMultiplatformExtension.configureDarwinCompatiblePlatforms() {
+    listOf(
+        macosX64(),
+        macosArm64(),
+        iosArm32(),
+        iosArm64(),
+        iosSimulatorArm64(),
+        tvosArm64(),
+        tvosSimulatorArm64(),
+        watchosArm32(),
+        watchosArm64(),
+        watchosSimulatorArm64()
+    ).forEach { it.binarySetup() }
 }
 
-fun KotlinMultiplatformExtension.configureLinuxCompatiblePlatforms(nativeSetup: KotlinNativeTarget.() -> Unit) {
-    linuxX64(nativeSetup)
+fun KotlinMultiplatformExtension.configureWindowsCompatiblePlatforms() {
+    listOf(
+        mingwX64()
+    ).forEach { it.binarySetup() }
 }
 
-fun KotlinMultiplatformExtension.configureAllPlatforms(nativeSetup: KotlinNativeTarget.() -> Unit) {
-    configureLinuxCompatiblePlatforms(nativeSetup)
-    configureWindowsCompatiblePlatforms(nativeSetup)
-    configureDarwinCompatiblePlatforms(nativeSetup)
-    linuxArm32Hfp(nativeSetup)
-    linuxArm64(nativeSetup)
-    mingwX86(nativeSetup)
+fun KotlinMultiplatformExtension.configureLinuxCompatiblePlatforms() {
+    listOf(
+        linuxX64()
+    ).forEach { it.binarySetup() }
+}
+
+fun KotlinMultiplatformExtension.configureAllPlatforms() {
+    configureLinuxCompatiblePlatforms()
+    configureWindowsCompatiblePlatforms()
+    configureDarwinCompatiblePlatforms()
+    listOf(
+        linuxArm32Hfp(),
+        linuxArm64(),
+        mingwX86()
+    ).forEach { it.binarySetup() }
 }
 
 kotlin {
@@ -94,23 +114,11 @@ kotlin {
 
     val releaseStage: String? by project
 
-    val binarySetup: KotlinNativeTarget.() -> Unit = {
-        compilations["main"].defaultSourceSet.dependsOn(sourceSets["nativeMain"])
-        compilations["test"].defaultSourceSet.dependsOn(sourceSets["nativeTest"])
-        binaries {
-            sharedLib()
-            staticLib()
-            "main".let {
-                executable { entryPoint = it }
-            }
-        }
-    }
-
     when (OperatingSystem.current() to releaseStage.toBoolean()) {
-        OperatingSystem.LINUX to false -> configureLinuxCompatiblePlatforms(binarySetup)
-        OperatingSystem.WINDOWS to false -> configureWindowsCompatiblePlatforms(binarySetup)
-        OperatingSystem.MAC_OS to false -> configureDarwinCompatiblePlatforms(binarySetup)
-        OperatingSystem.MAC_OS to true -> configureAllPlatforms(binarySetup)
+        OperatingSystem.LINUX to false -> configureLinuxCompatiblePlatforms()
+        OperatingSystem.WINDOWS to false -> configureWindowsCompatiblePlatforms()
+        OperatingSystem.MAC_OS to false -> configureDarwinCompatiblePlatforms()
+        OperatingSystem.MAC_OS to true -> configureAllPlatforms()
         else -> throw GradleException(
             "To cross-compile for all the platforms, a `macos` runner should be used"
         )
