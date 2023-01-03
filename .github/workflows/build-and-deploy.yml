@@ -35,8 +35,9 @@ jobs:
           signing-password: ${{ secrets.SIGNING_PASSWORD }}
   release:
     concurrency:
-      # Only one release job at a time. Strictly sequential.
-      group: release
+      # Only one release job at a time per branch, as only master releases.
+      # Strictly sequential.
+      group: release-${{ github.event.number || github.ref }}
     needs:
       - build
     runs-on: macos-latest
