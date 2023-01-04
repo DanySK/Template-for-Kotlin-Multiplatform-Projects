@@ -1,3 +1,28 @@
+## [0.1.6](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/compare/0.1.5...0.1.6) (2023-01-04)
+
+
+### Build and continuous integration
+
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.1.20 ([83cdf1b](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/83cdf1b9579fc48eabb7350fd32e72a885c6e149))
+* fix broken release (branches could interrupt master) ([cddb47d](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/cddb47d113f4f78a1ea0f76c705ebc8532111de6))
+
+
+### Dependency updates
+
+* **deps:** drops kotlin-stdlib-reflect ([0736e19](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/0736e191a4433e3f131d85fc8cc990dc45267c21))
+* **deps:** update plugin com.gradle.enterprise to v3.11.4 ([5494e01](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/5494e0194ecc4b94e785aa5bb6f5205ac6609735))
+* **deps:** update plugin com.gradle.enterprise to v3.12.1 ([a335284](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/a335284d7010241d65c0f860436731f0b20d0534))
+* **deps:** update plugin kotlin-qa to v0.25.1 ([3f4ef7d](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/3f4ef7d8312335714fbc550a45bef2ff447bafc6))
+* **deps:** update plugin multijvmtesting to v0.4.15 ([8bcf559](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/8bcf55962d4a8f28b892e0b89b463ad0bfeb7857))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v1.0.25 ([ba869eb](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/ba869eba1ba05910f90c9b2c8c0b97cc9a9915a2))
+* **deps:** update plugin publishoncentral to v2.0.12 ([b5bb83a](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/b5bb83ad577e05114bb3d163ef962294bb8dc20b))
+* **deps:** update plugin tasktree to v2.1.1 ([7b2a056](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/7b2a0569cdf47265bab1af962d3a0b1d58fb9e26))
+
+
+### Documentation
+
+* **deps:** update plugin dokka to v1.7.20 ([fdcb4d4](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/fdcb4d4509e462a57f86960369c73371c1aa9b7e))
+
 ## [0.1.5](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/compare/0.1.4...0.1.5) (2023-01-02)
 
 
