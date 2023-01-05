@@ -1,3 +1,22 @@
+## [0.1.7](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/compare/0.1.6...0.1.7) (2023-01-05)
+
+
+### Bug Fixes
+
+* use lightweight tags ([ccb2fbf](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/ccb2fbfaeffd35b9759adc0adb1aeac3a53cfd0c))
+* use the correct git-version plugin ([287d3ad](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/287d3ad1a4fa856fc6fb3cdcf83461df4ee99eb4))
+
+
+### Dependency updates
+
+* **deps:** update plugin npm-publish to v3.2.0 ([0539eb2](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/0539eb2d6a8e76f7aa9dd266fdbaeafe832a166d))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v1.1.1 ([9d98473](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/9d98473ca363f963530a2e42c0f1003b14ed6cfb))
+
+
+### Build and continuous integration
+
+* **deps:** update actions/checkout action to v3.3.0 ([667cdef](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/667cdeff039188b0bdbcc72ed45a75350b8da779))
+
 ## [0.1.6](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/compare/0.1.5...0.1.6) (2023-01-04)
 
 
