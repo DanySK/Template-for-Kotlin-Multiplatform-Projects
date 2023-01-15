@@ -7,8 +7,8 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [ macos, windows, ubuntu ]
-    runs-on: ${{ matrix.os }}-latest
+        os: [ windows-2022, macos-12, ubuntu-22.04 ]
+    runs-on: ${{ matrix.os }}
     concurrency:
       group: build-${{ github.workflow }}-${{ matrix.os }}-${{ github.event.number || github.ref }}
       cancel-in-progress: true
@@ -40,7 +40,7 @@ jobs:
       group: release-${{ github.event.number || github.ref }}
     needs:
       - build
-    runs-on: macos-latest
+    runs-on: macos-12
     if: >-
       !github.event.repository.fork
       && (
@@ -76,7 +76,7 @@ jobs:
           signing-key: ${{ secrets.SIGNING_KEY }}
           signing-password: ${{ secrets.SIGNING_PASSWORD }}
   success:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     needs:
       - release
       - build
