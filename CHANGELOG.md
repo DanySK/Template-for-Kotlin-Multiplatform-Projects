@@ -1,3 +1,20 @@
+## [0.1.8](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/compare/0.1.7...0.1.8) (2023-02-05)
+
+
+### Build and continuous integration
+
+* **deps:** update danysk/action-checkout action to v0.2.5 ([53e150f](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/53e150f57799969f9f83673ace24745f8a051654))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.1.21 ([d8021c2](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/d8021c2bdb0f4b37b339d95ebbff3067a3c7d60c))
+* fix bad output export syntax ([f3cb4e1](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/f3cb4e148158d244efdbf217fd237f2f4ee9038c))
+* read the version of npm from the package.json ([a5c7241](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/a5c7241c46a0362649a84fb9b0258037392b5845))
+
+
+### Dependency updates
+
+* **core-deps:** update kotlin monorepo to v1.8.10 ([608bf9f](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/608bf9f88508e3213fe3e65464bfb0791ac0da1c))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.16 ([77544fa](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/77544fa460e8f31602e20252687ff5622667d4f9))
+* **deps:** update node.js to 18.13 ([ae0e43e](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/ae0e43e89ce6e422eabe724d33fdb5c1893919ba))
+
 ## [0.1.7](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/compare/0.1.6...0.1.7) (2023-01-05)
 
 
