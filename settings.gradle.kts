@@ -10,7 +10,7 @@ pluginManagement {
 
 plugins {
     id("com.gradle.enterprise") version "3.12.3"
-    id("org.danilopianini.gradle-pre-commit-git-hooks") version "1.1.2"
+    id("org.danilopianini.gradle-pre-commit-git-hooks") version "1.1.3"
 }
 
 gradleEnterprise {
