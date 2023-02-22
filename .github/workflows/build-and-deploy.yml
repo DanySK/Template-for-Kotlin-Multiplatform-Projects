@@ -4,7 +4,52 @@ on:
   workflow_dispatch:
 
 jobs:
+  staging-repo:
+    runs-on: ubuntu-22.04
+    concurrency:
+      group: staging-repo
+    if: >-
+      ${{
+        !github.event.repository.fork
+        && (
+          github.event_name != 'pull_request'
+          || github.event.pull_request.head.repo.full_name == github.repository
+        )
+      }}
+    outputs:
+      maven-central-repo-id: ${{ steps.staging-repo.outputs.MavenCentral }}
+      next-version: ${{ steps.compute-next-version.outputs.next-version }}
+      will-release: ${{ steps.compute-next-version.outputs.will-release }}
+    steps:
+      - name: Checkout the repo
+        uses: actions/checkout@v3.3.0
+        with:
+          fetch-depth: 0
+      - uses: DanySK/build-check-deploy-gradle-action@2.1.25
+        with:
+          maven-central-password: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
+          should-run-codecov: false
+          should-deploy: true
+          build-command: true
+          check-command: true
+          deploy-command: ./gradlew createStagingRepositoryOnMavenCentral --parallel
+      - name: Save staging repository ID
+        id: staging-repo
+        run: |
+          [[ -f build/staging-repo-ids.properties ]] || (
+            echo "Staging repositories ID file not found" &&
+            exit 1
+          )
+          REPO_IDS=$(cat build/staging-repo-ids.properties)
+          echo "Staging repositories IDs:\n$REPO_IDS"
+          echo $REPO_IDS >> $GITHUB_OUTPUT
+      - name: Compute next release version
+        id: compute-next-version
+        uses: nicolasfara/precompute-semantic-release-version-action@1.0.1
+        with:
+          github-token: ${{ github.token }}
   build:
+    needs: [ staging-repo ]
     strategy:
       matrix:
         os: [ windows-2022, macos-12, ubuntu-22.04 ]
@@ -19,12 +64,13 @@ jobs:
         with:
           # Dry-deployment
           deploy-command: >-
-            ./gradlew uploadAll close --parallel
+            NEXT_VERSION="${{ needs.staging-repo.outputs.next-version }}"
+            OVERRIDE_VERSION=$([[ "$NEXT_VERSION" != "" ]] && echo "-PforceVersion=$(echo $NEXT_VERSION)" || echo "")
+            ./gradlew $OVERRIDE_VERSION -PstagingRepositoryId=${{ needs.staging-repo.outputs.maven-central-repo-id }} uploadAll --parallel
           should-run-codecov: ${{ runner.os == 'Linux' }}
           should-deploy: >-
             ${{
-              runner.os == 'macOS'
-              && !github.event.repository.fork
+              !github.event.repository.fork
               && (
                 github.event_name != 'pull_request'
                 || github.event.pull_request.head.repo.full_name == github.repository
@@ -33,6 +79,31 @@ jobs:
           maven-central-password: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
           signing-key: ${{ secrets.SIGNING_KEY }}
           signing-password: ${{ secrets.SIGNING_PASSWORD }}
+  close-staging-repos:
+    needs: [ staging-repo, build ]
+    runs-on: ubuntu-22.04
+    concurrency:
+      group: close-staging-repos
+    if: >-
+      ${{
+        !github.event.repository.fork
+        && (
+          github.event_name != 'pull_request'
+          || github.event.pull_request.head.repo.full_name == github.repository
+        )
+      }}
+    steps:
+      - name: Checkout the repo
+        uses: actions/checkout@v3.3.0
+      - uses: DanySK/build-check-deploy-gradle-action@2.1.25
+        with:
+          maven-central-password: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
+          should-run-codecov: false
+          should-deploy: true
+          build-command: true
+          check-command: true
+          deploy-command: >-
+            ./gradlew -PstagingRepositoryId=${{ needs.staging-repo.outputs.maven-central-repo-id }} close --parallel
   release:
     concurrency:
       # Only one release job at a time per branch, as only master releases.
@@ -40,13 +111,15 @@ jobs:
       group: release-${{ github.event.number || github.ref }}
     needs:
       - build
-    runs-on: macos-12
+    runs-on: ubuntu-22.04
     if: >-
-      !github.event.repository.fork
-      && (
-        github.event_name != 'pull_request'
-        || github.event.pull_request.head.repo.full_name == github.repository
-      )
+      ${{
+        !github.event.repository.fork
+        && (
+          github.event_name != 'pull_request'
+          || github.event.pull_request.head.repo.full_name == github.repository
+        )
+      }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3.3.0
@@ -61,6 +134,7 @@ jobs:
           node-version: ${{ steps.node-version.outputs.version }}
       - uses: DanySK/build-check-deploy-gradle-action@2.1.26
         env:
+          STAGING_REPO_ID: ${{ needs.staging-repo.outputs.maven-central-repo-id }}
           ORG_GRADLE_PROJECT_releaseStage: true
         with:
           build-command: true
@@ -78,6 +152,8 @@ jobs:
   success:
     runs-on: ubuntu-22.04
     needs:
+      - staging-repo
+      - close-staging-repos
       - release
       - build
     if: >-
