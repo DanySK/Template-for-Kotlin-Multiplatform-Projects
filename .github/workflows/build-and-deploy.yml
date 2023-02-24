@@ -4,18 +4,28 @@ on:
   workflow_dispatch:
 
 jobs:
+  check-secrets:
+    runs-on: ubuntu-22.04
+    outputs:
+      run-with-secrets: ${{ steps.require-secrets.outputs.run-with-secrets }}
+    steps:
+      - name: Find if secrets are available
+        id: detect-secrets
+        uses: DanySK/are-secrets-available@1.0.0
+        with:
+          secrets: ${{ toJson(secrets) }}
+      - name: Set condition
+        id: require-secrets
+        run: |
+          echo "run-with-secrets=${{ steps.detect-secrets.outputs.has-secrets == 'true' && github.event.repository.fork == 'false' }}" >> $GITHUB_OUTPUT
+
   staging-repo:
     runs-on: ubuntu-22.04
+    needs:
+      - check-secrets
     concurrency:
       group: staging-repo
-    if: >-
-      ${{
-        !github.event.repository.fork
-        && (
-          github.event_name != 'pull_request'
-          || github.event.pull_request.head.repo.full_name == github.repository
-        )
-      }}
+    if: ${{ needs.check-secrets.outputs.run-with-secrets == 'true' }}
     outputs:
       maven-central-repo-id: ${{ steps.staging-repo.outputs.MavenCentral }}
       next-version: ${{ steps.compute-next-version.outputs.next-version }}
@@ -49,7 +59,9 @@ jobs:
         with:
           github-token: ${{ github.token }}
   build:
-    needs: [ staging-repo ]
+    needs:
+      - staging-repo
+    if: ${{ always() && !contains(needs.staging-repo.result, 'failure') }}
     strategy:
       matrix:
         os: [ windows-2022, macos-12, ubuntu-22.04 ]
@@ -68,14 +80,7 @@ jobs:
             OVERRIDE_VERSION=$([[ "$NEXT_VERSION" != "" ]] && echo "-PforceVersion=$(echo $NEXT_VERSION)" || echo "")
             ./gradlew $OVERRIDE_VERSION -PstagingRepositoryId=${{ needs.staging-repo.outputs.maven-central-repo-id }} uploadAll --parallel
           should-run-codecov: ${{ runner.os == 'Linux' }}
-          should-deploy: >-
-            ${{
-              !github.event.repository.fork
-              && (
-                github.event_name != 'pull_request'
-                || github.event.pull_request.head.repo.full_name == github.repository
-              )
-            }}
+          should-deploy: ${{ needs.check-secrets.outputs.run-with-secrets == 'true' }}
           maven-central-password: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
           signing-key: ${{ secrets.SIGNING_KEY }}
           signing-password: ${{ secrets.SIGNING_PASSWORD }}
@@ -84,14 +89,7 @@ jobs:
     runs-on: ubuntu-22.04
     concurrency:
       group: close-staging-repos
-    if: >-
-      ${{
-        !github.event.repository.fork
-        && (
-          github.event_name != 'pull_request'
-          || github.event.pull_request.head.repo.full_name == github.repository
-        )
-      }}
+    if: ${{ needs.check-secrets.outputs.run-with-secrets == 'true' }}
     steps:
       - name: Checkout the repo
         uses: actions/checkout@v3.3.0
@@ -111,15 +109,9 @@ jobs:
       group: release-${{ github.event.number || github.ref }}
     needs:
       - build
+      - close-staging-repos
     runs-on: ubuntu-22.04
-    if: >-
-      ${{
-        !github.event.repository.fork
-        && (
-          github.event_name != 'pull_request'
-          || github.event.pull_request.head.repo.full_name == github.repository
-        )
-      }}
+    if: ${{ needs.check-secrets.outputs.run-with-secrets == 'true' }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3.3.0
@@ -152,6 +144,7 @@ jobs:
   success:
     runs-on: ubuntu-22.04
     needs:
+      - check-secrets
       - staging-repo
       - close-staging-repos
       - release
