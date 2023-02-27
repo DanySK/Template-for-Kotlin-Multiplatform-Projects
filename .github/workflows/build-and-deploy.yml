@@ -17,7 +17,7 @@ jobs:
       - name: Set condition
         id: require-secrets
         run: |
-          echo "run-with-secrets=${{ steps.detect-secrets.outputs.has-secrets == 'true' && github.event.repository.fork == 'false' }}" >> $GITHUB_OUTPUT
+          echo "run-with-secrets=${{ steps.detect-secrets.outputs.has-secrets == 'true' && !github.event.repository.fork }}" >> $GITHUB_OUTPUT
 
   staging-repo:
     runs-on: ubuntu-22.04
