@@ -1,5 +1,3 @@
-@file:Suppress("UnstableApiUsage")
-
 import org.danilopianini.gradle.mavencentral.JavadocJar
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 import org.gradle.internal.os.OperatingSystem
@@ -70,28 +68,47 @@ kotlin {
         }
     }
 
-    when (OperatingSystem.current()) {
-        OperatingSystem.LINUX -> {
-            linuxX64(nativeSetup)
-            linuxArm64(nativeSetup)
-        }
-        OperatingSystem.WINDOWS -> {
-            mingwX64(nativeSetup)
-        }
-        OperatingSystem.MAC_OS -> {
-            macosX64(nativeSetup)
-            macosArm64(nativeSetup)
-            ios(nativeSetup)
-            watchos(nativeSetup)
-            tvos(nativeSetup)
-        }
-        else -> throw GradleException("Unsupported OS: ${OperatingSystem.current()}")
-    }
+    linuxX64(nativeSetup)
+    linuxArm64(nativeSetup)
+
+    mingwX64(nativeSetup)
+
+    macosX64(nativeSetup)
+    macosArm64(nativeSetup)
+    ios(nativeSetup)
+    watchos(nativeSetup)
+    tvos(nativeSetup)
 
     targets.all {
         compilations.all {
             kotlinOptions {
                 allWarningsAsErrors = true
+            }
+        }
+    }
+
+    val os = OperatingSystem.current()
+    val excludeTargets = when {
+        os.isLinux -> kotlin.targets.filterNot { "linux" in it.name }
+        os.isWindows -> kotlin.targets.filterNot { "mingw" in it.name }
+        os.isMacOsX -> kotlin.targets.filter { "linux" in it.name || "mingw" in it.name }
+        else -> emptyList()
+    }.mapNotNull { it as? KotlinNativeTarget }
+
+    configure(excludeTargets) {
+        compilations.configureEach {
+            cinterops.configureEach { tasks[interopProcessingTaskName].enabled = false }
+            compileTaskProvider.get().enabled = false
+            tasks[processResourcesTaskName].enabled = false
+        }
+        binaries.configureEach { linkTask.enabled = false }
+
+        mavenPublication {
+            tasks.withType<AbstractPublishToMaven>().configureEach {
+                onlyIf { publication != this }
+            }
+            tasks.withType<GenerateModuleMetadata>().configureEach {
+                onlyIf { publication.get() != this }
             }
         }
     }
