@@ -1,3 +1,21 @@
+## [0.1.10](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/compare/0.1.9...0.1.10) (2023-03-06)
+
+
+### Bug Fixes
+
+* compile only host-specific platforms ([1af72a9](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/1af72a9a458d651c5eb6c7a18006c07c582ceb7a))
+
+
+### General maintenance
+
+* delete old gradle property and suppress warning for ignore disable targets ([bbdb5bc](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/bbdb5bc8f4838601537aa1d7c5d487d7c6d5980f))
+
+
+### Build and continuous integration
+
+* **deps:** update nicolasfara/precompute-semantic-release-version-action action to v1.0.2 ([77a91b9](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/77a91b9c736af141b6c8b5ed3346178438d60058))
+* improve staging repo step ([65ecbf7](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/65ecbf7f1674fc88b56487a34752cc38bd996e41))
+
 ## [0.1.9](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/compare/0.1.8...0.1.9) (2023-03-04)
 
 
