@@ -91,7 +91,9 @@ jobs:
           signing-key: ${{ secrets.SIGNING_KEY }}
           signing-password: ${{ secrets.SIGNING_PASSWORD }}
   close-staging-repos:
-    needs: [ staging-repo, build ]
+    needs:
+      - staging-repo
+      - build
     runs-on: ubuntu-22.04
     concurrency:
       group: close-staging-repos
@@ -118,6 +120,7 @@ jobs:
       # Strictly sequential.
       group: release-${{ github.event.number || github.ref }}
     needs:
+      - staging-repo
       - build
       - close-staging-repos
     runs-on: ubuntu-22.04
