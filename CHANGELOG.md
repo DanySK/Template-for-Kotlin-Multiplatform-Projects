@@ -1,3 +1,10 @@
+## [0.1.10](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/compare/0.1.9...0.1.10) (2023-03-15)
+
+
+### Bug Fixes
+
+* **ci:** execute command line-by-line ([1e0e7a9](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/1e0e7a9e758eeeb2d11c5e6df4cb2320acc5fc3f))
+
 ## [0.1.9](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/compare/0.1.8...0.1.9) (2023-03-15)
 
 
