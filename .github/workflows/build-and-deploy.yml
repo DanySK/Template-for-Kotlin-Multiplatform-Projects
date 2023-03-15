@@ -82,7 +82,7 @@ jobs:
       - uses: DanySK/build-check-deploy-gradle-action@2.2.0
         with:
           # Dry-deployment
-          deploy-command: >-
+          deploy-command: |
             NEXT_VERSION="${{ needs.staging-repo.outputs.next-version }}"
             OVERRIDE_VERSION=$([[ "$NEXT_VERSION" != "" ]] && echo "-PforceVersion=$(echo $NEXT_VERSION)" || echo "")
             ./gradlew $OVERRIDE_VERSION -PstagingRepositoryId=${{ needs.staging-repo.outputs.maven-central-repo-id }} uploadAll --parallel
