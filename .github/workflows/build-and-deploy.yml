@@ -24,8 +24,8 @@ jobs:
     needs:
       - check-secrets
     concurrency:
-      group: staging-repo
-    if: ${{ needs.check-secrets.outputs.run-with-secrets == 'true' }}
+      group: staging-repo-${{ github.workflow }}-${{ github.event.number || github.ref }}
+    if: needs.check-secrets.outputs.run-with-secrets == 'true'
     outputs:
       maven-central-repo-id: ${{ steps.staging-repo.outputs.MavenCentral }}
       next-version: ${{ steps.compute-next-version.outputs.next-version }}
@@ -68,7 +68,7 @@ jobs:
     needs:
       - check-secrets
       - staging-repo
-    if: ${{ always() && !contains(needs.staging-repo.result, 'failure') }}
+    if: always() && !contains(needs.staging-repo.result, 'failure')
     strategy:
       matrix:
         os: [ windows-2022, macos-12, ubuntu-22.04 ]
@@ -87,7 +87,7 @@ jobs:
             OVERRIDE_VERSION=$([[ "$NEXT_VERSION" != "" ]] && echo "-PforceVersion=$(echo $NEXT_VERSION)" || echo "")
             ./gradlew $OVERRIDE_VERSION -PstagingRepositoryId=${{ needs.staging-repo.outputs.maven-central-repo-id }} uploadAll --parallel
           should-run-codecov: ${{ runner.os == 'Linux' }}
-          should-deploy: ${{ needs.check-secrets.outputs.run-with-secrets == 'true' }}
+          should-deploy: ${{ contains(needs.staging-repo.result, 'success') }}
           maven-central-password: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
           signing-key: ${{ secrets.SIGNING_KEY }}
           signing-password: ${{ secrets.SIGNING_PASSWORD }}
@@ -96,9 +96,7 @@ jobs:
       - staging-repo
       - build
     runs-on: ubuntu-22.04
-    concurrency:
-      group: close-staging-repos
-    if: ${{ needs.check-secrets.outputs.run-with-secrets == 'true' }}
+    if: needs.check-secrets.outputs.run-with-secrets == 'true'
     steps:
       - name: Checkout the repo
         uses: actions/checkout@v3.5.2
@@ -126,7 +124,7 @@ jobs:
       - build
       - close-staging-repos
     runs-on: ubuntu-22.04
-    if: ${{ needs.check-secrets.outputs.run-with-secrets == 'true' }}
+    if: needs.check-secrets.outputs.run-with-secrets == 'true'
     steps:
       - name: Checkout
         uses: actions/checkout@v3.5.2
