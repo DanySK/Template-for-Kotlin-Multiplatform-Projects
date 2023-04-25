@@ -1,3 +1,27 @@
+## [0.1.12](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/compare/0.1.11...0.1.12) (2023-04-25)
+
+
+### Build and continuous integration
+
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.2.4 ([5f6eedc](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/5f6eedcdc45edcfac779f8887bd50e30340dbdcb))
+
+
+### Dependency updates
+
+* **core-deps:** update kotlin monorepo to v1.8.21 ([373e9db](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/373e9db243bd90f07a5c31c278d1268d10163411))
+* **deps:** update dependency gradle to v8.1.1 ([7172cde](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/7172cded20341115a7b7bd6286ce956372145698))
+* **deps:** update kotest to v5.6.1 ([cbda8a1](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/cbda8a1ba201ba7e3b45b2292319ca7681ff820a))
+* **deps:** update plugin gitsemver to v1.1.8 ([363bd8a](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/363bd8aa7bbd6df8c6233506be9ac2f600e1a89c))
+* **deps:** update plugin gitsemver to v1.1.9 ([f029f86](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/f029f86dd2687fcbde0cf63b60c93f613f49c2cb))
+* **deps:** update plugin multijvmtesting to v0.4.21 ([acd68e5](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/acd68e538b8e0a27a2a24999dee13b989cbc5ff7))
+* **deps:** update plugin multijvmtesting to v0.4.22 ([30d2a9c](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/30d2a9c1a1f514602650d8a566f08a0f0c0a07b1))
+* **deps:** update plugin multijvmtesting to v0.4.23 ([135e283](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/135e283fcb4a52f13f5de9b6200b74ef745994ba))
+* **deps:** update plugin org.gradle.toolchains.foojay-resolver-convention to v0.5.0 ([b9a2954](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/b9a2954290e5be36f54ceee576f2054fb0182a64))
+* **deps:** update plugin publishoncentral to v5.0.1 ([91d8a2f](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/91d8a2f43191366ab1c81e3d9dd44fdb8c7c9c6a))
+* **deps:** update plugin publishoncentral to v5.0.2 ([7e34da6](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/7e34da618d69cf111a46ab4cc5a3dcb945a27717))
+* **deps:** update plugin publishoncentral to v5.0.3 ([432dde8](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/432dde80992e284ee564db8a47ad0dd2b21a6aed))
+* **deps:** update plugin publishoncentral to v5.0.4 ([c834ec2](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/c834ec27e6c0bb720e613977de3f976b48455c44))
+
 ## [0.1.11](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/compare/0.1.10...0.1.11) (2023-04-18)
 
 
