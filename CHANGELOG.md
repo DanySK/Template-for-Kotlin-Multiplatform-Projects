@@ -1,3 +1,13 @@
+## [0.1.14](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/compare/0.1.13...0.1.14) (2023-06-07)
+
+
+### Dependency updates
+
+* **core-deps:** update kotlin monorepo to v1.8.22 ([e8e9abc](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/e8e9abc347a7141865f9cba6e398daf27574368d))
+* **deps:** update plugin gitsemver to v1.1.10 ([55822c1](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/55822c14d54942465d4d4ce156057a9fe2f0c5f8))
+* **deps:** update plugin multijvmtesting to v0.5.2 ([6112058](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/61120582b5caf85e8e8367c7576eecb717bd3c37))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v1.1.8 ([92128a8](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/92128a800e7996e008bdc50cafc333622bd3804e))
+
 ## [0.1.13](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/compare/0.1.12...0.1.13) (2023-06-05)
 
 
