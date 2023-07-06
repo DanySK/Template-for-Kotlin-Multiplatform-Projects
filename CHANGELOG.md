@@ -1,3 +1,32 @@
+## [0.1.15](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/compare/0.1.14...0.1.15) (2023-07-06)
+
+
+### Build and continuous integration
+
+* **deps:** update actions/checkout action to v3.5.3 ([13bb536](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/13bb536f8be32c72389c8f32d825d2f13ed72a26))
+* **deps:** update actions/setup-node action to v3.7.0 ([2b34e79](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/2b34e7916f6d7629880f795750ec25f151f02109))
+* **deps:** update danysk/action-checkout action to v0.2.10 ([f2f3c79](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/f2f3c79d4079e93bfa6d59d5b1bf85efbe6d6504))
+
+
+### Dependency updates
+
+* **core-deps:** update kotlin monorepo to v1.9.0 ([34b2476](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/34b2476fc04efa069b448f4e08c76ba05759ccf3))
+* **deps:** update dependency gradle to v8.2 ([c5678b2](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/c5678b250a88a4fec000ea23205c77b0ae2be240))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.32 ([e3cc7e5](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/e3cc7e57cfa913010382616ea16d1c63e98b6449))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.33 ([ec9320f](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/ec9320f020a2d9761f8858d129eb755df8b8397a))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.35 ([683a09b](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/683a09b255e7b6ac66d65acfc2ff8a83f850cebe))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.36 ([0bb3014](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/0bb30143c257575a366180608563d5da506b45ff))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.37 ([e77b113](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/e77b1134a5beb8160a3a34de68a60e113ec72394))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.38 ([e16f733](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/e16f733ec70ba09874e551b3953d99ea65eb4eaa))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.39 ([edd577d](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/edd577d9015d117aebdf192b5ce269ed83d77a2a))
+* **deps:** update plugin com.gradle.enterprise to v3.13.4 ([4f45889](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/4f458898fdb3b2ad892542e9b5f3bd8baac4b384))
+* **deps:** update plugin multijvmtesting to v0.5.3 ([d7a5920](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/d7a59205fbd28d83079871883aa2f3bdc72787bb))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v1.1.9 ([1f08390](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/1f08390365d5d016683dafa410de1e5db1fae170))
+* **deps:** update plugin publishoncentral to v5.0.6 ([f3b2d56](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/f3b2d5627ffe657d7922e272295161aad97219ec))
+* **deps:** update plugin publishoncentral to v5.0.7 ([3fbd489](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/3fbd48993891c06ab18306744cb344405794d5d2))
+* **deps:** update plugin publishoncentral to v5.0.8 ([1a1bf3a](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/1a1bf3adec0a1a9ed96f0ec7d2a5da72ea97db7e))
+* **deps:** update plugin publishoncentral to v5.0.9 ([4ea6fd0](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/4ea6fd0e926732b2db4025a8e4b427a62a788f16))
+
 ## [0.1.14](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/compare/0.1.13...0.1.14) (2023-06-07)
 
 
