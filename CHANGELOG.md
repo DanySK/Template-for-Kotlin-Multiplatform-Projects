@@ -1,3 +1,26 @@
+## [0.1.17](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/compare/0.1.16...0.1.17) (2023-08-31)
+
+
+### Build and continuous integration
+
+* **deps:** update actions/checkout action to v3.6.0 ([b95db0f](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/b95db0f3efd0f367139b9c2bba346c9b60e61352))
+* **deps:** update danysk/action-checkout action to v0.2.11 ([95e3e9c](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/95e3e9ca8c3a8210eaf69b46fcc5c5070dae8a56))
+
+
+### Dependency updates
+
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.44 ([a02f6da](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/a02f6da0e39afbf2f2b3f66766cb33eab521f6b3))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.45 ([9882f44](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/9882f44a72728a1acc6f75bee3ece8090803934e))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.46 ([c4763b3](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/c4763b37dc31f1dcbb0de7557e6054c2ff49dd3d))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.47 ([f234854](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/f2348541d38c2cbba5fb2d1322e53a3a35f53e7c))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.48 ([eb5fcbf](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/eb5fcbf24030c0fa902f478281188443f3954a17))
+* **deps:** update plugin publishoncentral to v5.0.12 ([10c69a6](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/10c69a6ca29fddf563f27f10bbc7d9ded7b35f91))
+
+
+### Documentation
+
+* **deps:** update plugin dokka to v1.9.0 ([553797c](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/553797c022fe56dbfafc6fb23d70d5e390d33dda))
+
 ## [0.1.16](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/compare/0.1.15...0.1.16) (2023-08-23)
 
 
