@@ -50,6 +50,10 @@ kotlin {
         val nativeTest by creating {
             dependsOn(commonTest)
         }
+
+        all {
+            languageSettings.optIn("-Xexpect-actual-classes")
+        }
     }
 
     js(IR) {
@@ -83,15 +87,9 @@ kotlin {
      */
     macosX64(nativeSetup)
     macosArm64(nativeSetup)
-    iosArm64(nativeSetup)
-    iosX64(nativeSetup)
-    iosSimulatorArm64(nativeSetup)
-    watchosArm32(nativeSetup)
-    watchosX64(nativeSetup)
-    watchosSimulatorArm64(nativeSetup)
-    tvosArm64(nativeSetup)
-    tvosX64(nativeSetup)
-    tvosSimulatorArm64(nativeSetup)
+    ios(nativeSetup)
+    watchos(nativeSetup)
+    tvos(nativeSetup)
 
     targets.all {
         compilations.all {
