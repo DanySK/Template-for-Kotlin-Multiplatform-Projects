@@ -2,7 +2,6 @@ import org.danilopianini.gradle.mavencentral.JavadocJar
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 import org.gradle.internal.os.OperatingSystem
 
-@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.kotest.multiplatform)
@@ -51,6 +50,10 @@ kotlin {
         val nativeTest by creating {
             dependsOn(commonTest)
         }
+
+        all {
+            languageSettings.optIn("-Xexpect-actual-classes")
+        }
     }
 
     js(IR) {
@@ -68,6 +71,8 @@ kotlin {
         }
     }
 
+    applyDefaultHierarchyTemplate()
+
     linuxX64(nativeSetup)
     linuxArm64(nativeSetup)
 
@@ -75,9 +80,15 @@ kotlin {
 
     macosX64(nativeSetup)
     macosArm64(nativeSetup)
-    ios(nativeSetup)
-    watchos(nativeSetup)
-    tvos(nativeSetup)
+    iosArm64(nativeSetup)
+    iosX64(nativeSetup)
+    iosSimulatorArm64(nativeSetup)
+    watchosArm32(nativeSetup)
+    watchosX64(nativeSetup)
+    watchosSimulatorArm64(nativeSetup)
+    tvosArm64(nativeSetup)
+    tvosX64(nativeSetup)
+    tvosSimulatorArm64(nativeSetup)
 
     targets.all {
         compilations.all {
@@ -135,7 +146,7 @@ signing {
 publishOnCentral {
     projectLongName.set("Template for Kotlin Multiplatform Project")
     projectDescription.set("A template repository for Kotlin Multiplatform projects")
-    repository("https://maven.pkg.github.com/danysk/${rootProject.name}".toLowerCase()) {
+    repository("https://maven.pkg.github.com/danysk/${rootProject.name}".lowercase()) {
         user.set("DanySK")
         password.set(System.getenv("GITHUB_TOKEN"))
     }
