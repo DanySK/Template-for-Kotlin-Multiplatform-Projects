@@ -50,10 +50,6 @@ kotlin {
         val nativeTest by creating {
             dependsOn(commonTest)
         }
-
-        all {
-            languageSettings.optIn("-Xexpect-actual-classes")
-        }
     }
 
     js(IR) {
@@ -94,6 +90,7 @@ kotlin {
         compilations.all {
             kotlinOptions {
                 allWarningsAsErrors = true
+                freeCompilerArgs += listOf("-Xexpect-actual-classes")
             }
         }
     }
