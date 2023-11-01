@@ -1,3 +1,381 @@
+## [0.1.18](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/compare/0.1.17...0.1.18) (2023-10-16)
+
+
+### Dependency updates
+
+* **deps:** update dependency gradle to v8.4 ([af4eb9f](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/af4eb9fb31744e35086b57bb25bed85d2778abca))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.49 ([aeaf53f](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/aeaf53fa067f8007a7df77c96a08ab641e9e02b4))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.50 ([cf36ff1](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/cf36ff135a1eb9f992ea23a5724ebdcaa8b0ec5a))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.51 ([29396ee](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/29396ee32aeb520dde093cb647285efd9606acc5))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.52 ([e5345bc](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/e5345bccf198b4113c59f3c29d171fcf1202a0fe))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.53 ([b1101bd](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/b1101bd9d216f8bc2aa938c865ea863ebe400a2d))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.54 ([a003dc0](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/a003dc0b84c63baa6ac5e4952ce57e04539b1092))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.55 ([a59d387](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/a59d3871ec811f9b8d1c4b922c2a5be38d227ff9))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.56 ([4c320ef](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/4c320ef011905a57cfd1465d410104204b4802f6))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.58 ([e52c9b3](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/e52c9b3b036e6ba259fbbb205ae595bb26cbaf84))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.59 ([c4370e3](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/c4370e32baa146c953038288c4067dd624afbbb4))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.60 ([44eb36d](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/44eb36d954849c2e1bb2c0381e2c838edf924982))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.61 ([1237c97](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/1237c97750cbe53417146d9375ee0a1ee5af0142))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.62 ([caec902](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/caec9021956f5495c6dfacdf907c9b2ef530ec46))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.63 ([df7375c](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/df7375cfb0cb75922a15d060046b6dab3e907d79))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.64 ([d391cef](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/d391cef0fea78ad662e9de23fd6669d02543cd89))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.65 ([013e180](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/013e1806e8e9743f4c953f328f20d3466dff11b5))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.66 ([d0575b4](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/d0575b4ea6e64c6f855b6f08ee623245201cc346))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.67 ([c64c705](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/c64c705ae1eb667317fc45620da8a4e23d373378))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.68 ([aedfdcc](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/aedfdcc5e812ad9ec5537d6a418e6692087f8008))
+* **deps:** update kotest to v5.7.0 ([1ae8be7](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/1ae8be75eb88bc0c289f3c43dc9a178ebc3f21c1))
+* **deps:** update kotest to v5.7.1 ([6d162a8](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/6d162a86642f215254a8f4395cc346b2358f28ba))
+* **deps:** update kotest to v5.7.2 ([ddf2602](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/ddf2602c80db75e9896dec69d88e1408fcfb3af1))
+* **deps:** update node.js to 18.18 ([b42e321](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/b42e3215308e113128008152721bcb60e1f43997))
+* **deps:** update plugin com.gradle.enterprise to v3.15 ([c425e59](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/c425e599afbaaf7aa9fc574cb030a1ec7c288cad))
+* **deps:** update plugin com.gradle.enterprise to v3.15.1 ([096f014](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/096f01410cc4200ef6147fc55268dcbc58e15392))
+* **deps:** update plugin multijvmtesting to v0.5.5 ([8a6bdc3](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/8a6bdc3ea1f4757d6720f7747a91606aa7bd9d41))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v1.1.10 ([52bb090](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/52bb090a9ef771e9fc8ddb5b93762e0b1d1e40a9))
+* **deps:** update plugin publishoncentral to v5.0.13 ([f15cd89](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/f15cd892e49dabf8faf6319a5d3da2299001eab7))
+* **deps:** update plugin publishoncentral to v5.0.14 ([5672236](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/5672236a524aeb2cbc81ca3d3a7e1b0415b20026))
+* **deps:** update plugin publishoncentral to v5.0.15 ([ae4e37d](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/ae4e37d9bb69117fc45c633a96487806dc9a4206))
+
+
+### Documentation
+
+* **deps:** update plugin dokka to v1.9.10 ([f2b452f](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/f2b452fa4cdbf705a3965c543a414c63915ad0fd))
+
+
+### Build and continuous integration
+
+* **deps:** update actions/checkout action to v4 ([5e90c68](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/5e90c68e6aa371c10132339da8e1a22d75739a5a))
+* **deps:** update actions/checkout action to v4.1.0 ([c901140](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/c901140b2c392070de41aca3fca1a27aebef8ebb))
+* **deps:** update danysk/action-checkout action to v0.2.12 ([a869a52](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/a869a52fa73614bf8f3455acba81b1018f9132b6))
+* **deps:** update danysk/action-checkout action to v0.2.13 ([b2244bf](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/b2244bf12e72b4055cb53b715b2a6fef6974c6c5))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.2.10 ([415ec0c](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/415ec0c1ca54f4d8f0a8a8fcd9ea2fb2c2817fe3))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.2.9 ([3bb9ddf](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/3bb9ddf1b61b0c5d0263022adc551b6e94edf607))
+
+## [0.1.17](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/compare/0.1.16...0.1.17) (2023-08-31)
+
+
+### Build and continuous integration
+
+* **deps:** update actions/checkout action to v3.6.0 ([b95db0f](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/b95db0f3efd0f367139b9c2bba346c9b60e61352))
+* **deps:** update danysk/action-checkout action to v0.2.11 ([95e3e9c](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/95e3e9ca8c3a8210eaf69b46fcc5c5070dae8a56))
+
+
+### Dependency updates
+
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.44 ([a02f6da](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/a02f6da0e39afbf2f2b3f66766cb33eab521f6b3))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.45 ([9882f44](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/9882f44a72728a1acc6f75bee3ece8090803934e))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.46 ([c4763b3](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/c4763b37dc31f1dcbb0de7557e6054c2ff49dd3d))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.47 ([f234854](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/f2348541d38c2cbba5fb2d1322e53a3a35f53e7c))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.48 ([eb5fcbf](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/eb5fcbf24030c0fa902f478281188443f3954a17))
+* **deps:** update plugin publishoncentral to v5.0.12 ([10c69a6](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/10c69a6ca29fddf563f27f10bbc7d9ded7b35f91))
+
+
+### Documentation
+
+* **deps:** update plugin dokka to v1.9.0 ([553797c](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/553797c022fe56dbfafc6fb23d70d5e390d33dda))
+
+## [0.1.16](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/compare/0.1.15...0.1.16) (2023-08-23)
+
+
+### Build and continuous integration
+
+* **deps:** update actions/setup-node action to v3.8.0 ([2c2647d](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/2c2647d876921d78d8267cdb9521a5ebada30a95))
+* **deps:** update actions/setup-node action to v3.8.1 ([fccac80](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/fccac800b88474a14a0aa8649387e8416ef269f2))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.2.7 ([1ca89d5](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/1ca89d545350ace32c48f663a243388fef3aff1c))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.2.8 ([88f6639](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/88f6639b8f5b3f06b19063e38959269fec2b0b13))
+
+
+### Dependency updates
+
+* **core-deps:** update kotlin monorepo to v1.9.10 ([dae9a37](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/dae9a37ad785f9e85e902fde4013d2ec9ab65aad))
+* **deps:** update dependency gradle to v8.2.1 ([3239bc1](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/3239bc1b99c091b5b28fb195c88532dd37ba3e90))
+* **deps:** update dependency gradle to v8.3 ([667d39e](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/667d39e83626ec2f6a5f8801d345c163ec3d6d32))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.40 ([045496c](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/045496c5e7ab745ab16063d8c3fb3ed103a94d88))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.41 ([fc653e8](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/fc653e8a6bd1d466454cccc77b9b1d11ad7fa6e6))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.42 ([f3e807a](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/f3e807a2cc630a365ef8792c86bd672352b977d6))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.43 ([e50ff2b](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/e50ff2b7abfb266f2a3db518f60b48511fcced5a))
+* **deps:** update node.js to 18.17 ([e49ef24](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/e49ef24a2ce062ff9ee07536ccb4665a3ab9e33c))
+* **deps:** update plugin com.gradle.enterprise to v3.14 ([5f43fdd](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/5f43fddc3b22c707fdf13b47b70d0743d661a2cd))
+* **deps:** update plugin com.gradle.enterprise to v3.14.1 ([c880f9b](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/c880f9b6e13ca3958bc605b54ad54c52e60d4129))
+* **deps:** update plugin multijvmtesting to v0.5.4 ([1064c0b](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/1064c0bb12c11af24215dcf3753b88dc0a448dfb))
+* **deps:** update plugin npm-publish to v3.4.0 ([618877d](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/618877d94228d6e9aa6a91d64de5b72631a60679))
+* **deps:** update plugin npm-publish to v3.4.1 ([6095c60](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/6095c60e432f3e8c730e156d175320ee94d49f53))
+* **deps:** update plugin org.gradle.toolchains.foojay-resolver-convention to v0.6.0 ([701d9a3](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/701d9a3595561a0193442dd92f64af65cd327c69))
+* **deps:** update plugin org.gradle.toolchains.foojay-resolver-convention to v0.7.0 ([45f6aaa](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/45f6aaac54105e4a893a94d182bcd9e44a92df12))
+* **deps:** update plugin publishoncentral to v5.0.10 ([82b4051](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/82b40513fc5196d5df185d68edee50ecd57bd95c))
+* **deps:** update plugin publishoncentral to v5.0.11 ([c135545](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/c135545e8b707d59d2372176281c85a85189f6a9))
+
+## [0.1.15](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/compare/0.1.14...0.1.15) (2023-07-06)
+
+
+### Build and continuous integration
+
+* **deps:** update actions/checkout action to v3.5.3 ([13bb536](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/13bb536f8be32c72389c8f32d825d2f13ed72a26))
+* **deps:** update actions/setup-node action to v3.7.0 ([2b34e79](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/2b34e7916f6d7629880f795750ec25f151f02109))
+* **deps:** update danysk/action-checkout action to v0.2.10 ([f2f3c79](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/f2f3c79d4079e93bfa6d59d5b1bf85efbe6d6504))
+
+
+### Dependency updates
+
+* **core-deps:** update kotlin monorepo to v1.9.0 ([34b2476](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/34b2476fc04efa069b448f4e08c76ba05759ccf3))
+* **deps:** update dependency gradle to v8.2 ([c5678b2](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/c5678b250a88a4fec000ea23205c77b0ae2be240))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.32 ([e3cc7e5](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/e3cc7e57cfa913010382616ea16d1c63e98b6449))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.33 ([ec9320f](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/ec9320f020a2d9761f8858d129eb755df8b8397a))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.35 ([683a09b](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/683a09b255e7b6ac66d65acfc2ff8a83f850cebe))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.36 ([0bb3014](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/0bb30143c257575a366180608563d5da506b45ff))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.37 ([e77b113](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/e77b1134a5beb8160a3a34de68a60e113ec72394))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.38 ([e16f733](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/e16f733ec70ba09874e551b3953d99ea65eb4eaa))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.39 ([edd577d](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/edd577d9015d117aebdf192b5ce269ed83d77a2a))
+* **deps:** update plugin com.gradle.enterprise to v3.13.4 ([4f45889](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/4f458898fdb3b2ad892542e9b5f3bd8baac4b384))
+* **deps:** update plugin multijvmtesting to v0.5.3 ([d7a5920](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/d7a59205fbd28d83079871883aa2f3bdc72787bb))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v1.1.9 ([1f08390](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/1f08390365d5d016683dafa410de1e5db1fae170))
+* **deps:** update plugin publishoncentral to v5.0.6 ([f3b2d56](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/f3b2d5627ffe657d7922e272295161aad97219ec))
+* **deps:** update plugin publishoncentral to v5.0.7 ([3fbd489](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/3fbd48993891c06ab18306744cb344405794d5d2))
+* **deps:** update plugin publishoncentral to v5.0.8 ([1a1bf3a](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/1a1bf3adec0a1a9ed96f0ec7d2a5da72ea97db7e))
+* **deps:** update plugin publishoncentral to v5.0.9 ([4ea6fd0](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/4ea6fd0e926732b2db4025a8e4b427a62a788f16))
+
+## [0.1.14](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/compare/0.1.13...0.1.14) (2023-06-07)
+
+
+### Dependency updates
+
+* **core-deps:** update kotlin monorepo to v1.8.22 ([e8e9abc](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/e8e9abc347a7141865f9cba6e398daf27574368d))
+* **deps:** update plugin gitsemver to v1.1.10 ([55822c1](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/55822c14d54942465d4d4ce156057a9fe2f0c5f8))
+* **deps:** update plugin multijvmtesting to v0.5.2 ([6112058](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/61120582b5caf85e8e8367c7576eecb717bd3c37))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v1.1.8 ([92128a8](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/92128a800e7996e008bdc50cafc333622bd3804e))
+
+## [0.1.13](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/compare/0.1.12...0.1.13) (2023-06-05)
+
+
+### Build and continuous integration
+
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.2.5 ([26a784e](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/26a784e1ab16cf46db679a662512b5d5da88c5a3))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.2.6 ([5f85a37](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/5f85a3742b41700f33db25974cf216698748c67a))
+
+
+### Dependency updates
+
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.26 ([b276341](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/b27634196669b7467f9e4d66b6c25944cf47ef59))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.27 ([cf67724](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/cf677245cfa3d2cf6c946fd1cc6deb51ab04aa19))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.28 ([b88273e](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/b88273e218f04a150f2a1cbb10395b13080c98ff))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.29 ([874118e](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/874118e1007b15c5fef98fa11b00f527b1bcaf3a))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.30 ([9c8b1ac](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/9c8b1acb295f1c94fcab8f5022056a562231babf))
+* **deps:** update kotest to v5.6.2 ([a59cffe](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/a59cffe606e1a0d37e0a713d2a06cab86b421ff0))
+* **deps:** update plugin com.gradle.enterprise to v3.13.1 ([a9d60e7](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/a9d60e7a8991c7e42f3218cb463306fd89e767e8))
+* **deps:** update plugin com.gradle.enterprise to v3.13.2 ([eb9d0f2](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/eb9d0f2a3930badefbf5d9f2b52b02ddef1d74f1))
+* **deps:** update plugin com.gradle.enterprise to v3.13.3 ([7af65cb](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/7af65cbfdf5b1389435175c1d817c04d9e99c0bc))
+* **deps:** update plugin multijvmtesting to v0.5.0 ([56bc94a](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/56bc94a491ea440318e2954513d76165f4857230))
+* **deps:** update plugin multijvmtesting to v0.5.1 ([d1a37ff](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/d1a37ffd501640b45eae7bbebd9fd7f5a697b56b))
+* **deps:** update plugin npm-publish to v3.3.0 ([c3867b8](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/c3867b861968848ba5485a7d1e7a578f27b538c3))
+* **deps:** update plugin npm-publish to v3.3.1 ([12b642d](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/12b642ddee269282e79f5a2d68464363b55889db))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v1.1.7 ([7ec84ed](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/7ec84ed82f0cae614925740b61c44bdb3e261818))
+* **deps:** update plugin publishoncentral to v5.0.5 ([b2281bc](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/b2281bcdbea1c8cc5526921776366c59ee2c23bd))
+
+
+### Documentation
+
+* **deps:** update plugin dokka to v1.8.20 ([df55ba1](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/df55ba17de1a4a3188298293155324a02f7cee8a))
+
+## [0.1.12](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/compare/0.1.11...0.1.12) (2023-04-25)
+
+
+### Build and continuous integration
+
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.2.4 ([5f6eedc](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/5f6eedcdc45edcfac779f8887bd50e30340dbdcb))
+
+
+### Dependency updates
+
+* **core-deps:** update kotlin monorepo to v1.8.21 ([373e9db](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/373e9db243bd90f07a5c31c278d1268d10163411))
+* **deps:** update dependency gradle to v8.1.1 ([7172cde](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/7172cded20341115a7b7bd6286ce956372145698))
+* **deps:** update kotest to v5.6.1 ([cbda8a1](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/cbda8a1ba201ba7e3b45b2292319ca7681ff820a))
+* **deps:** update plugin gitsemver to v1.1.8 ([363bd8a](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/363bd8aa7bbd6df8c6233506be9ac2f600e1a89c))
+* **deps:** update plugin gitsemver to v1.1.9 ([f029f86](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/f029f86dd2687fcbde0cf63b60c93f613f49c2cb))
+* **deps:** update plugin multijvmtesting to v0.4.21 ([acd68e5](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/acd68e538b8e0a27a2a24999dee13b989cbc5ff7))
+* **deps:** update plugin multijvmtesting to v0.4.22 ([30d2a9c](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/30d2a9c1a1f514602650d8a566f08a0f0c0a07b1))
+* **deps:** update plugin multijvmtesting to v0.4.23 ([135e283](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/135e283fcb4a52f13f5de9b6200b74ef745994ba))
+* **deps:** update plugin org.gradle.toolchains.foojay-resolver-convention to v0.5.0 ([b9a2954](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/b9a2954290e5be36f54ceee576f2054fb0182a64))
+* **deps:** update plugin publishoncentral to v5.0.1 ([91d8a2f](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/91d8a2f43191366ab1c81e3d9dd44fdb8c7c9c6a))
+* **deps:** update plugin publishoncentral to v5.0.2 ([7e34da6](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/7e34da618d69cf111a46ab4cc5a3dcb945a27717))
+* **deps:** update plugin publishoncentral to v5.0.3 ([432dde8](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/432dde80992e284ee564db8a47ad0dd2b21a6aed))
+* **deps:** update plugin publishoncentral to v5.0.4 ([c834ec2](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/c834ec27e6c0bb720e613977de3f976b48455c44))
+
+## [0.1.11](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/compare/0.1.10...0.1.11) (2023-04-18)
+
+
+### Build and continuous integration
+
+* **deps:** update actions/checkout action to v3.4.0 ([7208d19](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/7208d196636d70e6d9c67f1eb33d68fff617e9ea))
+* **deps:** update actions/checkout action to v3.5.0 ([35908c1](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/35908c1824384fcdec441a07f7db90e315d709ce))
+* **deps:** update actions/checkout action to v3.5.1 ([acbc70e](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/acbc70e17ba2f8e8382a093240f74631d7aa2025))
+* **deps:** update actions/checkout action to v3.5.2 ([a178ab0](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/a178ab069fa4105835cc9cf1c96d00ab9b837dbf))
+* **deps:** update danysk/action-checkout action to v0.2.6 ([fb99e08](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/fb99e081d366a1ab05aac9c0f82e7cbdf0b817f9))
+* **deps:** update danysk/action-checkout action to v0.2.7 ([92c6540](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/92c6540f1ada0e47944cd5d4c4360bda638f2b34))
+* **deps:** update danysk/action-checkout action to v0.2.8 ([504c2c4](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/504c2c42ca3f29d8c2153f313f7b9aa9ad917341))
+* **deps:** update danysk/action-checkout action to v0.2.9 ([e3db564](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/e3db564a65c9f5444f96e02e5759a50a40c7d88f))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.2.1 ([db7b29a](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/db7b29acc385403a889b09dceba61aac811a0b4a))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.2.1 ([c63d5fc](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/c63d5fccfa7883b5c394ebe366fd34c3c0ec97ea))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.2.2 ([ccb5666](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/ccb56663bbfac855029f30a1b034800277b0b20c))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.2.3 ([eb4e955](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/eb4e955bd38dd065ef74e84844a66c056b3ccbd8))
+* fix the concurrency issues with the Central repo staging creation ([4229e1a](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/4229e1afc829cfbf70229e041a1033f13933d7bc))
+* **mergify:** disable auto-rebasing due to Mergifyio/mergify[#5074](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/issues/5074) ([49f38cc](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/49f38cc2e275fdb50a9e2fa8b304f425ec0c5627))
+
+
+### Dependency updates
+
+* **core-deps:** update kotlin monorepo to v1.8.20 ([607f695](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/607f6953a0b9901cc8e7fb92c02ed38c7d9dff5c))
+* **deps:** update dependency gradle to v8.1 ([e3606a6](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/e3606a6ca786f264b0f02892022546ed6ad49407))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.17 ([f97951f](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/f97951fa43ac293b23991865f711e99476d29ef9))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.19 ([c201d4e](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/c201d4e94471e57bb2f2638956b7c3947b291e2b))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.20 ([35db026](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/35db0261dc6756d97a1e9ae5c7303d99505fc78e))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.21 ([8cb5d8d](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/8cb5d8d691a6b6e4aac23c0ef7c81f607e41d503))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.22 ([d145ef0](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/d145ef093ce8ef28f26e9beba45d866b6f172c79))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.23 ([bea8f30](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/bea8f30a1a3bc84135548a483631b72ac8f4a83b))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.24 ([bc3638f](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/bc3638fd25a36844be0c4826e93b9e3b7a07b258))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.25 ([26fe037](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/26fe037d97cf3f371f828477547771e454bd278c))
+* **deps:** update node.js to 18.16 ([1f69152](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/1f691529e292063ad8779b6571ad81df4d8a5f7c))
+* **deps:** update plugin com.gradle.enterprise to v3.12.5 ([ad8494c](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/ad8494ce37b3042e4b6560468f5adddaa768a078))
+* **deps:** update plugin com.gradle.enterprise to v3.12.6 ([5f359e7](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/5f359e7a01c57a64860f9884711413bb546b31b3))
+* **deps:** update plugin com.gradle.enterprise to v3.13 ([22bf0ac](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/22bf0ac2c3cf5ff6c0e78515180c5f835778808c))
+* **deps:** update plugin gitsemver to v1.1.5 ([edaeba0](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/edaeba0a8a0263796eae3ec57d717bde614dea25))
+* **deps:** update plugin gitsemver to v1.1.6 ([197cd0f](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/197cd0f87a3d783052c753be28b0f898e652c9fb))
+* **deps:** update plugin gitsemver to v1.1.7 ([30fd936](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/30fd93630b543a6779fa053f590d0214959edac7))
+* **deps:** update plugin multijvmtesting to v0.4.20 ([8bb3365](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/8bb3365c3be1888197772d1c464b2e6e257f3d7c))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v1.1.6 ([eba9609](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/eba9609787b14b389b3846f65d6bccb04cf12451))
+* **deps:** update plugin publishoncentral to v4 ([4242351](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/4242351cdade79772bbbd7dd91fd9dd1349c6eb7))
+* **deps:** update plugin publishoncentral to v4.0.1 ([18bc4e8](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/18bc4e8340a03c14d3d6bc0c5d006d84e16589ce))
+* **deps:** update plugin publishoncentral to v4.1.1 ([d85494d](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/d85494d2aea974d8d4444d878135aa13545ff0dc))
+* **deps:** update plugin publishoncentral to v5 ([9e86cde](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/9e86cde75ab126505a6d81fa5c59b1d7a361a62d))
+
+## [0.1.10](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/compare/0.1.9...0.1.10) (2023-03-15)
+
+
+### Bug Fixes
+
+* **ci:** execute command line-by-line ([1e0e7a9](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/1e0e7a9e758eeeb2d11c5e6df4cb2320acc5fc3f))
+
+## [0.1.9](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/compare/0.1.8...0.1.9) (2023-03-15)
+
+
+### Bug Fixes
+
+* **build:** disable correctly maven metadata generation for excluded target ([faf98d1](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/faf98d121d86d9a1029d4e4da618f407fd019234))
+* **ci:** add missing dependency between jobs ([e4416e1](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/e4416e187b88eab1b9b842160f64703dc8335b32))
+* compile only host-specific platforms ([1af72a9](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/1af72a9a458d651c5eb6c7a18006c07c582ceb7a))
+
+
+### Documentation
+
+* **deps:** update plugin dokka to v1.8.10 ([281f5d0](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/281f5d042c803600b8aa32b7e0fde7f6bdfada00))
+
+
+### General maintenance
+
+* delete old gradle property and suppress warning for ignore disable targets ([bbdb5bc](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/bbdb5bc8f4838601537aa1d7c5d487d7c6d5980f))
+* **release:** 0.1.10 [skip ci] ([b551dd1](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/b551dd1f8feb3f0575d91dfb45d1f938b12dd845))
+* **release:** 0.1.9 [skip ci] ([2754a91](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/2754a913c4f40a6829ccc76e7c0cb396797392df)), closes [#152](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/issues/152)
+
+
+### Build and continuous integration
+
+* apply `org.gradle.toolchains.foojay-resolver-convention` ([72fec67](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/72fec67ab8096747c65293ac80b77385f69b74a6))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.1.22 ([dc5cce4](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/dc5cce4068ff8ed743c6ff77327545a368b0bf49))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.1.23 ([a8a2d63](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/a8a2d63091e652f967824275c960f42a66b11ad1))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.1.24 ([b5b326f](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/b5b326f807e5540dd69a0c0bf8534e7eed1440bb))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.1.25 ([3dfe87c](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/3dfe87c2c4eeda38d95b3e430c965fa61ad20c06))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.1.26 ([044d478](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/044d4786ca2f3ab5d632ba8445b1e287aeb1f6fa))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.2.0 ([1a4e840](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/1a4e84086fbe693f754e79a02901267c39274aef))
+* **deps:** update nicolasfara/precompute-semantic-release-version-action action to v1.0.2 ([77a91b9](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/77a91b9c736af141b6c8b5ed3346178438d60058))
+* improve staging repo step ([65ecbf7](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/65ecbf7f1674fc88b56487a34752cc38bd996e41))
+* release job depends on staging-repo job ([728a1f0](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/728a1f0e130b4d55fecf69c053d2662c14f349f0))
+* use multi-stage CI for kt-MP projects ([#152](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/issues/152)) ([7554099](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/75540998ad4785608a05599c780a0316fa6c79df))
+
+
+### Dependency updates
+
+* **deps:** update dependency gradle to v8 ([175a911](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/175a911d8e9064fa61cc8d69ed19e7ab21402b7d))
+* **deps:** update dependency gradle to v8.0.2 ([337dfab](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/337dfab93a9df63aadd77d3fac5ddab05f9cb555))
+* **deps:** update node.js to 18.14 ([109801d](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/109801d1e8099de28ec734d176b50897a9d1b7ba))
+* **deps:** update node.js to 18.15 ([fafd648](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/fafd6481e4a1d2e6fc1a0a8f18f02579d20632ce))
+* **deps:** update plugin com.gradle.enterprise to v3.12.3 ([033d511](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/033d5111845b9c97ed0bafc2158e5f97c194a838))
+* **deps:** update plugin com.gradle.enterprise to v3.12.4 ([b774d64](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/b774d64eef835974e5064d54645f5584114cab74))
+* **deps:** update plugin gitsemver to v1.0.2 ([3b11723](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/3b11723540775f00a4e868f021a8bed71310fc27))
+* **deps:** update plugin gitsemver to v1.1.1 ([963db39](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/963db394a34bde13dc13e35a7ec4655029994eee))
+* **deps:** update plugin gitsemver to v1.1.4 ([b8aecdd](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/b8aecdd34279892e13396e57074e079a6cf6e47b))
+* **deps:** update plugin multijvmtesting to v0.4.16 ([d6a89ff](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/d6a89ffbace23ac2d66816faf8e37af524b35910))
+* **deps:** update plugin multijvmtesting to v0.4.17 ([7ee76a7](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/7ee76a7cbf1dd022b3643ebe49d13e849ff36d9e))
+* **deps:** update plugin multijvmtesting to v0.4.19 ([7f169e3](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/7f169e3c7ed9ca01a2ec23f6207418f72caa5e9c))
+* **deps:** update plugin npm-publish to v3.2.1 ([d9d123c](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/d9d123cf5ff6eb4b88d70bf52b521cf6abe0006a))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v1.1.2 ([71765e2](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/71765e2b5ce1392f6daacaf5732925b95c79e77c))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v1.1.3 ([7023cc5](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/7023cc5fa7b208426c55aabf48d673a97e6b5768))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v1.1.5 ([2661d7a](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/2661d7aef9efd8aad6451f733f22d2611e0a1c19))
+* **deps:** update plugin publishoncentral to v2.0.13 ([3608c0f](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/3608c0f3b743c4689b11cef240011f97bb990970))
+* **deps:** update plugin publishoncentral to v3 ([80f854b](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/80f854bdcbaa09609fc84f36b8a1e80bb56e2ffc))
+* **deps:** update plugin publishoncentral to v3.3.0 ([b08e3f1](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/b08e3f15ac87bf182e080fda5f24a90459edf989))
+* **deps:** update plugin publishoncentral to v3.3.1 ([bbaebbc](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/bbaebbc067de956c6228154c03e40d7dd5b4cb3f))
+* **deps:** update plugin publishoncentral to v3.3.3 ([3173746](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/317374619ee4e75b22c7e3de9ccf506ceddc3376))
+* **deps:** update plugin publishoncentral to v3.4.0 ([06d6894](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/06d689415223f389f9adf5b2f4ed8e85d28416a0))
+
+## [0.1.10](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/compare/0.1.9...0.1.10) (2023-03-06)
+
+
+### Bug Fixes
+
+* compile only host-specific platforms ([1af72a9](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/1af72a9a458d651c5eb6c7a18006c07c582ceb7a))
+
+
+### General maintenance
+
+* delete old gradle property and suppress warning for ignore disable targets ([bbdb5bc](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/bbdb5bc8f4838601537aa1d7c5d487d7c6d5980f))
+
+
+### Build and continuous integration
+
+* **deps:** update nicolasfara/precompute-semantic-release-version-action action to v1.0.2 ([77a91b9](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/77a91b9c736af141b6c8b5ed3346178438d60058))
+* improve staging repo step ([65ecbf7](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/65ecbf7f1674fc88b56487a34752cc38bd996e41))
+
+## [0.1.9](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/compare/0.1.8...0.1.9) (2023-03-04)
+
+
+### Build and continuous integration
+
+* apply `org.gradle.toolchains.foojay-resolver-convention` ([72fec67](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/72fec67ab8096747c65293ac80b77385f69b74a6))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.1.22 ([dc5cce4](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/dc5cce4068ff8ed743c6ff77327545a368b0bf49))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.1.23 ([a8a2d63](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/a8a2d63091e652f967824275c960f42a66b11ad1))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.1.24 ([b5b326f](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/b5b326f807e5540dd69a0c0bf8534e7eed1440bb))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.1.25 ([3dfe87c](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/3dfe87c2c4eeda38d95b3e430c965fa61ad20c06))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.1.26 ([044d478](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/044d4786ca2f3ab5d632ba8445b1e287aeb1f6fa))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.2.0 ([1a4e840](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/1a4e84086fbe693f754e79a02901267c39274aef))
+* use multi-stage CI for kt-MP projects ([#152](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/issues/152)) ([7554099](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/75540998ad4785608a05599c780a0316fa6c79df))
+
+
+### Documentation
+
+* **deps:** update plugin dokka to v1.8.10 ([281f5d0](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/281f5d042c803600b8aa32b7e0fde7f6bdfada00))
+
+
+### Dependency updates
+
+* **deps:** update dependency gradle to v8 ([175a911](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/175a911d8e9064fa61cc8d69ed19e7ab21402b7d))
+* **deps:** update dependency gradle to v8.0.2 ([337dfab](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/337dfab93a9df63aadd77d3fac5ddab05f9cb555))
+* **deps:** update node.js to 18.14 ([109801d](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/109801d1e8099de28ec734d176b50897a9d1b7ba))
+* **deps:** update plugin com.gradle.enterprise to v3.12.3 ([033d511](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/033d5111845b9c97ed0bafc2158e5f97c194a838))
+* **deps:** update plugin com.gradle.enterprise to v3.12.4 ([b774d64](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/b774d64eef835974e5064d54645f5584114cab74))
+* **deps:** update plugin gitsemver to v1.0.2 ([3b11723](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/3b11723540775f00a4e868f021a8bed71310fc27))
+* **deps:** update plugin gitsemver to v1.1.1 ([963db39](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/963db394a34bde13dc13e35a7ec4655029994eee))
+* **deps:** update plugin gitsemver to v1.1.4 ([b8aecdd](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/b8aecdd34279892e13396e57074e079a6cf6e47b))
+* **deps:** update plugin multijvmtesting to v0.4.16 ([d6a89ff](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/d6a89ffbace23ac2d66816faf8e37af524b35910))
+* **deps:** update plugin multijvmtesting to v0.4.17 ([7ee76a7](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/7ee76a7cbf1dd022b3643ebe49d13e849ff36d9e))
+* **deps:** update plugin multijvmtesting to v0.4.19 ([7f169e3](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/7f169e3c7ed9ca01a2ec23f6207418f72caa5e9c))
+* **deps:** update plugin npm-publish to v3.2.1 ([d9d123c](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/d9d123cf5ff6eb4b88d70bf52b521cf6abe0006a))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v1.1.2 ([71765e2](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/71765e2b5ce1392f6daacaf5732925b95c79e77c))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v1.1.3 ([7023cc5](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/7023cc5fa7b208426c55aabf48d673a97e6b5768))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v1.1.5 ([2661d7a](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/2661d7aef9efd8aad6451f733f22d2611e0a1c19))
+* **deps:** update plugin publishoncentral to v2.0.13 ([3608c0f](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/3608c0f3b743c4689b11cef240011f97bb990970))
+* **deps:** update plugin publishoncentral to v3 ([80f854b](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/80f854bdcbaa09609fc84f36b8a1e80bb56e2ffc))
+* **deps:** update plugin publishoncentral to v3.3.0 ([b08e3f1](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/b08e3f15ac87bf182e080fda5f24a90459edf989))
+* **deps:** update plugin publishoncentral to v3.3.1 ([bbaebbc](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/bbaebbc067de956c6228154c03e40d7dd5b4cb3f))
+* **deps:** update plugin publishoncentral to v3.3.3 ([3173746](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/317374619ee4e75b22c7e3de9ccf506ceddc3376))
+
 ## [0.1.8](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/compare/0.1.7...0.1.8) (2023-02-05)
 
 

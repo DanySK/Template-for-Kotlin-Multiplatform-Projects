@@ -1,8 +1,5 @@
-@file:Suppress("UnstableApiUsage")
-
 import org.danilopianini.gradle.mavencentral.JavadocJar
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
-import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.gradle.internal.os.OperatingSystem
 
 @Suppress("DSL_SCOPE_VIOLATION")
@@ -23,56 +20,6 @@ group = "org.danilopianini"
 repositories {
     google()
     mavenCentral()
-}
-
-fun KotlinNativeTarget.binarySetup() {
-    compilations["main"].defaultSourceSet.dependsOn(kotlin.sourceSets["nativeMain"])
-    compilations["test"].defaultSourceSet.dependsOn(kotlin.sourceSets["nativeTest"])
-    binaries {
-        sharedLib()
-        staticLib()
-        "main".let {
-            executable { entryPoint = it }
-        }
-    }
-}
-
-fun KotlinMultiplatformExtension.configureDarwinCompatiblePlatforms() {
-    listOf(
-        macosX64(),
-        macosArm64(),
-        iosArm32(),
-        iosArm64(),
-        iosSimulatorArm64(),
-        tvosArm64(),
-        tvosSimulatorArm64(),
-        watchosArm32(),
-        watchosArm64(),
-        watchosSimulatorArm64()
-    ).forEach { it.binarySetup() }
-}
-
-fun KotlinMultiplatformExtension.configureWindowsCompatiblePlatforms() {
-    listOf(
-        mingwX64()
-    ).forEach { it.binarySetup() }
-}
-
-fun KotlinMultiplatformExtension.configureLinuxCompatiblePlatforms() {
-    listOf(
-        linuxX64()
-    ).forEach { it.binarySetup() }
-}
-
-fun KotlinMultiplatformExtension.configureAllPlatforms() {
-    configureLinuxCompatiblePlatforms()
-    configureWindowsCompatiblePlatforms()
-    configureDarwinCompatiblePlatforms()
-    listOf(
-        linuxArm32Hfp(),
-        linuxArm64(),
-        mingwX86()
-    ).forEach { it.binarySetup() }
 }
 
 kotlin {
@@ -112,22 +59,56 @@ kotlin {
         binaries.library()
     }
 
-    val releaseStage: String? by project
-
-    when (OperatingSystem.current() to releaseStage.toBoolean()) {
-        OperatingSystem.LINUX to false -> configureLinuxCompatiblePlatforms()
-        OperatingSystem.WINDOWS to false -> configureWindowsCompatiblePlatforms()
-        OperatingSystem.MAC_OS to false -> configureDarwinCompatiblePlatforms()
-        OperatingSystem.MAC_OS to true -> configureAllPlatforms()
-        else -> throw GradleException(
-            "To cross-compile for all the platforms, a `macos` runner should be used"
-        )
+    val nativeSetup: KotlinNativeTarget.() -> Unit = {
+        compilations["main"].defaultSourceSet.dependsOn(kotlin.sourceSets["nativeMain"])
+        compilations["test"].defaultSourceSet.dependsOn(kotlin.sourceSets["nativeTest"])
+        binaries {
+            sharedLib()
+            staticLib()
+        }
     }
+
+    linuxX64(nativeSetup)
+    linuxArm64(nativeSetup)
+
+    mingwX64(nativeSetup)
+
+    macosX64(nativeSetup)
+    macosArm64(nativeSetup)
+    ios(nativeSetup)
+    watchos(nativeSetup)
+    tvos(nativeSetup)
 
     targets.all {
         compilations.all {
             kotlinOptions {
                 allWarningsAsErrors = true
+            }
+        }
+    }
+
+    val os = OperatingSystem.current()
+    val excludeTargets = when {
+        os.isLinux -> kotlin.targets.filterNot { "linux" in it.name }
+        os.isWindows -> kotlin.targets.filterNot { "mingw" in it.name }
+        os.isMacOsX -> kotlin.targets.filter { "linux" in it.name || "mingw" in it.name }
+        else -> emptyList()
+    }.mapNotNull { it as? KotlinNativeTarget }
+
+    configure(excludeTargets) {
+        compilations.configureEach {
+            cinterops.configureEach { tasks[interopProcessingTaskName].enabled = false }
+            compileTaskProvider.get().enabled = false
+            tasks[processResourcesTaskName].enabled = false
+        }
+        binaries.configureEach { linkTask.enabled = false }
+
+        mavenPublication {
+            tasks.withType<AbstractPublishToMaven>().configureEach {
+                onlyIf { publication != this@mavenPublication }
+            }
+            tasks.withType<GenerateModuleMetadata>().configureEach {
+                onlyIf { publication.get() != this@mavenPublication }
             }
         }
     }
