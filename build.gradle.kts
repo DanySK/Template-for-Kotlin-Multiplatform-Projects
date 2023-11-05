@@ -69,12 +69,18 @@ kotlin {
     }
 
     applyDefaultHierarchyTemplate()
-
+    /*
+     * Linux 64
+     */
     linuxX64(nativeSetup)
     linuxArm64(nativeSetup)
-
+    /*
+     * Win 64
+     */
     mingwX64(nativeSetup)
-
+    /*
+     * Apple OSs
+     */
     macosX64(nativeSetup)
     macosArm64(nativeSetup)
     iosArm64(nativeSetup)
