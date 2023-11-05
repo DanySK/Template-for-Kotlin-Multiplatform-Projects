@@ -56,12 +56,14 @@ kotlin {
         browser()
         nodejs()
         binaries.library()
+        binaries.executable()
     }
 
     val nativeSetup: KotlinNativeTarget.() -> Unit = {
         compilations["main"].defaultSourceSet.dependsOn(kotlin.sourceSets["nativeMain"])
         compilations["test"].defaultSourceSet.dependsOn(kotlin.sourceSets["nativeTest"])
         binaries {
+            executable()
             sharedLib()
             staticLib()
         }
