@@ -56,7 +56,6 @@ kotlin {
         browser()
         nodejs()
         binaries.library()
-        binaries.executable()
     }
 
     val nativeSetup: KotlinNativeTarget.() -> Unit = {
