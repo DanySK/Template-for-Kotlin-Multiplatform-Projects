@@ -1,6 +1,6 @@
 import org.danilopianini.gradle.mavencentral.JavadocJar
-import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 import org.gradle.internal.os.OperatingSystem
+import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
