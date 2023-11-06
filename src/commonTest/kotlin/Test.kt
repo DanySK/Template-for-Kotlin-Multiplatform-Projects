@@ -6,5 +6,5 @@ class Test : StringSpec(
         "a simple test" {
             true shouldNotBe false
         }
-    }
+    },
 )
