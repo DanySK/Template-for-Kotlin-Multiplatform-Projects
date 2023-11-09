@@ -87,7 +87,6 @@ jobs:
             ruby -e 'if /^windows-\w+$/ =~ "${{ matrix.os }}" then puts `./gradlew --stop` end'
             NEXT_VERSION="${{ needs.staging-repo.outputs.next-version }}"
             OVERRIDE_VERSION=$([[ "$NEXT_VERSION" != "" ]] && echo "-PforceVersion=$(echo $NEXT_VERSION)" || echo "")
-            if 
             ./gradlew $OVERRIDE_VERSION -PstagingRepositoryId=${{ needs.staging-repo.outputs.maven-central-repo-id }} uploadAll --parallel
           should-run-codecov: ${{ runner.os == 'Linux' }}
           should-deploy: ${{ contains(needs.staging-repo.result, 'success') }}
