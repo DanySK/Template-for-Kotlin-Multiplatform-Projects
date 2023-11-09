@@ -1,3 +1,18 @@
+## [0.1.20](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/compare/0.1.19...0.1.20) (2023-11-09)
+
+
+### Dependency updates
+
+* **core-deps:** update kotlin monorepo to v1.9.20 (patch) ([#346](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/issues/346)) ([c3bb7e9](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/c3bb7e94e1ec2120de15c4fb9b792b468f443cd4))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.71 ([cf7b6d0](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/cf7b6d0ffdf5ddfacbf8c1833f5f408aa8ea0210))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.72 ([55f9cea](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/55f9cea3fb56100edecb42825f184a84a749a970))
+* **deps:** update plugin kotlin-qa to v0.54.0 ([8aba2d7](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/8aba2d7ede5e71ba7ef9f19eb58e4fb05910b628))
+
+
+### Build and continuous integration
+
+* stop the gradle daemon on windows before deploying to prevent `The process cannot access the file because it is being used by another process` ([#358](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/issues/358)) ([b2c7e8d](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/b2c7e8de066830b78df341145f1167a00fecdfe7))
+
 ## [0.1.19](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/compare/0.1.18...0.1.19) (2023-11-06)
 
 
