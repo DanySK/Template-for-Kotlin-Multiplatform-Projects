@@ -1,3 +1,17 @@
+## [0.1.21](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/compare/0.1.20...0.1.21) (2023-11-23)
+
+
+### Dependency updates
+
+* **core-deps:** update dependency org.jetbrains.kotlin.multiplatform to v1.9.21 ([33c4c5d](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/33c4c5d3e0bbc92d897547b442d633287e61ab0f))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.74 ([33adc4f](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/33adc4ffb7d2fab847c6b6bbf8223d3f6ec04525))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.75 ([bb11047](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/bb11047401d603e452cc332ddce0b2239034f55a))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.76 ([bbf5bf5](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/bbf5bf5ef05eaa47fec4cd0ebe0e5d03b21b8fbb))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.77 ([e6cfd30](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/e6cfd3073eb89d04371ccc3b7575740a4b935d14))
+* **deps:** update node.js to 20.10 ([284815a](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/284815ad8d7505d02e327cc01aacc544a4a31067))
+* **deps:** update plugin gitsemver to v2.0.2 ([389d645](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/389d64587c034b6ec117751b3cf79d791710a5a8))
+* **deps:** update plugin publishoncentral to v5.0.19 ([1fcf02e](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/1fcf02e8c82a1e8cd2613e53ffc0b5527f1e4a0a))
+
 ## [0.1.20](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/compare/0.1.19...0.1.20) (2023-11-09)
 
 
