@@ -1,1 +1,3 @@
+package Entities.Interfaces
+
 interface PollAlgorithmParameter
