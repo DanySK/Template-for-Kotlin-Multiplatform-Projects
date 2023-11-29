@@ -56,9 +56,8 @@ fun main() {
 
     val votes = listOf(v1, v2, v3)
     val poll = PollSimulation(MajorityAlgorithm(), competition, votes)
-    val ranking = poll.computePoll()
-        ranking.printRanking()
-//val a = DefaultPollManager(listOf(poll))
+
+    DefaultPollManager(listOf(poll)).computeAllPolls().forEach { it.printRanking() }
 
 }
 
