@@ -3,14 +3,14 @@ package Entities.Implementations
 import Entities.Interfaces.*
 import Entities.Types.ScoreMetrics
 
-class MajorityAlgorithm<S : ScoreMetrics>() : PollAlgorithm<SinglePreferenceVote<S>> {
+class MajorityAlgorithm<S : ScoreMetrics> : PollAlgorithm<S, SinglePreferenceVote<S>> {
     override val pollAlgorithmParameters = listOf<PollAlgorithmParameter>()
-    override fun computeByAlgorithmRules(votes: List<SinglePreferenceVote<S>>): Ranking {
+    override fun computeByAlgorithmRules(votes: List<SinglePreferenceVote<S>>): Ranking<S> {
         val votesCount = votes.groupingBy { it.votedCompetitor }.eachCount()
 
         val maxValue = votesCount.values.max()
 
-        return CompetitorVotesByDescendingRanking(votesCount.filterValues { it == maxValue })
+        return RankingByDescendingVotes(votesCount.filterValues { it == maxValue })
 
 
 
