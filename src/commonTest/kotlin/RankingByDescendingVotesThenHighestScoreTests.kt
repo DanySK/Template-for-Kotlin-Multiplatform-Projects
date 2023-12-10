@@ -1,7 +1,7 @@
+
 import Entities.Implementations.HumanCompetitor
 import Entities.Implementations.RankingByDescendingVotesThenHighestScore
 import Entities.Interfaces.Competitor
-import Entities.Interfaces.NumberOfVotes
 import Entities.Interfaces.Score
 import Entities.Types.WinsInCampionship
 import io.kotest.assertions.throwables.shouldThrow
@@ -17,7 +17,7 @@ class RankingByDescendingVotesThenHighestScoreTests : StringSpec({
             override val scoreValue: WinsInCampionship
                 get() = WinsInCampionship(1)
         }
-        val map = mapOf<Competitor<WinsInCampionship>, NumberOfVotes>(
+        val map = mapOf<Competitor<WinsInCampionship>, Int>(
             HumanCompetitor("competitor 1", listOf<Score<WinsInCampionship>>()) to 1,
             HumanCompetitor("competitor 2", listOf<Score<WinsInCampionship>>(competitor2Score)) to 2,
         )
@@ -51,7 +51,7 @@ class RankingByDescendingVotesThenHighestScoreTests : StringSpec({
                 get() = WinsInCampionship(10)
         }
 
-        val map = mapOf<Competitor<WinsInCampionship>, NumberOfVotes>(
+        val map = mapOf<Competitor<WinsInCampionship>, Int>(
             HumanCompetitor("competitor 1", listOf(competitor1Score)) to 2,
             HumanCompetitor("competitor 2", listOf(competitor2Score)) to 1,
             HumanCompetitor("competitor 3", listOf(competitor3m1Score,

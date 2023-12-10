@@ -1,17 +1,18 @@
 package Entities.Types
 
 import kotlin.time.Duration
-import kotlin.time.DurationUnit
 
 abstract class ScoreMetrics : Comparable<Any>
-data class BestTimeInMatch(val timing : Duration) : ScoreMetrics() {
+ class BestTimeInMatch(val timing : Duration) : ScoreMetrics() {
     override fun compareTo(other: Any): Int {
         if(other is BestTimeInMatch){
             return timing.compareTo(other.timing)
         }
         else throw IllegalArgumentException("Compared value is not compatible")
     }
-}
+
+
+ }
 
 data class WinsInCampionship(val wins : Int) : ScoreMetrics() {
     override fun compareTo(other: Any): Int {
@@ -20,5 +21,7 @@ data class WinsInCampionship(val wins : Int) : ScoreMetrics() {
         }
         else throw IllegalArgumentException("Compared value is not compatible")
     }
+
+
 
 }

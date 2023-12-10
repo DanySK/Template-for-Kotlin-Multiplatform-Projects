@@ -14,11 +14,12 @@ plugins {
     alias(libs.plugins.taskTree)
 }
 
-group = "org.danilopianini"
+group = "org.jacopocorina"
 
 repositories {
     google()
     mavenCentral()
+    maven { url = uri("https://jitpack.io") }
 }
 
 kotlin {
@@ -37,6 +38,12 @@ kotlin {
             dependencies {
                 implementation(libs.bundles.kotlin.testing.common)
                 implementation(libs.bundles.kotest.common)
+            }
+        }
+
+        val jvmMain by getting {
+            dependencies {
+                implementation("com.github.jcornaz:kondorcet:v1.0.0")
             }
         }
         val jvmTest by getting {

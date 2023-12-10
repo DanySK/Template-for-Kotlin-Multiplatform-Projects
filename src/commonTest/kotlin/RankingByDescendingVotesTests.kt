@@ -1,8 +1,8 @@
-import Entities.Implementations.RankingByDescendingVotes
-import Entities.Implementations.RankingByDescendingVotesThenHighestScore
+
+
 import Entities.Implementations.HumanCompetitor
+import Entities.Implementations.RankingByDescendingVotes
 import Entities.Interfaces.Competitor
-import Entities.Interfaces.NumberOfVotes
 import Entities.Interfaces.Score
 import Entities.Types.ScoreMetrics
 import Entities.Types.WinsInCampionship
@@ -19,7 +19,7 @@ class RankingByDescendingVotesTests : StringSpec(
     {
         "CompetitorRankingByDescendingVotes cannot receive an empty ranking" {
             val exception = shouldThrow<IllegalArgumentException> {
-                RankingByDescendingVotes(emptyMap<Competitor<ScoreMetrics>, NumberOfVotes>())
+                RankingByDescendingVotes(emptyMap<Competitor<ScoreMetrics>, Int>())
             }
             exception.message.shouldNotBeBlank()
             exception.message.shouldNotBeEmpty()
@@ -27,7 +27,7 @@ class RankingByDescendingVotesTests : StringSpec(
         }
 
         "CompetitorRankingByDescendingVotes cannot have ascending ranking" {
-            val map = mapOf<Competitor<WinsInCampionship>, NumberOfVotes>(
+            val map = mapOf<Competitor<WinsInCampionship>, Int>(
                 HumanCompetitor("competitor 1", listOf<Score<WinsInCampionship>>()) to 1,
                 HumanCompetitor("competitor 2", listOf<Score<WinsInCampionship>>()) to 2,
             )
@@ -43,7 +43,7 @@ class RankingByDescendingVotesTests : StringSpec(
                 override val scoreValue: WinsInCampionship
                     get() = WinsInCampionship(1)
             }
-            val map = mapOf<Competitor<WinsInCampionship>, NumberOfVotes>(
+            val map = mapOf<Competitor<WinsInCampionship>, Int>(
                 HumanCompetitor("competitor 1", listOf<Score<WinsInCampionship>>()) to 1,
                 HumanCompetitor("competitor 2", listOf<Score<WinsInCampionship>>(competitor2Score)) to 2,
             )

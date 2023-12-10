@@ -5,6 +5,7 @@ import Entities.Interfaces.Score
 import Entities.Types.ScoreMetrics
 
 data class HumanCompetitor<S : ScoreMetrics> (override val name: String,
-                                         override var scores: List<Score<S>>): Competitor<S>
+                                         override var scores: List<Score<S>> = listOf()
+): Competitor<S>
 
 

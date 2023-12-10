@@ -1,14 +1,13 @@
 package Entities.Types
 
 import Entities.Interfaces.Competitor
-import Entities.Interfaces.NumberOfVotes
-import Entities.Interfaces.Score
+
 
 sealed class Comparators {
 
-    class  HighestScore<S : ScoreMetrics> : Comparator<Pair<Competitor<S>, NumberOfVotes>> {
+    class  HighestScore<S : ScoreMetrics> : Comparator<Pair<Competitor<S>, Int>> {
 
-        override fun compare(a: Pair<Competitor<S>, NumberOfVotes>, b: Pair<Competitor<S>, NumberOfVotes>): Int {
+        override fun compare(a: Pair<Competitor<S>, Int>, b: Pair<Competitor<S>, Int>): Int {
             val bestOfA = a.first.scores.map { it.scoreValue }.max()
             val bestOfB = b.first.scores.map { it.scoreValue }.max()
 
@@ -16,9 +15,9 @@ sealed class Comparators {
         }
     }
 
-    class  HighestNumberOfVotes<S : ScoreMetrics> : Comparator<Pair<Competitor<S>, NumberOfVotes>> {
+    class  HighestNumberOfVotes<S : ScoreMetrics> : Comparator<Pair<Competitor<S>, Int>> {
 
-        override fun compare(a: Pair<Competitor<S>, NumberOfVotes>, b: Pair<Competitor<S>, NumberOfVotes>): Int {
+        override fun compare(a: Pair<Competitor<S>, Int>, b: Pair<Competitor<S>, Int>): Int {
 
             val bestOfA = a.second
             val bestOfB = b.second
