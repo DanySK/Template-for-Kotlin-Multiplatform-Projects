@@ -58,10 +58,14 @@ class RankingByDescendingVotesThenHighestScoreTests : StringSpec({
                 competitor3m2Score)) to 2,
         )
         val ranking = RankingByDescendingVotesThenHighestScore(map).ranking
-        ranking.map { it.second } shouldBe listOf(2, 2, 1)
-        ranking.map { it.first.scores } shouldBe listOf(listOf(competitor3m1Score,
-            competitor3m2Score), listOf(competitor1Score), listOf(competitor2Score))
-        ranking.map { it.first.name } shouldBe listOf("competitor 3",
+        ranking.map { it.value } shouldBe listOf(2, 2, 1)
+
+        val scores = ranking.flatMap { it.key.flatMap { competitor -> competitor.scores  } }
+        scores shouldBe listOf(competitor3m1Score,competitor3m2Score,
+                               competitor1Score, competitor2Score)
+
+        val names = ranking.flatMap { it.key.map { competitor -> competitor.name  } }
+        names shouldBe listOf("competitor 3",
             "competitor 1",
             "competitor 2")
 

@@ -33,8 +33,8 @@ class RankingByDescendingVotesTests : StringSpec(
             )
 
             val ranking = RankingByDescendingVotes(map).ranking
-            ranking.map { it.second } shouldNotBe listOf(1, 2)
-            ranking.map { it.second } shouldBe listOf(2, 1)
+            ranking.map { it.value } shouldNotBe listOf(1, 2)
+            ranking.map { it.value } shouldBe listOf(2, 1)
         }
 
         "CompetitorRankingByDescendingVotes can have empty lists of scores" {
