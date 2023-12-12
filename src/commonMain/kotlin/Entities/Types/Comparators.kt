@@ -1,18 +1,18 @@
 package Entities.Types
 
 import Entities.Interfaces.Competitor
+import Entities.Interfaces.Score
 
 
 sealed class Comparators {
 
-    class  HighestScore<S : ScoreMetrics> : Comparator<Pair<Competitor<S>, Int?>> {
+    class  HighestScore<S : ScoreMetrics> : Comparator<Score<S>> {
 
-       override fun compare(a: Pair<Competitor<S>, Int?>, b: Pair<Competitor<S>, Int?>): Int {
-           val bestOfA = a.first.scores.maxOfOrNull { it.scoreValue }
-           val bestOfB = b.first.scores.maxOfOrNull { it.scoreValue }
+       override fun compare(a: Score<S>, b: Score<S>): Int {
+           val bestOfA = a.scoreValue
+           val bestOfB = b.scoreValue
 
-           if(bestOfA == null || bestOfB == null) throw NullPointerException("Cannot compare null scores")
-            return bestOfB.compareTo(bestOfA)
+           return bestOfA.compareTo(bestOfB)
         }
     }
 

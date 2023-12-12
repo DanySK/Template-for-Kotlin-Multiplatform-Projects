@@ -6,6 +6,7 @@ import Entities.Interfaces.Score
 import Entities.Types.WinsInCampionship
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec
+import io.kotest.matchers.collections.shouldContainAll
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.shouldNotBeBlank
 import io.kotest.matchers.string.shouldNotBeEmpty
@@ -51,23 +52,41 @@ class RankingByDescendingVotesThenHighestScoreTests : StringSpec({
                 get() = WinsInCampionship(10)
         }
 
+        val competitor4m1Score = object : Score<WinsInCampionship> {
+            override val scoreValue: WinsInCampionship
+                get() = WinsInCampionship(1)
+        }
+
+        val competitor4m2Score = object : Score<WinsInCampionship> {
+            override val scoreValue: WinsInCampionship
+                get() = WinsInCampionship(10)
+        }
+
+        val competitor4m3Score = object : Score<WinsInCampionship> {
+            override val scoreValue: WinsInCampionship
+                get() = WinsInCampionship(10)
+        }
+
         val map = mapOf<Competitor<WinsInCampionship>, Int>(
-            HumanCompetitor("competitor 1", listOf(competitor1Score)) to 2,
-            HumanCompetitor("competitor 2", listOf(competitor2Score)) to 1,
+            HumanCompetitor("competitor 1", listOf(competitor1Score)) to 1,
+            HumanCompetitor("competitor 2", listOf(competitor2Score)) to 2,
             HumanCompetitor("competitor 3", listOf(competitor3m1Score,
                 competitor3m2Score)) to 2,
+            HumanCompetitor("competitor 4", listOf(competitor4m1Score,
+                competitor4m2Score,competitor4m3Score)) to 2,
         )
+
         val ranking = RankingByDescendingVotesThenHighestScore(map).ranking
+
         ranking.map { it.value } shouldBe listOf(2, 2, 1)
 
-        val scores = ranking.flatMap { it.key.flatMap { competitor -> competitor.scores  } }
-        scores shouldBe listOf(competitor3m1Score,competitor3m2Score,
-                               competitor1Score, competitor2Score)
+        val scores = ranking.flatMap { it.key.flatMap { competitor -> competitor.scores  }}
+        scores.map { s -> s.scoreValue.wins }  shouldBe listOf(10,10, 1, 1)
 
         val names = ranking.flatMap { it.key.map { competitor -> competitor.name  } }
-        names shouldBe listOf("competitor 3",
-            "competitor 1",
-            "competitor 2")
+        names.take(2).shouldContainAll("competitor 4", "competitor 3")
+        names[2] shouldBe "competitor 2"
+        names[3] shouldBe "competitor 1"
 
     }
 },

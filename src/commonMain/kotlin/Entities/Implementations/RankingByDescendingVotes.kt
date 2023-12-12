@@ -14,19 +14,22 @@ open class RankingByDescendingVotes<S : ScoreMetrics>(unorderedRanking : Map<Com
     override val ranking: Map<Set<Competitor<S>>, Int?>
         get() =  _unorderedRanking.
                  toMapSetOfCompetitorsWithSameVoteNumber().
-                 toList().
-                 sortedWith(Comparators.HighestNumberOfVotes()).
-                 toMap()
+                 orderByHighestNumberOfVotes()
 
     private fun Map<Competitor<S>, Int>.toMapSetOfCompetitorsWithSameVoteNumber() : Map<Set<Competitor<S>>,Int>{
-    return  this.
-            toList().
-            groupBy { it.second }.
-            map { (k, v) -> v.map { it.first }.toSet() to k }.
-            toMap()
+     return this.toList().groupBy { it.second }
+        .map { (k, v) -> k to v.map { p -> p.first }.toSet() }
+        .associate { (k, v) -> v to k }
+        .toMap()
     }
     override fun printRanking() {
         println(ranking.toString())
+    }
+
+    private fun Map<Set<Competitor<S>>,Int?>.orderByHighestNumberOfVotes() : Map<Set<Competitor<S>>, Int?> {
+        return this.toList().
+        sortedWith(Comparators.HighestNumberOfVotes()).
+        toMap()
     }
 
 

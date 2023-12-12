@@ -18,21 +18,34 @@ class RankingByDescendingVotesThenHighestScore<S : ScoreMetrics>
 
     override val ranking: Map<Set<Competitor<S>>, Int?>
         get() =
-            super.ranking.toFlattenCompetitorsAndVotes().toList().sortedWith(Comparators.HighestScore())
-                .associate { setOf(it.first) to it.second }
+            super.ranking.computeWithHighestScoreRule()
 
-    private fun Map<Set<Competitor<S>>, Int?>.toFlattenCompetitorsAndVotes() : Map<Competitor<S>,Int?>{
-        val resultMap = mutableMapOf<Competitor<S>, Int?>()
+    private fun Map<Set<Competitor<S>>, Int?>.computeWithHighestScoreRule(): Map<Set<Competitor<S>>, Int?>
+    {
 
-        for ((competitors, value) in this) {
-            for(competitor in competitors){
-                if(!resultMap.containsKey(competitor)){
-                    resultMap[competitor] = value
-                }
+        val m = mutableMapOf<Set<Competitor<S>>, Int?>()
+        for ((competitorsSetWithSameVotesNumber, votes) in this) {
+            val competitorWithRelativeHighestScore =
+                competitorsSetWithSameVotesNumber
+                    .associateWith { competitor -> competitor.scores.maxWith(Comparators.HighestScore()) }
+
+            for((competitor,highestScore) in competitorWithRelativeHighestScore){
+                competitor.scores = competitor.scores.filter { it == highestScore }.distinct()
+            } //keep just highest score, list will be list of 1 element
+
+            val a = competitorWithRelativeHighestScore.toList().groupBy { it.second.scoreValue }
+                .map { (k, v) -> k to v.map { p -> p.first }.toSet() }
+                .sortedByDescending { it.first } // useful for order of next cycle
+                .toMap()
+
+
+            for((_, competitors) in a){
+                m[competitors] = votes
             }
 
         }
-
-        return resultMap
+        return m
     }
+
+
 }
