@@ -1,4 +1,4 @@
-
+package Implementations
 import Entities.Implementations.HumanCompetitor
 import Entities.Implementations.RankingByDescendingVotesThenHighestScore
 import Entities.Interfaces.Competitor
@@ -6,7 +6,6 @@ import Entities.Interfaces.Score
 import Entities.Types.WinsInCampionship
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec
-import io.kotest.matchers.collections.shouldContainAll
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.shouldNotBeBlank
 import io.kotest.matchers.string.shouldNotBeEmpty
@@ -80,13 +79,11 @@ class RankingByDescendingVotesThenHighestScoreTests : StringSpec({
 
         ranking.map { it.value } shouldBe listOf(2, 2, 1)
 
-        val scores = ranking.flatMap { it.key.flatMap { competitor -> competitor.scores  }}
-        scores.map { s -> s.scoreValue.wins }  shouldBe listOf(10,10, 1, 1)
+        val scores = ranking.map { it.key.flatMap { competitor -> competitor.scores  }}
+        scores.map { s -> s.map { it.scoreValue.wins } }  shouldBe listOf(listOf(10,10), listOf(1), listOf(1))
 
-        val names = ranking.flatMap { it.key.map { competitor -> competitor.name  } }
-        names.take(2).shouldContainAll("competitor 4", "competitor 3")
-        names[2] shouldBe "competitor 2"
-        names[3] shouldBe "competitor 1"
+        val names = ranking.map { it.key.map { competitor -> competitor.name  }.toSet() }
+        names shouldBe listOf(setOf("competitor 4", "competitor 3"), setOf("competitor 2"), setOf("competitor 1"))
 
     }
 },

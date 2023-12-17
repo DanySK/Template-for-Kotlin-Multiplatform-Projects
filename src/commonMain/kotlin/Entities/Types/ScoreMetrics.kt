@@ -3,7 +3,7 @@ package Entities.Types
 import kotlin.time.Duration
 
 abstract class ScoreMetrics : Comparable<Any>
- class BestTimeInMatch(val timing : Duration) : ScoreMetrics() {
+data class BestTimeInMatch(val timing : Duration) : ScoreMetrics() {
     override fun compareTo(other: Any): Int {
         if(other is BestTimeInMatch){
             return timing.compareTo(other.timing)

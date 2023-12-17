@@ -1,4 +1,4 @@
-
+package Implementations
 
 import Entities.Implementations.HumanCompetitor
 import Entities.Implementations.RankingByDescendingVotes
@@ -34,7 +34,7 @@ class RankingByDescendingVotesTests : StringSpec(
                 HumanCompetitor("competitor 1", listOf<Score<WinsInCampionship>>()) to 1,
                 HumanCompetitor("competitor 2", listOf<Score<WinsInCampionship>>()) to 2,
                 HumanCompetitor("competitor 3", listOf<Score<WinsInCampionship>>()) to 2,
-                HumanCompetitor("competitor 4", listOf<Score<WinsInCampionship>>()) to 2,
+                HumanCompetitor("competitor 4", listOf<Score<WinsInCampionship>>()) to 2
             )
 
             val ranking = RankingByDescendingVotes(map).ranking

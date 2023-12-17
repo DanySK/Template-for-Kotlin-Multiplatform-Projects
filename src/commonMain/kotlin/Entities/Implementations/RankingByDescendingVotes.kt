@@ -2,7 +2,6 @@ package Entities.Implementations
 
 import Entities.Interfaces.Competitor
 import Entities.Interfaces.Ranking
-import Entities.Types.Comparators
 import Entities.Types.ScoreMetrics
 
 open class RankingByDescendingVotes<S : ScoreMetrics>(unorderedRanking : Map<Competitor<S>, Int>) : Ranking<S> {
@@ -26,10 +25,12 @@ open class RankingByDescendingVotes<S : ScoreMetrics>(unorderedRanking : Map<Com
         println(ranking.toString())
     }
 
-    private fun Map<Set<Competitor<S>>,Int?>.orderByHighestNumberOfVotes() : Map<Set<Competitor<S>>, Int?> {
-        return this.toList().
-        sortedWith(Comparators.HighestNumberOfVotes()).
-        toMap()
+    private fun Map<Set<Competitor<S>>,Int>.orderByHighestNumberOfVotes() : Map<Set<Competitor<S>>, Int> {
+        val a = this.
+        toList().
+        sortedByDescending { it.second }
+
+        return a.toMap()
     }
 
 
