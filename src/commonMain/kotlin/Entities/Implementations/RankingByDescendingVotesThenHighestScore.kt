@@ -9,7 +9,7 @@ class RankingByDescendingVotesThenHighestScore<S : ScoreMetrics>
     (unorderedRanking : Map<Competitor<S>, Int>) :
     RankingByDescendingVotes<S>(unorderedRanking) {
         init {
-            /*if(super.ranking.any { it.key.map { competitor -> competitor.scores }.isEmpty() })*/
+
             val competitors = super.ranking.flatMap { it.key }
             if(competitors.map { it.scores } .any { it.isEmpty() })
                 throw IllegalStateException("Every competitor must have at least one score")

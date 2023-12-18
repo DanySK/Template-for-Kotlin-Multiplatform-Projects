@@ -7,6 +7,9 @@ import Entities.Interfaces.Score
 import Entities.Interfaces.SinglePreferenceVote
 import Entities.Interfaces.Voter
 import Entities.Types.BestTimeInMatch
+import Entities.Types.ConstantParameters
+import Entities.Types.ScoreMetrics
+import io.kotest.assertions.throwables.shouldThrowWithMessage
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.collections.shouldContainAll
 import io.kotest.matchers.shouldBe
@@ -15,6 +18,70 @@ import kotlin.time.toDuration
 
 class MajorityVotesAndLowestScoreAlgorithmTests: StringSpec({
 
+    "Majority Algorithm should throw exception when multiple vote is not allowed"{
+
+        val competitor1 = HumanCompetitor<ScoreMetrics>("Competitor 1")
+
+        val competitor2 = HumanCompetitor<ScoreMetrics>("Competitor 2")
+
+        val v1 = object : SinglePreferenceVote<ScoreMetrics> {
+            override val votedCompetitor = competitor2
+            override val voter: Voter = HumanVoter("anonym1")
+
+        }
+
+        val v2 = object : SinglePreferenceVote<ScoreMetrics> {
+            override val votedCompetitor = competitor2
+            override val voter: Voter = HumanVoter("anonym2")
+
+        }
+
+        val v3 = object : SinglePreferenceVote<ScoreMetrics> {
+            override val votedCompetitor = competitor1
+            override val voter: Voter = HumanVoter("anonym1")
+
+        }
+
+        val votes = listOf(v1, v2, v3)
+
+        shouldThrowWithMessage<IllegalStateException>("Each voter can vote only once") { MajorityVotesAndLowestScoreAlgorithm<ScoreMetrics>().
+        computeByAlgorithmRules(votes)  }
+
+
+    }
+
+    "Majority Algorithm should throw exception when multiple vote is allowed but competitor is voted more than once"{
+
+        val competitor1 = HumanCompetitor<ScoreMetrics>("Competitor 1")
+
+        val competitor2 = HumanCompetitor<ScoreMetrics>("Competitor 2")
+
+        val v1 = object : SinglePreferenceVote<ScoreMetrics> {
+            override val votedCompetitor = competitor2
+            override val voter: Voter = HumanVoter("anonym1")
+
+        }
+
+        val v2 = object : SinglePreferenceVote<ScoreMetrics> {
+            override val votedCompetitor = competitor2
+            override val voter: Voter = HumanVoter("anonym1")
+
+        }
+
+        val v3 = object : SinglePreferenceVote<ScoreMetrics> {
+            override val votedCompetitor = competitor1
+            override val voter: Voter = HumanVoter("anonym1")
+
+        }
+
+        val votes = listOf(v1, v2, v3)
+
+        shouldThrowWithMessage <IllegalStateException>("Each voter can vote just once for each competitor"){
+            MajorityVotesAndLowestScoreAlgorithm<ScoreMetrics>(listOf(ConstantParameters.MultipleVotesAllowed)).
+            computeByAlgorithmRules(votes)  }
+
+
+    }
 
     "Scores -> no ties in votes, no ties in score should have just 1 winner in the only placement"{
 
@@ -35,19 +102,19 @@ class MajorityVotesAndLowestScoreAlgorithmTests: StringSpec({
 
         val v1 = object : SinglePreferenceVote<BestTimeInMatch> {
             override val votedCompetitor = competitor2
-            override val voter: Voter = HumanVoter("anonym")
+            override val voter: Voter = HumanVoter("anonym1")
 
         }
 
         val v2 = object : SinglePreferenceVote<BestTimeInMatch> {
             override val votedCompetitor = competitor2
-            override val voter: Voter = HumanVoter("anonym")
+            override val voter: Voter = HumanVoter("anonym2")
 
         }
 
         val v3 = object : SinglePreferenceVote<BestTimeInMatch> {
             override val votedCompetitor = competitor1
-            override val voter: Voter = HumanVoter("anonym")
+            override val voter: Voter = HumanVoter("anonym3")
 
         }
 
@@ -79,19 +146,19 @@ class MajorityVotesAndLowestScoreAlgorithmTests: StringSpec({
 
         val v1 = object : SinglePreferenceVote<BestTimeInMatch> {
             override val votedCompetitor = competitor2
-            override val voter: Voter = HumanVoter("anonym")
+            override val voter: Voter = HumanVoter("anonym1")
 
         }
 
         val v2 = object : SinglePreferenceVote<BestTimeInMatch> {
             override val votedCompetitor = competitor2
-            override val voter: Voter = HumanVoter("anonym")
+            override val voter: Voter = HumanVoter("anonym2")
 
         }
 
         val v3 = object : SinglePreferenceVote<BestTimeInMatch> {
             override val votedCompetitor = competitor1
-            override val voter: Voter = HumanVoter("anonym")
+            override val voter: Voter = HumanVoter("anonym3")
 
         }
 
@@ -130,31 +197,31 @@ class MajorityVotesAndLowestScoreAlgorithmTests: StringSpec({
 
         val v1 = object : SinglePreferenceVote<BestTimeInMatch> {
             override val votedCompetitor = competitor2
-            override val voter: Voter = HumanVoter("anonym")
+            override val voter: Voter = HumanVoter("anonym1")
 
         }
 
         val v2 = object : SinglePreferenceVote<BestTimeInMatch> {
             override val votedCompetitor = competitor2
-            override val voter: Voter = HumanVoter("anonym")
+            override val voter: Voter = HumanVoter("anonym2")
 
         }
 
         val v3 = object : SinglePreferenceVote<BestTimeInMatch> {
             override val votedCompetitor = competitor1
-            override val voter: Voter = HumanVoter("anonym")
+            override val voter: Voter = HumanVoter("anonym3")
 
         }
 
         val v4 = object : SinglePreferenceVote<BestTimeInMatch> {
             override val votedCompetitor = competitor1
-            override val voter: Voter = HumanVoter("anonym")
+            override val voter: Voter = HumanVoter("anonym4")
 
         }
 
         val v5 = object : SinglePreferenceVote<BestTimeInMatch> {
             override val votedCompetitor = competitor3
-            override val voter: Voter = HumanVoter("anonym")
+            override val voter: Voter = HumanVoter("anonym5")
 
         }
 
@@ -195,36 +262,36 @@ class MajorityVotesAndLowestScoreAlgorithmTests: StringSpec({
 
         val v1 = object : SinglePreferenceVote<BestTimeInMatch> {
             override val votedCompetitor = competitor2
-            override val voter: Voter = HumanVoter("anonym")
+            override val voter: Voter = HumanVoter("anonym1")
 
         }
 
         val v2 = object : SinglePreferenceVote<BestTimeInMatch> {
             override val votedCompetitor = competitor2
-            override val voter: Voter = HumanVoter("anonym")
+            override val voter: Voter = HumanVoter("anonym2")
 
         }
 
         val v3 = object : SinglePreferenceVote<BestTimeInMatch> {
             override val votedCompetitor = competitor1
-            override val voter: Voter = HumanVoter("anonym")
+            override val voter: Voter = HumanVoter("anonym3")
 
         }
 
         val v4 = object : SinglePreferenceVote<BestTimeInMatch> {
             override val votedCompetitor = competitor1
-            override val voter: Voter = HumanVoter("anonym")
+            override val voter: Voter = HumanVoter("anonym4")
 
         }
 
         val v5 = object : SinglePreferenceVote<BestTimeInMatch> {
             override val votedCompetitor = competitor3
-            override val voter: Voter = HumanVoter("anonym")
+            override val voter: Voter = HumanVoter("anonym5")
 
         }
         val v6= object : SinglePreferenceVote<BestTimeInMatch> {
             override val votedCompetitor = competitor3
-            override val voter: Voter = HumanVoter("anonym")
+            override val voter: Voter = HumanVoter("anonym6")
 
         }
         val votes = listOf(v1, v2, v3, v4, v5, v6)

@@ -1,3 +1,5 @@
 package Entities.Interfaces
 
-interface PollAlgorithmParameter
+interface PollAlgorithmParameter {
+    val parameter : String
+}

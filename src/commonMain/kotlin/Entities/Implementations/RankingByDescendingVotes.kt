@@ -1,10 +1,10 @@
 package Entities.Implementations
 
+import Entities.Abstract.Ranking
 import Entities.Interfaces.Competitor
-import Entities.Interfaces.Ranking
 import Entities.Types.ScoreMetrics
 
-open class RankingByDescendingVotes<S : ScoreMetrics>(unorderedRanking : Map<Competitor<S>, Int>) : Ranking<S> {
+open class RankingByDescendingVotes<S : ScoreMetrics>(unorderedRanking : Map<Competitor<S>, Int>) : Ranking<S>() {
     init {
         if (unorderedRanking.isEmpty()) throw IllegalArgumentException("Ranking cannot be empty")
     }
@@ -21,9 +21,7 @@ open class RankingByDescendingVotes<S : ScoreMetrics>(unorderedRanking : Map<Com
         .associate { (k, v) -> v to k }
         .toMap()
     }
-    override fun printRanking() {
-        println(ranking.toString())
-    }
+
 
     private fun Map<Set<Competitor<S>>,Int>.orderByHighestNumberOfVotes() : Map<Set<Competitor<S>>, Int> {
         val a = this.
@@ -32,6 +30,5 @@ open class RankingByDescendingVotes<S : ScoreMetrics>(unorderedRanking : Map<Com
 
         return a.toMap()
     }
-
 
 }
