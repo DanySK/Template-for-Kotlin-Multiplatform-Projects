@@ -6,6 +6,7 @@ import Entities.Interfaces.Competitor
 import Entities.Interfaces.ListOfPreferencesVote
 import Entities.Interfaces.PollAlgorithm
 import Entities.Interfaces.PollAlgorithmParameter
+import Entities.Types.ConstantParameters
 import Entities.Types.ScoreMetrics
 
 class MyCondorcetAlgorithm<S : ScoreMetrics>  (
@@ -14,6 +15,21 @@ class MyCondorcetAlgorithm<S : ScoreMetrics>  (
 
 
     override fun computeByAlgorithmRules(votes: List<ListOfPreferencesVote<S>>): Ranking<S> {
+
+        when (pollAlgorithmParameters.count { it == ConstantParameters.MultipleVotesAllowed }){
+            0 -> {
+                if(votes.groupingBy { it.voter }.eachCount().any { it.value > 1 }){
+                    throw IllegalStateException("Each voter can vote only once")
+                }
+            }
+            1 ->{
+                //multiple vote allowed
+                if(votes.groupingBy { Pair(it.votedCompetitors, it.voter)}.eachCount().any { it.value > 1 }){
+                    throw IllegalStateException("Each voter can vote just once for each list of preferences")
+                }
+            }
+            else -> throw IllegalArgumentException("Parameter can't be repeated more than once")
+        }
 
         votes.map { it.votedCompetitors }.forEach {
             val setOfCompetitors = it.toSet()
