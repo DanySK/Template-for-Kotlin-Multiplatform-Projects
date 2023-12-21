@@ -2,7 +2,6 @@ package Entities.Abstract
 
 import Entities.Interfaces.Competition
 import Entities.Interfaces.PollAlgorithm
-import Entities.Interfaces.Ranking
 import Entities.Interfaces.Vote
 import Entities.Types.ScoreMetrics
 

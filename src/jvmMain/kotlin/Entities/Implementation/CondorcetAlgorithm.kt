@@ -1,6 +1,10 @@
 package Entities.Implementation
 
-import Entities.Interfaces.*
+import Entities.Abstract.Ranking
+import Entities.Interfaces.Competitor
+import Entities.Interfaces.ListOfPreferencesVote
+import Entities.Interfaces.PollAlgorithm
+import Entities.Interfaces.PollAlgorithmParameter
 import Entities.Types.ScoreMetrics
 import kondorcet.Ballot
 import kondorcet.method.CondorcetMethod
@@ -8,9 +12,9 @@ import kondorcet.model.DefaultBallot
 import kondorcet.model.getResult
 import kondorcet.model.toPoll
 
-class CondorcetAlgorithm<S : ScoreMetrics> : PollAlgorithm<S, DescendingListOfPreferencesVote<S>>{
+class CondorcetAlgorithm<S : ScoreMetrics>() : PollAlgorithm<S, ListOfPreferencesVote<S>>{
     override val pollAlgorithmParameters = listOf<PollAlgorithmParameter>()
-    override fun computeByAlgorithmRules(votes: List<DescendingListOfPreferencesVote<S>>): Ranking<S> {
+    override fun computeByAlgorithmRules(votes: List<ListOfPreferencesVote<S>>): Ranking<S> {
 
         val votesCompetitor = votes.map { it.votedCompetitors }.groupingBy { it }
             .eachCount().toMap()

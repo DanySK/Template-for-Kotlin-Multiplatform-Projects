@@ -1,19 +1,19 @@
 package Entities.Implementations
 
 import Entities.Interfaces.Competitor
-import Entities.Interfaces.DescendingListOfPreferencesVote
+import Entities.Interfaces.ListOfPreferencesVote
 import Entities.Interfaces.Voter
 import Entities.Types.ScoreMetrics
 
-class DescendingListOfPreferencesVoteImpl<S : ScoreMetrics>(
+class DescendingListOfPreferencesVote<S : ScoreMetrics>(
     override val votedCompetitors: List<Competitor<S>>,
     override val voter: Voter
-) : DescendingListOfPreferencesVote<S> {
+) : ListOfPreferencesVote<S> {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other == null || this::class != other::class) return false
 
-        other as DescendingListOfPreferencesVoteImpl<*>
+        other as DescendingListOfPreferencesVote<*>
 
         return votedCompetitors == other.votedCompetitors
     }

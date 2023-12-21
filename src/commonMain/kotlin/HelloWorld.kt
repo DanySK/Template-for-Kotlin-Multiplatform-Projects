@@ -1,11 +1,9 @@
 import Entities.Implementations.HumanCompetitor
 import Entities.Implementations.HumanVoter
-import Entities.Implementations.MajorityAlgorithm
+import Entities.Implementations.MajorityVotesAlgorithm
 import Entities.Implementations.PollSimulation
 import Entities.Interfaces.*
 import Entities.Types.BestTimeInMatch
-import Entities.Types.ScoreMetrics
-import Entities.Types.WinsInCampionship
 import kotlin.time.DurationUnit
 import kotlin.time.toDuration
 
@@ -55,7 +53,7 @@ fun main() {
     }
 
     val votes = listOf(v1, v2, v3)
-    val poll = PollSimulation(MajorityAlgorithm(), competition, votes)
+    val poll = PollSimulation(MajorityVotesAlgorithm(), competition, votes)
 
     DefaultPollManager(listOf(poll)).computeAllPolls().forEach { it.printRanking() }
 

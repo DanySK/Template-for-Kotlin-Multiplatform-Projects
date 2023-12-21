@@ -1,6 +1,5 @@
 package Entities.Abstract
 
-import Entities.Interfaces.Ranking
 import Entities.Interfaces.Vote
 import Entities.Types.ScoreMetrics
 

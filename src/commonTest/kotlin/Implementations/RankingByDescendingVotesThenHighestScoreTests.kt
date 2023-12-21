@@ -1,4 +1,4 @@
-
+package Implementations
 import Entities.Implementations.HumanCompetitor
 import Entities.Implementations.RankingByDescendingVotesThenHighestScore
 import Entities.Interfaces.Competitor
@@ -51,19 +51,39 @@ class RankingByDescendingVotesThenHighestScoreTests : StringSpec({
                 get() = WinsInCampionship(10)
         }
 
+        val competitor4m1Score = object : Score<WinsInCampionship> {
+            override val scoreValue: WinsInCampionship
+                get() = WinsInCampionship(1)
+        }
+
+        val competitor4m2Score = object : Score<WinsInCampionship> {
+            override val scoreValue: WinsInCampionship
+                get() = WinsInCampionship(10)
+        }
+
+        val competitor4m3Score = object : Score<WinsInCampionship> {
+            override val scoreValue: WinsInCampionship
+                get() = WinsInCampionship(10)
+        }
+
         val map = mapOf<Competitor<WinsInCampionship>, Int>(
-            HumanCompetitor("competitor 1", listOf(competitor1Score)) to 2,
-            HumanCompetitor("competitor 2", listOf(competitor2Score)) to 1,
+            HumanCompetitor("competitor 1", listOf(competitor1Score)) to 1,
+            HumanCompetitor("competitor 2", listOf(competitor2Score)) to 2,
             HumanCompetitor("competitor 3", listOf(competitor3m1Score,
                 competitor3m2Score)) to 2,
+            HumanCompetitor("competitor 4", listOf(competitor4m1Score,
+                competitor4m2Score,competitor4m3Score)) to 2,
         )
+
         val ranking = RankingByDescendingVotesThenHighestScore(map).ranking
-        ranking.map { it.second } shouldBe listOf(2, 2, 1)
-        ranking.map { it.first.scores } shouldBe listOf(listOf(competitor3m1Score,
-            competitor3m2Score), listOf(competitor1Score), listOf(competitor2Score))
-        ranking.map { it.first.name } shouldBe listOf("competitor 3",
-            "competitor 1",
-            "competitor 2")
+
+        ranking.map { it.value } shouldBe listOf(2, 2, 1)
+
+        val scores = ranking.map { it.key.flatMap { competitor -> competitor.scores  }}
+        scores.map { s -> s.map { it.scoreValue.wins } }  shouldBe listOf(listOf(10,10), listOf(1), listOf(1))
+
+        val names = ranking.map { it.key.map { competitor -> competitor.name  }.toSet() }
+        names shouldBe listOf(setOf("competitor 4", "competitor 3"), setOf("competitor 2"), setOf("competitor 1"))
 
     }
 },

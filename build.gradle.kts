@@ -33,7 +33,11 @@ kotlin {
     }
 
     sourceSets {
-        val commonMain by getting { }
+        val commonMain by getting {
+            dependencies {
+                implementation("com.github.jcornaz:kondorcet:v1.0.0")
+            }
+        }
         val commonTest by getting {
             dependencies {
                 implementation(libs.bundles.kotlin.testing.common)
