@@ -7,11 +7,14 @@ import Entities.Types.ScoreMetrics
 
 abstract class Poll <S : ScoreMetrics, V : Vote>{
 
-    abstract val pollAlgorithm : PollAlgorithm<S, V>
-    abstract val competition : Competition<S>
-    abstract val votes : List<V>
+    abstract var pollAlgorithm : PollAlgorithm<S, V>
+    abstract var competition : Competition<S>
+    abstract var votesList : List<V>
 
     fun computePoll() : Ranking<S> {
-        return pollAlgorithm.computeByAlgorithmRules(votes)
+
+            return pollAlgorithm.computeByAlgorithmRules(votesList)
+
+
     }
 }

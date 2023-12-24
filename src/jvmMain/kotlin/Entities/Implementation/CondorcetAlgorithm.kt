@@ -13,7 +13,7 @@ import kondorcet.model.getResult
 import kondorcet.model.toPoll
 
 class CondorcetAlgorithm<S : ScoreMetrics>() : PollAlgorithm<S, ListOfPreferencesVote<S>>{
-    override val pollAlgorithmParameters = listOf<PollAlgorithmParameter>()
+    override var pollAlgorithmParameters = listOf<PollAlgorithmParameter>()
     override fun computeByAlgorithmRules(votes: List<ListOfPreferencesVote<S>>): Ranking<S> {
 
         val votesCompetitor = votes.map { it.votedCompetitors }.groupingBy { it }

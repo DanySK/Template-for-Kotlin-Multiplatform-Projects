@@ -1,13 +1,7 @@
 
-import Entities.Implementation.CondorcetAlgorithm
-import Entities.Implementations.DescendingListOfPreferencesVote
-import Entities.Implementations.HumanCompetitor
-import Entities.Implementations.HumanVoter
-import Entities.Interfaces.ListOfPreferencesVote
-import Entities.Types.BestTimeInMatch
 
 fun main(){
-       val c = CondorcetAlgorithm<BestTimeInMatch>()
+      /* val c = CondorcetAlgorithm<BestTimeInMatch>()
         val l = mutableListOf<ListOfPreferencesVote<BestTimeInMatch>>()
         for(i in 1..23){
             val dl = DescendingListOfPreferencesVote<BestTimeInMatch>(votedCompetitors =
@@ -51,5 +45,5 @@ fun main(){
 
 
         val r = c.computeByAlgorithmRules(l)
-            r.printRanking()
+            r.printRanking()*/
     }

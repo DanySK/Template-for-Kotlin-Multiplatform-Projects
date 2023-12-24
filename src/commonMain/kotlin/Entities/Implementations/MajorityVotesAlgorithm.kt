@@ -7,9 +7,11 @@ import Entities.Interfaces.SinglePreferenceVote
 import Entities.Types.ConstantParameters
 import Entities.Types.ScoreMetrics
 
-class MajorityVotesAlgorithm<S : ScoreMetrics>(override val pollAlgorithmParameters: List<PollAlgorithmParameter> = listOf()) : PollAlgorithm<S, SinglePreferenceVote<S>> {
+class MajorityVotesAlgorithm<S : ScoreMetrics>(override var pollAlgorithmParameters: List<PollAlgorithmParameter> = listOf()) : PollAlgorithm<S, SinglePreferenceVote<S>> {
 
     override fun computeByAlgorithmRules(votes: List<SinglePreferenceVote<S>>): Ranking<S> {
+
+        if (votes.isEmpty()) throw IllegalArgumentException("Votes list cannot be empty")
 
         when (pollAlgorithmParameters.count { it == ConstantParameters.MultipleVotesAllowed }){
             0 -> {
@@ -36,4 +38,9 @@ class MajorityVotesAlgorithm<S : ScoreMetrics>(override val pollAlgorithmParamet
 
 
     }
+
+    operator fun PollAlgorithmParameter.unaryPlus(){
+        pollAlgorithmParameters += this@unaryPlus
+    }
+
 }

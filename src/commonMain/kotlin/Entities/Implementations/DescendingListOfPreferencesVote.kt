@@ -7,7 +7,7 @@ import Entities.Types.ScoreMetrics
 
 class DescendingListOfPreferencesVote<S : ScoreMetrics>(
     override val votedCompetitors: List<Competitor<S>>,
-    override val voter: Voter
+    override var voter: Voter
 ) : ListOfPreferencesVote<S> {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -21,4 +21,5 @@ class DescendingListOfPreferencesVote<S : ScoreMetrics>(
     override fun hashCode(): Int {
         return votedCompetitors.hashCode()
     }
+
 }

@@ -10,11 +10,13 @@ import Entities.Types.ConstantParameters
 import Entities.Types.ScoreMetrics
 
 class MyCondorcetAlgorithm<S : ScoreMetrics>  (
-    private val candidates : Set<Competitor<S>>, override val pollAlgorithmParameters: List<PollAlgorithmParameter> = listOf()
+    private val candidates : Set<Competitor<S>>, override var pollAlgorithmParameters: List<PollAlgorithmParameter> = listOf()
                                                ) : PollAlgorithm<S, ListOfPreferencesVote<S>> {
 
 
     override fun computeByAlgorithmRules(votes: List<ListOfPreferencesVote<S>>): Ranking<S> {
+
+        if (votes.isEmpty()) throw IllegalArgumentException("Votes list cannot be empty")
 
         when (pollAlgorithmParameters.count { it == ConstantParameters.MultipleVotesAllowed }){
             0 -> {
