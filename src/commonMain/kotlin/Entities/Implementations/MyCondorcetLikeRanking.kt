@@ -1,7 +1,7 @@
 package Entities.Implementation
 
+import Entities.Abstract.Competitor
 import Entities.Abstract.Ranking
-import Entities.Interfaces.Competitor
 import Entities.Types.ScoreMetrics
 
 class MyCondorcetLikeRanking<S : ScoreMetrics>(algOutput : List<Set<Competitor<S>>>) : Ranking<S>() {

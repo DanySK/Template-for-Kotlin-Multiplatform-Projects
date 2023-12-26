@@ -12,13 +12,11 @@ class ComparatorsTest : StringSpec({
 
     "HighestScoreComparator should be a descending comparator" {
         val s1 = object : Score<BestTimeInMatch> {
-            override val scoreValue: BestTimeInMatch
-                get() = BestTimeInMatch(1.toDuration(DurationUnit.HOURS))
+            override var scoreValue: BestTimeInMatch = BestTimeInMatch(1.toDuration(DurationUnit.HOURS))
 
         }
         val s2 = object : Score<BestTimeInMatch> {
-            override val scoreValue: BestTimeInMatch
-                get() = BestTimeInMatch(2.toDuration(DurationUnit.HOURS))
+            override var scoreValue: BestTimeInMatch = BestTimeInMatch(2.toDuration(DurationUnit.HOURS))
 
         }
         val comparator =  Comparators.HighestScore<BestTimeInMatch>()
@@ -28,29 +26,6 @@ class ComparatorsTest : StringSpec({
 
     }
 
-   /* "HighestNumberOfVotesComparator should be a descending comparator"{
-        val s1 = object : Score<BestTimeInMatch> {
-            override val scoreValue: BestTimeInMatch
-                get() = BestTimeInMatch(1.toDuration(DurationUnit.HOURS))
-
-        }
-        val s2 = object : Score<BestTimeInMatch> {
-            override val scoreValue: BestTimeInMatch
-                get() = BestTimeInMatch(2.toDuration(DurationUnit.HOURS))
-
-        }
-
-        val competitors = mapOf<Set<Competitor<BestTimeInMatch>>, Int?>(
-            setOf(HumanCompetitor("C1", listOf(s2))) to 2,
-            setOf(HumanCompetitor("C2", listOf(s1))) to 1
-        ).toList()
-
-        val comparator = Comparators.HighestNumberOfVotes<BestTimeInMatch>()
-        comparator.compare(competitors[0], competitors[1]) shouldBeGreaterThan 0
-        comparator.compare(competitors[1], competitors[0]) shouldBeLessThan 0
-        comparator.compare(competitors[1], competitors[1]) shouldBe 0
-
-    }*/
 
 
 })

@@ -1,7 +1,6 @@
 package Implementations
 
-import Entities.Implementations.HumanCompetitor
-import Entities.Implementations.HumanVoter
+import Entities.Abstract.Competitor
 import Entities.Implementations.MajorityVotesAlgorithm
 import Entities.Interfaces.SinglePreferenceVote
 import Entities.Interfaces.Voter
@@ -16,57 +15,88 @@ class MajorityVotesAlgorithmTests : StringSpec({
 
     "Majority Algorithm should throw exception when multiple vote is not allowed"{
 
-        val competitor1 = HumanCompetitor<ScoreMetrics>("Competitor 1")
+        val competitor2 = object : Competitor<ScoreMetrics>(){}.
+                apply { this.name = "Competitor 2"
+                        this.scores = listOf()
+                }
 
-        val competitor2 = HumanCompetitor<ScoreMetrics>("Competitor 2")
+        val candidates = setOf(competitor2)
 
         val v1 = object : SinglePreferenceVote<ScoreMetrics> {
-            override val votedCompetitor = competitor2
-            override val voter: Voter = HumanVoter("anonym1")
+            override var votedCompetitor: Competitor<ScoreMetrics> = competitor2
+            override var voter: Voter = object : Voter{
+                override val identifier: String = "anonym1"
+
+            }
 
         }
 
         val v2 = object : SinglePreferenceVote<ScoreMetrics> {
-            override val votedCompetitor = competitor2
-            override val voter: Voter = HumanVoter("anonym2")
+            override var votedCompetitor: Competitor<ScoreMetrics> = competitor2
+            override var voter: Voter = object : Voter{
+                override val identifier: String = "anonym2"
+
+            }
 
         }
-
         val v3 = object : SinglePreferenceVote<ScoreMetrics> {
-            override val votedCompetitor = competitor1
-            override val voter: Voter = HumanVoter("anonym1")
+            override var votedCompetitor: Competitor<ScoreMetrics> = competitor2
+            override var voter: Voter = object : Voter{
+                override val identifier: String = "anonym1"
+
+            }
 
         }
 
         val votes = listOf(v1, v2, v3)
 
-        shouldThrowWithMessage<IllegalStateException>("Each voter can vote only once") { MajorityVotesAlgorithm<ScoreMetrics>().
-        computeByAlgorithmRules(votes)  }
+        shouldThrowWithMessage<IllegalStateException>("Each voter can vote only once") {
+            MajorityVotesAlgorithm<ScoreMetrics>().
+            apply { this.candidates = candidates }.
+            computeByAlgorithmRules(votes)
+        }
 
 
     }
 
     "Majority Algorithm should throw exception when multiple vote is allowed but competitor is voted more than once"{
 
-        val competitor1 = HumanCompetitor<ScoreMetrics>("Competitor 1")
+        val competitor1 = object : Competitor<ScoreMetrics>(){}.
+                apply { this.name = "Competitor 1"
+                    this.scores = listOf()
+                }
 
-        val competitor2 = HumanCompetitor<ScoreMetrics>("Competitor 2")
+        val competitor2 = object : Competitor<ScoreMetrics>(){}.
+        apply { this.name = "Competitor 2"
+                this.scores = listOf()
+        }
+
+        val candidates = setOf(competitor1, competitor2)
 
         val v1 = object : SinglePreferenceVote<ScoreMetrics> {
-            override val votedCompetitor = competitor2
-            override val voter: Voter = HumanVoter("anonym1")
+            override var votedCompetitor: Competitor<ScoreMetrics> = competitor2
+            override var voter: Voter = object : Voter{
+                override val identifier: String = "anonym1"
+
+            }
 
         }
 
         val v2 = object : SinglePreferenceVote<ScoreMetrics> {
-            override val votedCompetitor = competitor2
-            override val voter: Voter = HumanVoter("anonym1")
+            override var votedCompetitor: Competitor<ScoreMetrics> = competitor2
+            override var voter: Voter = object : Voter{
+                override val identifier: String = "anonym1"
+
+            }
 
         }
 
         val v3 = object : SinglePreferenceVote<ScoreMetrics> {
-            override val votedCompetitor = competitor1
-            override val voter: Voter = HumanVoter("anonym1")
+            override var votedCompetitor: Competitor<ScoreMetrics> = competitor1
+            override var voter: Voter = object : Voter{
+                override val identifier: String = "anonym1"
+
+            }
 
         }
 
@@ -74,6 +104,7 @@ class MajorityVotesAlgorithmTests : StringSpec({
 
         shouldThrowWithMessage <IllegalStateException>("Each voter can vote just once for each competitor"){
         MajorityVotesAlgorithm<ScoreMetrics>(listOf(ConstantParameters.MultipleVotesAllowed)).
+        apply { this.candidates = candidates }.
         computeByAlgorithmRules(votes)  }
 
 
@@ -85,31 +116,49 @@ class MajorityVotesAlgorithmTests : StringSpec({
 
     "Majority Algorithm with 1 winner should have just 1 winner in the only placement"{
 
-        val competitor1 = HumanCompetitor<ScoreMetrics>("Competitor 1")
+        val competitor1 = object : Competitor<ScoreMetrics>(){}.
+        apply { this.name = "Competitor 1"
+            this.scores = listOf()
+        }
 
-        val competitor2 = HumanCompetitor<ScoreMetrics>("Competitor 2")
+        val competitor2 = object : Competitor<ScoreMetrics>(){}.
+        apply { this.name = "Competitor 2"
+            this.scores = listOf()
+        }
+
+        val candidates = setOf(competitor1, competitor2)
 
         val v1 = object : SinglePreferenceVote<ScoreMetrics> {
-            override val votedCompetitor = competitor2
-            override val voter: Voter = HumanVoter("anonym1")
+            override var votedCompetitor: Competitor<ScoreMetrics> = competitor2
+            override var voter: Voter = object : Voter{
+                override val identifier: String = "anonym1"
+
+            }
 
         }
 
         val v2 = object : SinglePreferenceVote<ScoreMetrics> {
-            override val votedCompetitor = competitor2
-            override val voter: Voter = HumanVoter("anonym2")
+            override var votedCompetitor: Competitor<ScoreMetrics> = competitor2
+            override var voter: Voter = object : Voter{
+                override val identifier: String = "anonym2"
+
+            }
 
         }
 
         val v3 = object : SinglePreferenceVote<ScoreMetrics> {
-            override val votedCompetitor = competitor1
-            override val voter: Voter = HumanVoter("anonym3")
+            override var votedCompetitor: Competitor<ScoreMetrics> = competitor1
+            override var voter: Voter = object : Voter{
+                override val identifier: String = "anonym3"
+
+            }
 
         }
 
         val votes = listOf(v1, v2, v3)
 
         val ranking = MajorityVotesAlgorithm<ScoreMetrics>().
+        apply { this.candidates = candidates }.
         computeByAlgorithmRules(votes).
         ranking
 
@@ -123,47 +172,73 @@ class MajorityVotesAlgorithmTests : StringSpec({
 
     "Majority Algorithm with 2 winner (tie) should have 2 winners in the only placement"{
 
-        val competitor1 = HumanCompetitor<ScoreMetrics>("Competitor 1")
+        val competitor1 = object : Competitor<ScoreMetrics>(){}.
+        apply { this.name = "Competitor 1"
+            this.scores = listOf()
+        }
 
-        val competitor2 = HumanCompetitor<ScoreMetrics>("Competitor 2")
+        val competitor2 = object : Competitor<ScoreMetrics>(){}.
+        apply { this.name = "Competitor 2"
+            this.scores = listOf()
+        }
 
-        val competitor3 = HumanCompetitor<ScoreMetrics>("Competitor 3")
+        val competitor3 = object : Competitor<ScoreMetrics>(){}.
+        apply { this.name = "Competitor 3"
+            this.scores = listOf()
+        }
+
+        val candidates = setOf(competitor1, competitor2, competitor3)
 
         val v1 = object : SinglePreferenceVote<ScoreMetrics> {
-            override val votedCompetitor = competitor2
-            override val voter: Voter = HumanVoter("anonym1")
+            override var votedCompetitor: Competitor<ScoreMetrics> = competitor2
+            override var voter: Voter = object : Voter{
+                override val identifier: String = "anonym1"
+
+            }
 
         }
 
         val v2 = object : SinglePreferenceVote<ScoreMetrics> {
-            override val votedCompetitor = competitor2
-            override val voter: Voter = HumanVoter("anonym2")
+            override var votedCompetitor: Competitor<ScoreMetrics> = competitor2
+            override var voter: Voter = object : Voter{
+                override val identifier: String = "anonym2"
 
+            }
         }
 
         val v3 = object : SinglePreferenceVote<ScoreMetrics> {
-            override val votedCompetitor = competitor1
-            override val voter: Voter = HumanVoter("anonym3")
+            override var votedCompetitor: Competitor<ScoreMetrics> = competitor1
+            override var voter: Voter = object : Voter{
+                override val identifier: String = "anonym3"
+
+            }
 
         }
 
         val v4 = object : SinglePreferenceVote<ScoreMetrics> {
-            override val votedCompetitor = competitor1
-            override val voter: Voter = HumanVoter("anonym4")
+            override var votedCompetitor: Competitor<ScoreMetrics> = competitor1
+            override var voter: Voter = object : Voter{
+                override val identifier: String = "anonym4"
+
+            }
 
         }
 
         val v5 = object : SinglePreferenceVote<ScoreMetrics> {
-            override val votedCompetitor = competitor3
-            override val voter: Voter = HumanVoter("anonym5")
+            override var votedCompetitor: Competitor<ScoreMetrics> = competitor3
+            override var voter: Voter = object : Voter{
+                override val identifier: String = "anonym5"
+
+            }
 
         }
 
         val votes = listOf(v1, v2, v3, v4, v5)
 
-        val ranking = MajorityVotesAlgorithm<ScoreMetrics>().
-        computeByAlgorithmRules(votes).
-        ranking
+        val ranking = MajorityVotesAlgorithm<ScoreMetrics>()
+            .apply { this.candidates = candidates }.
+            computeByAlgorithmRules(votes).
+            ranking
 
         ranking.size.shouldBe(1)
 

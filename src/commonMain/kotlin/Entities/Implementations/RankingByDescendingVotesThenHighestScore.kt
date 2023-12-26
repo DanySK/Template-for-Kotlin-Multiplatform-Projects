@@ -1,7 +1,6 @@
 package Entities.Implementations
 
-import Entities.Interfaces.Competitor
-
+import Entities.Abstract.Competitor
 import Entities.Types.Comparators
 import Entities.Types.ScoreMetrics
 

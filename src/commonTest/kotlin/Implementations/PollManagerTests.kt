@@ -1,14 +1,13 @@
 package Implementations
 
 import DefaultPollManager
-import Entities.Implementations.*
-import Entities.Interfaces.Score
+import Entities.Abstract.Competitor
 import Entities.Interfaces.SinglePreferenceVote
-import Entities.Interfaces.Voter
 import Entities.Types.BestTimeInMatch
+import Entities.Types.BestTimeInMatch.Companion.realized
 import io.kotest.assertions.throwables.shouldNotThrowAny
 import io.kotest.core.spec.style.StringSpec
-import io.kotest.matchers.collections.shouldContainAll
+import io.kotest.matchers.collections.shouldContainInOrder
 import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.maps.shouldHaveSize
 import io.kotest.matchers.shouldBe
@@ -18,53 +17,40 @@ import kotlin.time.toDuration
 class PollManagerTests : StringSpec ({
 
     "Poll simulation should return a ranking, computed with MajorityVotesAlgorithm" {
-        val s1 = object : Score<BestTimeInMatch> {
-            override val scoreValue: BestTimeInMatch
-                get() = BestTimeInMatch(1.toDuration(DurationUnit.DAYS))
+        val a = DefaultPollManager<BestTimeInMatch, SinglePreferenceVote<BestTimeInMatch>>() initializedAs {
+            +poll {
 
-            override fun toString(): String = scoreValue.toString()
-        }
-        val s2 = object : Score<BestTimeInMatch> {
-            override val scoreValue: BestTimeInMatch
-                get() = BestTimeInMatch(20.toDuration(DurationUnit.DAYS))
+                -competition {
+                    -"Sport match"
+                    +competitor {
+                        -"Competitor 1"
+                        //+ (winsInChampionship realized (1))
 
-            override fun toString(): String = scoreValue.toString()
-        }
+                        + (BestTimeInMatch realized (1.toDuration(DurationUnit.DAYS)))
 
-        val competitor1 = HumanCompetitor("Competitor 1", listOf(s1))
-
-        val competitor2 = HumanCompetitor("Competitor 2", listOf(s2))
-
-        val competition = SportCompetition<BestTimeInMatch>("Sport match", listOf(competitor1, competitor2))
+                    }
+                    +competitor {
+                        -"Competitor 2"
+                        + (BestTimeInMatch realized (20.toDuration(DurationUnit.HOURS)))
 
 
-        val v1 = object : SinglePreferenceVote<BestTimeInMatch> {
-            override val votedCompetitor = competitor2
-            override val voter: Voter = HumanVoter("J")
+                    }
+                }
+                -majorityVotesAlgorithm {
+                }
 
-        }
+                + ("Competitor 2" votedBy "J")
+                + ("Competitor 2" votedBy "F")
+                + ("Competitor 1" votedBy "G")
+                + ("Competitor 1" votedBy "V")
 
-        val v2 = object : SinglePreferenceVote<BestTimeInMatch> {
-            override val votedCompetitor = competitor2
-            override val voter: Voter = HumanVoter("F")
 
-        }
-
-        val v3 = object : SinglePreferenceVote<BestTimeInMatch> {
-            override val votedCompetitor = competitor1
-            override val voter: Voter = HumanVoter("G")
-
-        }
-        val v4 = object : SinglePreferenceVote<BestTimeInMatch> {
-            override val votedCompetitor = competitor1
-            override val voter: Voter = HumanVoter("V")
-
+            }
         }
 
-        val votes = listOf(v1, v2, v3, v4)
-        val polls = listOf(PollSimulation(MajorityVotesAlgorithm(), competition, votes))
 
-        val rankings = DefaultPollManager(polls).computeAllPolls()
+
+        val rankings = a.computeAllPolls()
 
         rankings shouldHaveSize 1
         rankings.first().ranking shouldHaveSize 1
@@ -73,7 +59,17 @@ class PollManagerTests : StringSpec ({
         entry.value shouldBe 2
 
         entry.key shouldHaveSize 2
-        entry.key.shouldContainAll (competitor1, competitor2)
+
+        val competitor1 = object : Competitor<BestTimeInMatch>() {}.apply {
+            this.name = "Competitor 1"
+            this.scores = listOf(BestTimeInMatch realized (1.toDuration(DurationUnit.HOURS)))
+        }
+        val competitor2 = object : Competitor<BestTimeInMatch>() {}.apply {
+            this.name = "Competitor 2"
+            this.scores = listOf(BestTimeInMatch realized (20.toDuration(DurationUnit.HOURS)))
+        }
+        entry.key.map { it.name }.shouldContainInOrder (competitor2.name, competitor1.name)
+
 
         shouldNotThrowAny { rankings.forEach { it.printRanking() } }
     }

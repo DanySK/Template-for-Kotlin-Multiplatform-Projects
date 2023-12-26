@@ -1,18 +1,17 @@
 package Entities.Implementations
 
+import Entities.Abstract.Competitor
 import Entities.Abstract.Ranking
 import Entities.Implementation.MyCondorcetLikeRanking
-import Entities.Interfaces.Competitor
 import Entities.Interfaces.ListOfPreferencesVote
 import Entities.Interfaces.PollAlgorithm
 import Entities.Interfaces.PollAlgorithmParameter
 import Entities.Types.ConstantParameters
 import Entities.Types.ScoreMetrics
 
-class MyCondorcetAlgorithm<S : ScoreMetrics>  (
-    private val candidates : Set<Competitor<S>>, override var pollAlgorithmParameters: List<PollAlgorithmParameter> = listOf()
-                                               ) : PollAlgorithm<S, ListOfPreferencesVote<S>> {
+class MyCondorcetAlgorithm<S : ScoreMetrics>(override var pollAlgorithmParameters: List<PollAlgorithmParameter> = listOf())  : PollAlgorithm<S, ListOfPreferencesVote<S>> {
 
+    lateinit var candidates: Set<Competitor<S>>
 
     override fun computeByAlgorithmRules(votes: List<ListOfPreferencesVote<S>>): Ranking<S> {
 
@@ -20,13 +19,13 @@ class MyCondorcetAlgorithm<S : ScoreMetrics>  (
 
         when (pollAlgorithmParameters.count { it == ConstantParameters.MultipleVotesAllowed }){
             0 -> {
-                if(votes.groupingBy { it.voter }.eachCount().any { it.value > 1 }){
+                if(votes.groupingBy { it.voter.identifier }.eachCount().any { it.value > 1 }){
                     throw IllegalStateException("Each voter can vote only once")
                 }
             }
             1 ->{
                 //multiple vote allowed
-                if(votes.groupingBy { Pair(it.votedCompetitors, it.voter)}.eachCount().any { it.value > 1 }){
+                if(votes.groupingBy { Pair(it.votedCompetitors.map { c -> c.name }, it.voter.identifier)}.eachCount().any { it.value > 1 }){
                     throw IllegalStateException("Each voter can vote just once for each list of preferences")
                 }
             }
@@ -34,6 +33,7 @@ class MyCondorcetAlgorithm<S : ScoreMetrics>  (
         }
 
         votes.map { it.votedCompetitors }.forEach {
+
             val setOfCompetitors = it.toSet()
 
             if (setOfCompetitors != candidates) { //mismatch between sets

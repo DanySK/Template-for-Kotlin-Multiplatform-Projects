@@ -1,7 +1,7 @@
 package Entities.Implementations
 
+import Entities.Abstract.Competitor
 import Entities.Abstract.Ranking
-import Entities.Interfaces.Competitor
 import Entities.Types.ScoreMetrics
 
 open class RankingByDescendingVotes<S : ScoreMetrics>(unorderedRanking : Map<Competitor<S>, Int>) : Ranking<S>() {

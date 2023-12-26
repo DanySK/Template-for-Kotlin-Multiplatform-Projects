@@ -1,7 +1,7 @@
 package Entities.Implementation
 
+import Entities.Abstract.Competitor
 import Entities.Abstract.Ranking
-import Entities.Interfaces.Competitor
 import Entities.Interfaces.ListOfPreferencesVote
 import Entities.Interfaces.PollAlgorithm
 import Entities.Interfaces.PollAlgorithmParameter

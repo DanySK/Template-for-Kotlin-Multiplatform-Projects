@@ -1,8 +1,10 @@
+import Entities.Implementations.DescendingListOfPreferencesVote
 import Entities.Interfaces.*
 import Entities.Types.BestTimeInMatch
 import Entities.Types.ConstantParameters.*
 import Entities.Types.*
 import Entities.Types.BestTimeInMatch.Companion.realized
+import Entities.Types.WinsInCampionship.Companion.realized
 import kotlin.time.DurationUnit
 import kotlin.time.toDuration
 
@@ -56,15 +58,12 @@ fun main() : Unit {
 
     DefaultPollManager(listOf(poll)).computeAllPolls().forEach { it.printRanking() }
 */
-    var a = DefaultPollManager<BestTimeInMatch, SinglePreferenceVote<BestTimeInMatch>>()
-    a = a initializedAs {
-        +poll {
-            //pollAlgorithm = MajorityVotesAlgorithm()
 
-            -majorityAlgorithm {
-                +MultipleVotesAllowed
-            }
-            -sportCompetition {
+
+    val a = DefaultPollManager<BestTimeInMatch, SinglePreferenceVote<BestTimeInMatch>>() initializedAs {
+        +poll {
+
+            -competition {
                 -"Race"
                 +competitor {
                     -"compname1"
@@ -80,13 +79,46 @@ fun main() : Unit {
 
                 }
             }
+            -majorityVotesAlgorithm {
+                +MultipleVotesAllowed
+            }
 
-            + ("compname10" votedBy "b")
+            + ("compname1" votedBy "b")
+
 
             }
         }//.computeAllPolls()
         println(a)
         a.computeAllPolls().forEach { println(it.ranking) }
+
+
+
+    val b = DefaultPollManager<WinsInCampionship, ListOfPreferencesVote<WinsInCampionship>>() initializedAs {
+        +poll {
+
+
+            -competition {
+                -"Race"
+                +competitor {
+                    -"compname1"
+                    + (WinsInCampionship realized 1)
+                }
+                +competitor {
+                    -"compname2"
+                    + (WinsInCampionship realized 1)
+                }
+            }
+
+            - condorcetAlgorithm {
+                +MultipleVotesAllowed
+            }
+
+            + ("compname1" then "compname2"  votedBy "b")
+
+        }
+    }//.computeAllPolls()
+    println(b)
+    b.computeAllPolls().forEach { println(it.ranking) }
     }
 
 

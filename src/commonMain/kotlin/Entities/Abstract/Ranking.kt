@@ -1,6 +1,5 @@
 package Entities.Abstract
 
-import Entities.Interfaces.Competitor
 import Entities.Types.ScoreMetrics
 
 abstract class Ranking<S : ScoreMetrics> {

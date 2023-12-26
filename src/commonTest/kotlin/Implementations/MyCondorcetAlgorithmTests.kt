@@ -1,10 +1,10 @@
 package Implementations
 
+import Entities.Abstract.Competitor
 import Entities.Implementations.DescendingListOfPreferencesVote
-import Entities.Implementations.HumanCompetitor
-import Entities.Implementations.HumanVoter
 import Entities.Implementations.MyCondorcetAlgorithm
 import Entities.Interfaces.ListOfPreferencesVote
+import Entities.Interfaces.Voter
 import Entities.Types.BestTimeInMatch
 import Entities.Types.ConstantParameters
 import io.kotest.assertions.throwables.shouldThrowWithMessage
@@ -15,32 +15,58 @@ import io.kotest.matchers.shouldBe
 
 class MyCondorcetAlgorithmTests : StringSpec({
 
-    "Algorithm should throw exception when multiple vote is not allowed"{
+    "Algorithm should throw exception when multiple vote is not allowed" {
 
-        val competitors =  setOf(
-            HumanCompetitor<BestTimeInMatch>("A"), HumanCompetitor("C"),
-            HumanCompetitor("B")
-        )
+        val competitors = setOf(
+            object : Competitor<BestTimeInMatch>() {}.apply {
+                this.name = "A"
+                this.scores = listOf()
+            },
+            object : Competitor<BestTimeInMatch>() {}.apply {
+                this.name = "C"
+                this.scores = listOf()
+            },
 
-        val c = MyCondorcetAlgorithm(competitors)
-        val l = mutableListOf<ListOfPreferencesVote<BestTimeInMatch>>()
-        for(i in 1..23){
-            val dl = DescendingListOfPreferencesVote<BestTimeInMatch>(votedCompetitors =
-            listOf(
-                HumanCompetitor("A"),
-                HumanCompetitor("C"),
-                HumanCompetitor("B"),
+            object : Competitor<BestTimeInMatch>() {}.apply {
+                this.name = "B"
+                this.scores = listOf()
+            },
 
-            ),
-                voter = HumanVoter("V1")
             )
 
+        val c = MyCondorcetAlgorithm<BestTimeInMatch>().apply { this.candidates = competitors }
+        val l = mutableListOf<ListOfPreferencesVote<BestTimeInMatch>>()
+        for (i in 1..23) {
+            val dl = DescendingListOfPreferencesVote<BestTimeInMatch>().apply {
+                votedCompetitors =
+                    listOf(
+                        object : Competitor<BestTimeInMatch>() {}.apply {
+                            this.name = "A"
+                            this.scores = listOf()
+                        },
+                        object : Competitor<BestTimeInMatch>() {}.apply {
+                            this.name = "C"
+                            this.scores = listOf()
+                        },
+
+                        object : Competitor<BestTimeInMatch>() {}.apply {
+                            this.name = "B"
+                            this.scores = listOf()
+                        },
+
+                        )
+                voter = object : Voter {
+                    override val identifier: String = "V1"
+                }
+
+            }
             l += dl
         }
 
 
         shouldThrowWithMessage<IllegalStateException>("Each voter can vote only once") {
-        c.computeByAlgorithmRules(l)  }
+            c.computeByAlgorithmRules(l)
+        }
 
 
     }
@@ -48,22 +74,54 @@ class MyCondorcetAlgorithmTests : StringSpec({
     "Algorithm should throw exception when multiple vote is allowed but list of preferences is voted more than once"{
 
         val competitors =  setOf(
-            HumanCompetitor<BestTimeInMatch>("A"), HumanCompetitor("C"),
-            HumanCompetitor("B")
+            object : Competitor<BestTimeInMatch>() {}.apply {
+                this.name = "A"
+                this.scores = listOf()
+            },
+            object : Competitor<BestTimeInMatch>() {}.apply {
+                this.name = "C"
+                this.scores = listOf()
+            },
+
+            object : Competitor<BestTimeInMatch>() {}.apply {
+                this.name = "B"
+                this.scores = listOf()
+            },
         )
 
-        val c = MyCondorcetAlgorithm(competitors, listOf(ConstantParameters.MultipleVotesAllowed))
+        val c = MyCondorcetAlgorithm<BestTimeInMatch>().
+        apply {
+            this.candidates = competitors
+            this.pollAlgorithmParameters = listOf(ConstantParameters.MultipleVotesAllowed)
+        }
         val l = mutableListOf<ListOfPreferencesVote<BestTimeInMatch>>()
         for(i in 1..23){
-            val dl = DescendingListOfPreferencesVote<BestTimeInMatch>(votedCompetitors =
-            listOf(
-                HumanCompetitor("A"),
-                HumanCompetitor("C"),
-                HumanCompetitor("B"),
+            val dl = DescendingListOfPreferencesVote<BestTimeInMatch>().
+            apply {
 
-                ),
-                voter = HumanVoter("V1")
-            )
+                votedCompetitors =
+                    listOf(
+                        object : Competitor<BestTimeInMatch>() {}.apply {
+                            this.name = "A"
+                            this.scores = listOf()
+                        },
+                        object : Competitor<BestTimeInMatch>() {}.apply {
+                            this.name = "C"
+                            this.scores = listOf()
+                        },
+
+                        object : Competitor<BestTimeInMatch>() {}.apply {
+                            this.name = "B"
+                            this.scores = listOf()
+                        },
+
+                        )
+
+                voter = object : Voter {
+                    override val identifier: String = "V1"
+                }
+
+            }
 
             l += dl
         }
@@ -77,61 +135,137 @@ class MyCondorcetAlgorithmTests : StringSpec({
 
     "Algorithm should throw exceptions when a list of preferences contains a not allowed candidate"{
         val competitors =  setOf(
-            HumanCompetitor<BestTimeInMatch>("A"), HumanCompetitor("C"),
-            HumanCompetitor("B")
+            object : Competitor<BestTimeInMatch>() {}.apply {
+                this.name = "A"
+                this.scores = listOf()
+            },
+            object : Competitor<BestTimeInMatch>() {}.apply {
+                this.name = "C"
+                this.scores = listOf()
+            },
+
+            object : Competitor<BestTimeInMatch>() {}.apply {
+                this.name = "B"
+                this.scores = listOf()
+            },
         )
         var counter = 0
-        val c = MyCondorcetAlgorithm(competitors)
+        val c = MyCondorcetAlgorithm<BestTimeInMatch>().
+        apply { this.candidates = competitors}
         val l = mutableListOf<ListOfPreferencesVote<BestTimeInMatch>>()
         for(i in 1..23){
-            val dl = DescendingListOfPreferencesVote<BestTimeInMatch>(votedCompetitors =
-            listOf(
-                HumanCompetitor("A"),
-                HumanCompetitor("C"),
-                HumanCompetitor("random"),    //error case
+            val dl = DescendingListOfPreferencesVote<BestTimeInMatch>().
+            apply {
+                votedCompetitors =
+                    listOf(
+                        object : Competitor<BestTimeInMatch>() {}.apply {
+                            this.name = "A"
+                            this.scores = listOf()
+                        },
+                        object : Competitor<BestTimeInMatch>() {}.apply {
+                            this.name = "C"
+                            this.scores = listOf()
+                        },
 
-            ),
-                voter = HumanVoter("V"+counter++)
-            )
+                        object : Competitor<BestTimeInMatch>() {}.apply {
+                            this.name = "random"
+                            this.scores = listOf()
+                        },
+
+                        )
+
+                voter = object : Voter {
+                    override val identifier: String = "V"+counter++
+                }
+
+            }
 
             l += dl
         }
 
         for(i in 1..19){
-            val dl = DescendingListOfPreferencesVote<BestTimeInMatch>(votedCompetitors =
-            listOf(
-                HumanCompetitor("B"),
-                HumanCompetitor("C"),
-                HumanCompetitor("A", listOf())
-            ),
-                voter = HumanVoter("V"+counter++)
-            )
+            val dl = DescendingListOfPreferencesVote<BestTimeInMatch>().
+            apply {
+                votedCompetitors =
+                    listOf(
+                        object : Competitor<BestTimeInMatch>() {}.apply {
+                            this.name = "B"
+                            this.scores = listOf()
+                        },
+                        object : Competitor<BestTimeInMatch>() {}.apply {
+                            this.name = "C"
+                            this.scores = listOf()
+                        },
+
+                        object : Competitor<BestTimeInMatch>() {}.apply {
+                            this.name = "A"
+                            this.scores = listOf()
+                        },
+
+                        )
+
+                voter = object : Voter {
+                    override val identifier: String = "V"+counter++
+                }
+            }
 
             l += dl
         }
 
         for(i in 1..16){
-            val dl = DescendingListOfPreferencesVote<BestTimeInMatch>(votedCompetitors =
-            listOf(
-                HumanCompetitor("C"),
-                HumanCompetitor("B"),
-                HumanCompetitor("A", listOf())
-            ),
-                voter = HumanVoter("V"+counter++)
-            )
+            val dl = DescendingListOfPreferencesVote<BestTimeInMatch>().
+            apply {
+                votedCompetitors =
+                    listOf(
+                        object : Competitor<BestTimeInMatch>() {}.apply {
+                            this.name = "C"
+                            this.scores = listOf()
+                        },
+                        object : Competitor<BestTimeInMatch>() {}.apply {
+                            this.name = "B"
+                            this.scores = listOf()
+                        },
+
+                        object : Competitor<BestTimeInMatch>() {}.apply {
+                            this.name = "A"
+                            this.scores = listOf()
+                        },
+
+                        )
+
+                voter = object : Voter {
+                    override val identifier: String = "V"+counter++
+                }
+            }
 
             l += dl
         }
 
         for(i in 1..2){
-            val dl = DescendingListOfPreferencesVote<BestTimeInMatch>(votedCompetitors =
-            listOf(
-                HumanCompetitor("C"),
-                HumanCompetitor("A"),
-                HumanCompetitor("B", listOf())
-            ),
-                voter = HumanVoter("V"+counter++)
-            )
+            val dl = DescendingListOfPreferencesVote<BestTimeInMatch>().
+            apply{
+                votedCompetitors =
+                    listOf(
+                        object : Competitor<BestTimeInMatch>() {}.apply {
+                            this.name = "C"
+                            this.scores = listOf()
+                        },
+                        object : Competitor<BestTimeInMatch>() {}.apply {
+                            this.name = "A"
+                            this.scores = listOf()
+                        },
+
+                        object : Competitor<BestTimeInMatch>() {}.apply {
+                            this.name = "B"
+                            this.scores = listOf()
+                        },
+
+                        )
+
+                voter = object : Voter {
+                    override val identifier: String = "V"+counter++
+                }
+            }
 
             l += dl
         }
@@ -145,61 +279,133 @@ class MyCondorcetAlgorithmTests : StringSpec({
 
 
     "Algorithm should throw exception when an allowed candidate is absent in a list of preferences"{
-        val competitors =  setOf(
-            HumanCompetitor<BestTimeInMatch>("A"), HumanCompetitor("C"),
-            HumanCompetitor("B")
+        val competitors = setOf(
+            object : Competitor<BestTimeInMatch>() {}.apply {
+                this.name = "A"
+                this.scores = listOf()
+            },
+            object : Competitor<BestTimeInMatch>() {}.apply {
+                this.name = "C"
+                this.scores = listOf()
+            },
+
+            object : Competitor<BestTimeInMatch>() {}.apply {
+                this.name = "B"
+                this.scores = listOf()
+            },
         )
         var counter = 0
-        val c = MyCondorcetAlgorithm(competitors)
+        val c = MyCondorcetAlgorithm<BestTimeInMatch>().
+                apply { this.candidates = competitors}
         val l = mutableListOf<ListOfPreferencesVote<BestTimeInMatch>>()
         for(i in 1..23){
-            val dl = DescendingListOfPreferencesVote<BestTimeInMatch>(votedCompetitors =
-            listOf(
-                HumanCompetitor("A"),
-                HumanCompetitor("C"),
-                //error case
-            ),
-                voter = HumanVoter("V"+counter++)
-            )
+            val dl = DescendingListOfPreferencesVote<BestTimeInMatch>().
+            apply {
+                votedCompetitors =
+                    listOf(
+                        object : Competitor<BestTimeInMatch>() {}.apply {
+                            this.name = "A"
+                            this.scores = listOf()
+                        },
+                        object : Competitor<BestTimeInMatch>() {}.apply {
+                            this.name = "C"
+                            this.scores = listOf()
+                        },
+                        //error case
+
+                        )
+
+                voter = object : Voter {
+                    override val identifier: String = "V"+counter++
+                }
+            }
 
             l += dl
         }
 
         for(i in 1..19){
-            val dl = DescendingListOfPreferencesVote<BestTimeInMatch>(votedCompetitors =
-            listOf(
-                HumanCompetitor("B"),
-                HumanCompetitor("C"),
-                HumanCompetitor("A", listOf())
-            ),
-                voter = HumanVoter("V"+counter++)
-            )
+            val dl = DescendingListOfPreferencesVote<BestTimeInMatch>().
+            apply {
+                votedCompetitors =
+                    listOf(
+                        object : Competitor<BestTimeInMatch>() {}.apply {
+                            this.name = "B"
+                            this.scores = listOf()
+                        },
+                        object : Competitor<BestTimeInMatch>() {}.apply {
+                            this.name = "C"
+                            this.scores = listOf()
+                        },
+
+                        object : Competitor<BestTimeInMatch>() {}.apply {
+                            this.name = "A"
+                            this.scores = listOf()
+                        },
+
+                        )
+
+                voter = object : Voter {
+                    override val identifier: String = "V"+counter++
+                }
+            }
 
             l += dl
         }
 
         for(i in 1..16){
-            val dl = DescendingListOfPreferencesVote<BestTimeInMatch>(votedCompetitors =
-            listOf(
-                HumanCompetitor("C"),
-                HumanCompetitor("B"),
-                HumanCompetitor("A", listOf())
-            ),
-                voter = HumanVoter("V"+counter++)
-            )
+            val dl = DescendingListOfPreferencesVote<BestTimeInMatch>().
+            apply{
+                votedCompetitors =
+                    listOf(
+                        object : Competitor<BestTimeInMatch>() {}.apply {
+                            this.name = "C"
+                            this.scores = listOf()
+                        },
+                        object : Competitor<BestTimeInMatch>() {}.apply {
+                            this.name = "B"
+                            this.scores = listOf()
+                        },
+
+                        object : Competitor<BestTimeInMatch>() {}.apply {
+                            this.name = "A"
+                            this.scores = listOf()
+                        },
+
+                        )
+
+                voter = object : Voter {
+                    override val identifier: String = "V"+counter++
+                }
+            }
 
             l += dl
         }
 
         for(i in 1..2){
-            val dl = DescendingListOfPreferencesVote<BestTimeInMatch>(votedCompetitors =
-            listOf(
-                HumanCompetitor("C"),
-                HumanCompetitor("A"),
-                HumanCompetitor("B", listOf())
-            ),
-                voter = HumanVoter("V"+counter++)
-            )
+            val dl = DescendingListOfPreferencesVote<BestTimeInMatch>().
+            apply {
+                votedCompetitors =
+                    listOf(
+                        object : Competitor<BestTimeInMatch>() {}.apply {
+                            this.name = "C"
+                            this.scores = listOf()
+                        },
+                        object : Competitor<BestTimeInMatch>() {}.apply {
+                            this.name = "A"
+                            this.scores = listOf()
+                        },
+
+                        object : Competitor<BestTimeInMatch>() {}.apply {
+                            this.name = "B"
+                            this.scores = listOf()
+                        },
+
+                        )
+
+                voter = object : Voter {
+                    override val identifier: String = "V"+counter++
+                }
+            }
 
             l += dl
         }
@@ -213,62 +419,143 @@ class MyCondorcetAlgorithmTests : StringSpec({
 
     "Algorithm should throw exceptions when an allowed candidate is present more than once in a list of preferences"{
         val competitors =  setOf(
-            HumanCompetitor<BestTimeInMatch>("A"), HumanCompetitor("C"),
-            HumanCompetitor("B")
+            object : Competitor<BestTimeInMatch>() {}.apply {
+                this.name = "A"
+                this.scores = listOf()
+            },
+            object : Competitor<BestTimeInMatch>() {}.apply {
+                this.name = "C"
+                this.scores = listOf()
+            },
+
+            object : Competitor<BestTimeInMatch>() {}.apply {
+                this.name = "B"
+                this.scores = listOf()
+            },
         )
 
         var counter = 0
-        val c = MyCondorcetAlgorithm(competitors)
+        val c = MyCondorcetAlgorithm<BestTimeInMatch>().
+        apply { this.candidates = competitors }
         val l = mutableListOf<ListOfPreferencesVote<BestTimeInMatch>>()
         for(i in 1..23){
-            val dl = DescendingListOfPreferencesVote<BestTimeInMatch>(votedCompetitors =
-            listOf(
-                HumanCompetitor("A"),
-                HumanCompetitor("C"),
-                HumanCompetitor("B"),
-                HumanCompetitor("C"), // error case
-            ),
-                voter = HumanVoter("V"+counter++)
-            )
+            val dl = DescendingListOfPreferencesVote<BestTimeInMatch>().
+            apply {
+                votedCompetitors =
+                    listOf(
+                        object : Competitor<BestTimeInMatch>() {}.apply {
+                            this.name = "A"
+                            this.scores = listOf()
+                        },
+                        object : Competitor<BestTimeInMatch>() {}.apply {
+                            this.name = "C"
+                            this.scores = listOf()
+                        },
+
+                        object : Competitor<BestTimeInMatch>() {}.apply {
+                            this.name = "B"
+                            this.scores = listOf()
+                        },
+                        // error case
+                        object : Competitor<BestTimeInMatch>() {}.apply {
+                            this.name = "C"
+                            this.scores = listOf()
+                        },
+
+                        )
+
+                voter = object : Voter {
+                    override val identifier: String = "V"+counter++
+                }
+
+            }
 
             l += dl
         }
 
         for(i in 1..19){
-            val dl = DescendingListOfPreferencesVote<BestTimeInMatch>(votedCompetitors =
-            listOf(
-                HumanCompetitor("B"),
-                HumanCompetitor("C"),
-                HumanCompetitor("A", listOf())
-            ),
-                voter = HumanVoter("V"+counter++)
-            )
+            val dl = DescendingListOfPreferencesVote<BestTimeInMatch>().
+            apply {
+                votedCompetitors =
+                    listOf(
+                        object : Competitor<BestTimeInMatch>() {}.apply {
+                            this.name = "B"
+                            this.scores = listOf()
+                        },
+                        object : Competitor<BestTimeInMatch>() {}.apply {
+                            this.name = "C"
+                            this.scores = listOf()
+                        },
+
+                        object : Competitor<BestTimeInMatch>() {}.apply {
+                            this.name = "A"
+                            this.scores = listOf()
+                        },
+
+
+                        )
+
+                voter = object : Voter {
+                    override val identifier: String = "V"+counter++
+                }
+            }
 
             l += dl
         }
 
         for(i in 1..16){
-            val dl = DescendingListOfPreferencesVote<BestTimeInMatch>(votedCompetitors =
-            listOf(
-                HumanCompetitor("C"),
-                HumanCompetitor("B"),
-                HumanCompetitor("A", listOf())
-            ),
-                voter = HumanVoter("V"+counter++)
-            )
+            val dl = DescendingListOfPreferencesVote<BestTimeInMatch>().
+            apply {
+                votedCompetitors =
+                    listOf(
+                        object : Competitor<BestTimeInMatch>() {}.apply {
+                            this.name = "C"
+                            this.scores = listOf()
+                        },
+                        object : Competitor<BestTimeInMatch>() {}.apply {
+                            this.name = "B"
+                            this.scores = listOf()
+                        },
+
+                        object : Competitor<BestTimeInMatch>() {}.apply {
+                            this.name = "A"
+                            this.scores = listOf()
+                        },
+                        )
+
+                voter = object : Voter {
+                    override val identifier: String = "V"+counter++
+                }
+            }
 
             l += dl
         }
 
         for(i in 1..2){
-            val dl = DescendingListOfPreferencesVote<BestTimeInMatch>(votedCompetitors =
-            listOf(
-                HumanCompetitor("C"),
-                HumanCompetitor("A"),
-                HumanCompetitor("B", listOf())
-            ),
-                voter = HumanVoter("V"+counter++)
-            )
+            val dl = DescendingListOfPreferencesVote<BestTimeInMatch>().
+            apply {
+                votedCompetitors =
+                    listOf(
+                        object : Competitor<BestTimeInMatch>() {}.apply {
+                            this.name = "C"
+                            this.scores = listOf()
+                        },
+                        object : Competitor<BestTimeInMatch>() {}.apply {
+                            this.name = "A"
+                            this.scores = listOf()
+                        },
+
+                        object : Competitor<BestTimeInMatch>() {}.apply {
+                            this.name = "B"
+                            this.scores = listOf()
+                        },
+                        )
+
+                voter = object : Voter {
+                    override val identifier: String = "V"+counter++
+                }
+
+            }
 
             l += dl
         }
@@ -282,60 +569,134 @@ class MyCondorcetAlgorithmTests : StringSpec({
 
     "Algorithm should not throw exceptions and produce ranking"{
         val competitors =  setOf(
-            HumanCompetitor<BestTimeInMatch>("A"), HumanCompetitor("C"),
-            HumanCompetitor("B")
+            object : Competitor<BestTimeInMatch>() {}.apply {
+                this.name = "A"
+                this.scores = listOf()
+            },
+            object : Competitor<BestTimeInMatch>() {}.apply {
+                this.name = "C"
+                this.scores = listOf()
+            },
+
+            object : Competitor<BestTimeInMatch>() {}.apply {
+                this.name = "B"
+                this.scores = listOf()
+            },
         )
         var counter = 0
-        val c = MyCondorcetAlgorithm(competitors)
+        val c = MyCondorcetAlgorithm<BestTimeInMatch>().
+        apply { this.candidates = competitors }
         val l = mutableListOf<ListOfPreferencesVote<BestTimeInMatch>>()
         for(i in 1..23){
-            val dl = DescendingListOfPreferencesVote<BestTimeInMatch>(votedCompetitors =
-            listOf(
-                HumanCompetitor("A"),
-                HumanCompetitor("C"),
-                HumanCompetitor("B")
-            ),
-                voter = HumanVoter("V"+counter++)
-            )
+            val dl = DescendingListOfPreferencesVote<BestTimeInMatch>().
+            apply {
+                votedCompetitors =
+                    listOf(
+                        object : Competitor<BestTimeInMatch>() {}.apply {
+                            this.name = "A"
+                            this.scores = listOf()
+                        },
+                        object : Competitor<BestTimeInMatch>() {}.apply {
+                            this.name = "C"
+                            this.scores = listOf()
+                        },
+
+                        object : Competitor<BestTimeInMatch>() {}.apply {
+                            this.name = "B"
+                            this.scores = listOf()
+                        },
+                    )
+
+                voter = object : Voter {
+                    override val identifier: String = "V"+counter++
+                }
+
+
+            }
 
             l += dl
         }
 
         for(i in 1..19){
-            val dl = DescendingListOfPreferencesVote<BestTimeInMatch>(votedCompetitors =
-            listOf(
-                HumanCompetitor("B"),
-                HumanCompetitor("C"),
-                HumanCompetitor("A", listOf())
-            ),
-                voter = HumanVoter("V"+counter++)
-            )
+            val dl = DescendingListOfPreferencesVote<BestTimeInMatch>().
+            apply {
+                votedCompetitors =
+                    listOf(
+                        object : Competitor<BestTimeInMatch>() {}.apply {
+                            this.name = "B"
+                            this.scores = listOf()
+                        },
+                        object : Competitor<BestTimeInMatch>() {}.apply {
+                            this.name = "C"
+                            this.scores = listOf()
+                        },
+
+                        object : Competitor<BestTimeInMatch>() {}.apply {
+                            this.name = "A"
+                            this.scores = listOf()
+                        },
+                    )
+
+                voter = object : Voter {
+                    override val identifier: String = "V"+counter++
+                }
+            }
 
             l += dl
         }
 
         for(i in 1..16){
-            val dl = DescendingListOfPreferencesVote<BestTimeInMatch>(votedCompetitors =
-            listOf(
-                HumanCompetitor("C"),
-                HumanCompetitor("B"),
-                HumanCompetitor("A", listOf())
-            ),
-                voter = HumanVoter("V"+counter++)
-            )
+            val dl = DescendingListOfPreferencesVote<BestTimeInMatch>().
+            apply {
+                votedCompetitors =
+                    listOf(
+                        object : Competitor<BestTimeInMatch>() {}.apply {
+                            this.name = "C"
+                            this.scores = listOf()
+                        },
+                        object : Competitor<BestTimeInMatch>() {}.apply {
+                            this.name = "B"
+                            this.scores = listOf()
+                        },
+
+                        object : Competitor<BestTimeInMatch>() {}.apply {
+                            this.name = "A"
+                            this.scores = listOf()
+                        },
+                    )
+
+                voter = object : Voter {
+                    override val identifier: String = "V"+counter++
+                }
+            }
 
             l += dl
         }
 
         for(i in 1..2){
-            val dl = DescendingListOfPreferencesVote<BestTimeInMatch>(votedCompetitors =
-            listOf(
-                HumanCompetitor("C"),
-                HumanCompetitor("A"),
-                HumanCompetitor("B", listOf())
-            ),
-                voter = HumanVoter("V"+counter++)
-            )
+            val dl = DescendingListOfPreferencesVote<BestTimeInMatch>().
+            apply {
+                votedCompetitors =
+                    listOf(
+                        object : Competitor<BestTimeInMatch>() {}.apply {
+                            this.name = "C"
+                            this.scores = listOf()
+                        },
+                        object : Competitor<BestTimeInMatch>() {}.apply {
+                            this.name = "A"
+                            this.scores = listOf()
+                        },
+
+                        object : Competitor<BestTimeInMatch>() {}.apply {
+                            this.name = "B"
+                            this.scores = listOf()
+                        },
+                    )
+
+                voter = object : Voter {
+                    override val identifier: String = "V"+counter++
+                }
+            }
 
             l += dl
         }
@@ -344,9 +705,19 @@ class MyCondorcetAlgorithmTests : StringSpec({
         val r = c.computeByAlgorithmRules(l)
         r.ranking shouldHaveSize 3
         r.ranking.values shouldContainAll setOf(null)
-        r.ranking.keys shouldBe setOf(setOf(HumanCompetitor("C")),
-            setOf(HumanCompetitor("A")),
-            setOf(HumanCompetitor("B")))
+        r.ranking.keys shouldBe setOf(setOf(object : Competitor<BestTimeInMatch>() {}.apply {
+            this.name = "C"
+            this.scores = listOf()
+        }),
+            setOf(object : Competitor<BestTimeInMatch>() {}.apply {
+                this.name = "A"
+                this.scores = listOf()
+            }),
+            setOf(object : Competitor<BestTimeInMatch>() {}.apply {
+                this.name = "B"
+                this.scores = listOf()
+            }))
+
     }
 
 })

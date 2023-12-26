@@ -1,7 +1,6 @@
 package Implementations
-import Entities.Implementations.HumanCompetitor
+import Entities.Abstract.Competitor
 import Entities.Implementations.RankingByDescendingVotesThenHighestScore
-import Entities.Interfaces.Competitor
 import Entities.Interfaces.Score
 import Entities.Types.WinsInCampionship
 import io.kotest.assertions.throwables.shouldThrow
@@ -14,12 +13,20 @@ class RankingByDescendingVotesThenHighestScoreTests : StringSpec({
     "CompetitorRankingByDescendingVotesThenHighestScore cannot have empty lists of scores" {
 
         val competitor2Score = object : Score<WinsInCampionship> {
-            override val scoreValue: WinsInCampionship
-                get() = WinsInCampionship(1)
+            override var scoreValue: WinsInCampionship = WinsInCampionship(1)
         }
         val map = mapOf<Competitor<WinsInCampionship>, Int>(
-            HumanCompetitor("competitor 1", listOf<Score<WinsInCampionship>>()) to 1,
-            HumanCompetitor("competitor 2", listOf<Score<WinsInCampionship>>(competitor2Score)) to 2,
+            object : Competitor<WinsInCampionship>(){}.
+            apply {
+                this.name = "competitor 1"
+                this.scores = listOf()
+            } to 1,
+
+            object : Competitor<WinsInCampionship>(){}.
+            apply {
+                this.name = "competitor 2"
+                this.scores = listOf(competitor2Score)
+            } to 2,
         )
 
         val exception = shouldThrow<IllegalStateException> {
@@ -33,46 +40,57 @@ class RankingByDescendingVotesThenHighestScoreTests : StringSpec({
 
     "CompetitorRankingByDescendingVotesThenHighestScore should put competitors in descending votes then with highest score first" {
         val competitor1Score = object : Score<WinsInCampionship> {
-            override val scoreValue: WinsInCampionship
-                get() = WinsInCampionship(1)
+            override var scoreValue: WinsInCampionship = WinsInCampionship(1)
         }
         val competitor2Score = object : Score<WinsInCampionship> {
-            override val scoreValue: WinsInCampionship
-                get() = WinsInCampionship(1)
+            override var scoreValue: WinsInCampionship = WinsInCampionship(1)
         }
 
         val competitor3m1Score = object : Score<WinsInCampionship> {
-            override val scoreValue: WinsInCampionship
-                get() = WinsInCampionship(1)
+            override var scoreValue: WinsInCampionship = WinsInCampionship(1)
         }
 
         val competitor3m2Score = object : Score<WinsInCampionship> {
-            override val scoreValue: WinsInCampionship
-                get() = WinsInCampionship(10)
+            override var scoreValue: WinsInCampionship = WinsInCampionship(10)
         }
 
         val competitor4m1Score = object : Score<WinsInCampionship> {
-            override val scoreValue: WinsInCampionship
-                get() = WinsInCampionship(1)
+            override var scoreValue: WinsInCampionship =  WinsInCampionship(1)
         }
 
         val competitor4m2Score = object : Score<WinsInCampionship> {
-            override val scoreValue: WinsInCampionship
-                get() = WinsInCampionship(10)
+            override var scoreValue: WinsInCampionship = WinsInCampionship(10)
         }
 
         val competitor4m3Score = object : Score<WinsInCampionship> {
-            override val scoreValue: WinsInCampionship
-                get() = WinsInCampionship(10)
+            override var scoreValue: WinsInCampionship = WinsInCampionship(10)
         }
 
         val map = mapOf<Competitor<WinsInCampionship>, Int>(
-            HumanCompetitor("competitor 1", listOf(competitor1Score)) to 1,
-            HumanCompetitor("competitor 2", listOf(competitor2Score)) to 2,
-            HumanCompetitor("competitor 3", listOf(competitor3m1Score,
-                competitor3m2Score)) to 2,
-            HumanCompetitor("competitor 4", listOf(competitor4m1Score,
-                competitor4m2Score,competitor4m3Score)) to 2,
+            object : Competitor<WinsInCampionship>(){}.
+            apply {
+                this.name = "competitor 1"
+                this.scores = listOf(competitor1Score)
+            } to 1,
+            object : Competitor<WinsInCampionship>(){}.
+            apply {
+                this.name = "competitor 2"
+                this.scores = listOf(competitor2Score)
+            } to 2,
+            object : Competitor<WinsInCampionship>(){}.
+            apply {
+                this.name = "competitor 3"
+                this.scores = listOf(competitor3m1Score,
+                    competitor3m2Score)
+            } to 2,
+
+            object : Competitor<WinsInCampionship>(){}.
+            apply {
+                this.name = "competitor 4"
+                this.scores = listOf(competitor4m1Score,
+                    competitor4m2Score,competitor4m3Score)
+            } to 2,
+
         )
 
         val ranking = RankingByDescendingVotesThenHighestScore(map).ranking
