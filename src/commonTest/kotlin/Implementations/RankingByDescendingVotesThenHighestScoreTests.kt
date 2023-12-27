@@ -1,7 +1,7 @@
 package Implementations
 import Entities.Abstract.Competitor
 import Entities.Implementations.RankingByDescendingVotesThenHighestScore
-import Entities.Interfaces.Score
+import Entities.Abstract.Score
 import Entities.Types.WinsInCampionship
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec
@@ -12,7 +12,7 @@ import io.kotest.matchers.string.shouldNotBeEmpty
 class RankingByDescendingVotesThenHighestScoreTests : StringSpec({
     "CompetitorRankingByDescendingVotesThenHighestScore cannot have empty lists of scores" {
 
-        val competitor2Score = object : Score<WinsInCampionship> {
+        val competitor2Score = object : Score<WinsInCampionship>() {
             override var scoreValue: WinsInCampionship = WinsInCampionship(1)
         }
         val map = mapOf<Competitor<WinsInCampionship>, Int>(
@@ -39,30 +39,30 @@ class RankingByDescendingVotesThenHighestScoreTests : StringSpec({
     }
 
     "CompetitorRankingByDescendingVotesThenHighestScore should put competitors in descending votes then with highest score first" {
-        val competitor1Score = object : Score<WinsInCampionship> {
+        val competitor1Score = object : Score<WinsInCampionship>() {
             override var scoreValue: WinsInCampionship = WinsInCampionship(1)
         }
-        val competitor2Score = object : Score<WinsInCampionship> {
-            override var scoreValue: WinsInCampionship = WinsInCampionship(1)
-        }
-
-        val competitor3m1Score = object : Score<WinsInCampionship> {
+        val competitor2Score = object : Score<WinsInCampionship>() {
             override var scoreValue: WinsInCampionship = WinsInCampionship(1)
         }
 
-        val competitor3m2Score = object : Score<WinsInCampionship> {
+        val competitor3m1Score = object : Score<WinsInCampionship>() {
+            override var scoreValue: WinsInCampionship = WinsInCampionship(1)
+        }
+
+        val competitor3m2Score = object : Score<WinsInCampionship>() {
             override var scoreValue: WinsInCampionship = WinsInCampionship(10)
         }
 
-        val competitor4m1Score = object : Score<WinsInCampionship> {
+        val competitor4m1Score = object : Score<WinsInCampionship>() {
             override var scoreValue: WinsInCampionship =  WinsInCampionship(1)
         }
 
-        val competitor4m2Score = object : Score<WinsInCampionship> {
+        val competitor4m2Score = object : Score<WinsInCampionship>() {
             override var scoreValue: WinsInCampionship = WinsInCampionship(10)
         }
 
-        val competitor4m3Score = object : Score<WinsInCampionship> {
+        val competitor4m3Score = object : Score<WinsInCampionship>() {
             override var scoreValue: WinsInCampionship = WinsInCampionship(10)
         }
 

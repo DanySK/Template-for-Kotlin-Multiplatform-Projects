@@ -1,6 +1,6 @@
 package Entities.Types
 
-import Entities.Interfaces.Score
+import Entities.Abstract.Score
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.ints.shouldBeGreaterThan
 import io.kotest.matchers.ints.shouldBeLessThan
@@ -11,11 +11,11 @@ import kotlin.time.toDuration
 class ComparatorsTest : StringSpec({
 
     "HighestScoreComparator should be a descending comparator" {
-        val s1 = object : Score<BestTimeInMatch> {
+        val s1 = object : Score<BestTimeInMatch>() {
             override var scoreValue: BestTimeInMatch = BestTimeInMatch(1.toDuration(DurationUnit.HOURS))
 
         }
-        val s2 = object : Score<BestTimeInMatch> {
+        val s2 = object : Score<BestTimeInMatch>() {
             override var scoreValue: BestTimeInMatch = BestTimeInMatch(2.toDuration(DurationUnit.HOURS))
 
         }

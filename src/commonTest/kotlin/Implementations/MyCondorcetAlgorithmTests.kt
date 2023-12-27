@@ -17,7 +17,7 @@ class MyCondorcetAlgorithmTests : StringSpec({
 
     "Algorithm should throw exception when multiple vote is not allowed" {
 
-        val competitors = setOf(
+        val competitors = listOf(
             object : Competitor<BestTimeInMatch>() {}.apply {
                 this.name = "A"
                 this.scores = listOf()
@@ -34,7 +34,7 @@ class MyCondorcetAlgorithmTests : StringSpec({
 
             )
 
-        val c = MyCondorcetAlgorithm<BestTimeInMatch>().apply { this.candidates = competitors }
+        val c = MyCondorcetAlgorithm<BestTimeInMatch>().apply { this.candidates = competitors.toList() }
         val l = mutableListOf<ListOfPreferencesVote<BestTimeInMatch>>()
         for (i in 1..23) {
             val dl = DescendingListOfPreferencesVote<BestTimeInMatch>().apply {
@@ -73,7 +73,7 @@ class MyCondorcetAlgorithmTests : StringSpec({
 
     "Algorithm should throw exception when multiple vote is allowed but list of preferences is voted more than once"{
 
-        val competitors =  setOf(
+        val competitors =  listOf(
             object : Competitor<BestTimeInMatch>() {}.apply {
                 this.name = "A"
                 this.scores = listOf()
@@ -91,7 +91,7 @@ class MyCondorcetAlgorithmTests : StringSpec({
 
         val c = MyCondorcetAlgorithm<BestTimeInMatch>().
         apply {
-            this.candidates = competitors
+            this.candidates = competitors.toList()
             this.pollAlgorithmParameters = listOf(ConstantParameters.MultipleVotesAllowed)
         }
         val l = mutableListOf<ListOfPreferencesVote<BestTimeInMatch>>()
@@ -134,7 +134,7 @@ class MyCondorcetAlgorithmTests : StringSpec({
     }
 
     "Algorithm should throw exceptions when a list of preferences contains a not allowed candidate"{
-        val competitors =  setOf(
+        val competitors =  listOf(
             object : Competitor<BestTimeInMatch>() {}.apply {
                 this.name = "A"
                 this.scores = listOf()
@@ -151,7 +151,7 @@ class MyCondorcetAlgorithmTests : StringSpec({
         )
         var counter = 0
         val c = MyCondorcetAlgorithm<BestTimeInMatch>().
-        apply { this.candidates = competitors}
+        apply { this.candidates = competitors.toList()}
         val l = mutableListOf<ListOfPreferencesVote<BestTimeInMatch>>()
         for(i in 1..23){
             val dl = DescendingListOfPreferencesVote<BestTimeInMatch>().
@@ -279,7 +279,7 @@ class MyCondorcetAlgorithmTests : StringSpec({
 
 
     "Algorithm should throw exception when an allowed candidate is absent in a list of preferences"{
-        val competitors = setOf(
+        val competitors = listOf(
             object : Competitor<BestTimeInMatch>() {}.apply {
                 this.name = "A"
                 this.scores = listOf()
@@ -296,7 +296,7 @@ class MyCondorcetAlgorithmTests : StringSpec({
         )
         var counter = 0
         val c = MyCondorcetAlgorithm<BestTimeInMatch>().
-                apply { this.candidates = competitors}
+                apply { this.candidates = competitors.toList()}
         val l = mutableListOf<ListOfPreferencesVote<BestTimeInMatch>>()
         for(i in 1..23){
             val dl = DescendingListOfPreferencesVote<BestTimeInMatch>().
@@ -418,7 +418,7 @@ class MyCondorcetAlgorithmTests : StringSpec({
     }
 
     "Algorithm should throw exceptions when an allowed candidate is present more than once in a list of preferences"{
-        val competitors =  setOf(
+        val competitors =  listOf(
             object : Competitor<BestTimeInMatch>() {}.apply {
                 this.name = "A"
                 this.scores = listOf()
@@ -436,7 +436,7 @@ class MyCondorcetAlgorithmTests : StringSpec({
 
         var counter = 0
         val c = MyCondorcetAlgorithm<BestTimeInMatch>().
-        apply { this.candidates = competitors }
+        apply { this.candidates = competitors.toList() }
         val l = mutableListOf<ListOfPreferencesVote<BestTimeInMatch>>()
         for(i in 1..23){
             val dl = DescendingListOfPreferencesVote<BestTimeInMatch>().
@@ -568,7 +568,7 @@ class MyCondorcetAlgorithmTests : StringSpec({
     }
 
     "Algorithm should not throw exceptions and produce ranking"{
-        val competitors =  setOf(
+        val competitors =  listOf(
             object : Competitor<BestTimeInMatch>() {}.apply {
                 this.name = "A"
                 this.scores = listOf()
@@ -585,7 +585,7 @@ class MyCondorcetAlgorithmTests : StringSpec({
         )
         var counter = 0
         val c = MyCondorcetAlgorithm<BestTimeInMatch>().
-        apply { this.candidates = competitors }
+        apply { this.candidates = competitors.toList() }
         val l = mutableListOf<ListOfPreferencesVote<BestTimeInMatch>>()
         for(i in 1..23){
             val dl = DescendingListOfPreferencesVote<BestTimeInMatch>().

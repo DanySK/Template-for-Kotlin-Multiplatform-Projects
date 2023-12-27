@@ -1,8 +1,8 @@
 package Implementations
 
 import Entities.Abstract.Competitor
+import Entities.Abstract.Score
 import Entities.Implementations.MajorityVotesAndHighestScoreAlgorithm
-import Entities.Interfaces.Score
 import Entities.Interfaces.SinglePreferenceVote
 import Entities.Interfaces.Voter
 import Entities.Types.BestTimeInMatch
@@ -29,7 +29,7 @@ class MajorityVotesAndHighestScoreAlgorithmTests : StringSpec({
             this.scores = listOf()
         }
 
-        val candidates = setOf(competitor1, competitor2)
+        val candidates = listOf(competitor1, competitor2)
 
         val v1 = object : SinglePreferenceVote<ScoreMetrics> {
             override var votedCompetitor: Competitor<ScoreMetrics> = competitor2
@@ -61,7 +61,7 @@ class MajorityVotesAndHighestScoreAlgorithmTests : StringSpec({
         val votes = listOf(v1, v2, v3)
 
         shouldThrowWithMessage<IllegalStateException>("Each voter can vote only once") { MajorityVotesAndHighestScoreAlgorithm<ScoreMetrics>().
-        apply { this.candidates = candidates }.
+        apply { this.candidates = candidates.toList() }.
         computeByAlgorithmRules(votes)  }
 
 
@@ -79,7 +79,7 @@ class MajorityVotesAndHighestScoreAlgorithmTests : StringSpec({
             this.scores = listOf()
         }
 
-        val candidates = setOf(competitor1, competitor2)
+        val candidates = listOf(competitor1, competitor2)
 
         val v1 = object : SinglePreferenceVote<ScoreMetrics> {
             override var votedCompetitor: Competitor<ScoreMetrics> = competitor2
@@ -113,7 +113,7 @@ class MajorityVotesAndHighestScoreAlgorithmTests : StringSpec({
 
         shouldThrowWithMessage <IllegalStateException>("Each voter can vote just once for each competitor"){
             MajorityVotesAndHighestScoreAlgorithm<ScoreMetrics>(listOf(ConstantParameters.MultipleVotesAllowed)).
-            apply { this.candidates = candidates }.
+            apply { this.candidates = candidates.toList() }.
             computeByAlgorithmRules(votes)  }
 
 
@@ -121,11 +121,11 @@ class MajorityVotesAndHighestScoreAlgorithmTests : StringSpec({
 
     "Scores -> no ties in votes, no ties in score should have just 1 winner in the only placement"{
 
-        val s1 = object : Score<BestTimeInMatch> {
+        val s1 = object : Score<BestTimeInMatch>() {
             override var scoreValue: BestTimeInMatch = BestTimeInMatch(1.toDuration(DurationUnit.DAYS))
             override fun toString() : String = scoreValue.toString()
         }
-        val s2 = object : Score<BestTimeInMatch> {
+        val s2 = object : Score<BestTimeInMatch>() {
             override var scoreValue: BestTimeInMatch = BestTimeInMatch(20.toDuration(DurationUnit.DAYS))
             override fun toString() : String = scoreValue.toString()
         }
@@ -140,7 +140,7 @@ class MajorityVotesAndHighestScoreAlgorithmTests : StringSpec({
             this.scores = listOf(s1)
         }
 
-        val candidates = setOf(competitor1, competitor2)
+        val candidates = listOf(competitor1, competitor2)
 
         val v1 = object : SinglePreferenceVote<BestTimeInMatch> {
             override var votedCompetitor: Competitor<BestTimeInMatch> = competitor2
@@ -173,7 +173,7 @@ class MajorityVotesAndHighestScoreAlgorithmTests : StringSpec({
         val votes = listOf(v1, v2, v3)
 
         val ranking = MajorityVotesAndHighestScoreAlgorithm<BestTimeInMatch>().
-        apply { this.candidates = candidates }.
+        apply { this.candidates = candidates.toList() }.
         computeByAlgorithmRules(votes).
         ranking
 
@@ -186,7 +186,7 @@ class MajorityVotesAndHighestScoreAlgorithmTests : StringSpec({
     }
 
     "Scores -> no ties in votes, ties in score should have just 1 winner in the only placement"{
-        val s1 = object : Score<BestTimeInMatch> {
+        val s1 = object : Score<BestTimeInMatch>() {
             override var scoreValue: BestTimeInMatch = BestTimeInMatch(1.toDuration(DurationUnit.DAYS))
             override fun toString() : String = scoreValue.toString()
         }
@@ -202,7 +202,7 @@ class MajorityVotesAndHighestScoreAlgorithmTests : StringSpec({
             this.scores = listOf(s1)
         }
 
-        val candidates = setOf(competitor1, competitor2)
+        val candidates = listOf(competitor1, competitor2)
         val v1 = object : SinglePreferenceVote<BestTimeInMatch> {
             override var votedCompetitor: Competitor<BestTimeInMatch> = competitor2
             override var voter: Voter = object : Voter{
@@ -233,7 +233,7 @@ class MajorityVotesAndHighestScoreAlgorithmTests : StringSpec({
         val votes = listOf(v1, v2, v3)
 
         val ranking = MajorityVotesAndHighestScoreAlgorithm<BestTimeInMatch>().
-        apply { this.candidates = candidates }.
+        apply { this.candidates = candidates.toList() }.
         computeByAlgorithmRules(votes).
         ranking
 
@@ -247,11 +247,11 @@ class MajorityVotesAndHighestScoreAlgorithmTests : StringSpec({
     }
 
     "Scores -> ties in votes, no ties in score should have 2 winners in 2 placements" {
-        val s1 = object : Score<BestTimeInMatch> {
+        val s1 = object : Score<BestTimeInMatch>() {
             override var scoreValue: BestTimeInMatch = BestTimeInMatch(1.toDuration(DurationUnit.DAYS))
             override fun toString() : String = scoreValue.toString()
         }
-        val s2 = object : Score<BestTimeInMatch> {
+        val s2 = object : Score<BestTimeInMatch>() {
             override var scoreValue: BestTimeInMatch = BestTimeInMatch(20.toDuration(DurationUnit.DAYS))
             override fun toString() : String = scoreValue.toString()
         }
@@ -271,7 +271,7 @@ class MajorityVotesAndHighestScoreAlgorithmTests : StringSpec({
             this.scores = listOf(s2)
         }
 
-        val candidates = setOf(competitor1, competitor2, competitor3)
+        val candidates = listOf(competitor1, competitor2, competitor3)
 
         val v1 = object : SinglePreferenceVote<BestTimeInMatch> {
             override var votedCompetitor: Competitor<BestTimeInMatch> = competitor2
@@ -321,7 +321,7 @@ class MajorityVotesAndHighestScoreAlgorithmTests : StringSpec({
         val votes = listOf(v1, v2, v3, v4, v5)
 
         val ranking = MajorityVotesAndHighestScoreAlgorithm<BestTimeInMatch>().
-        apply { this.candidates = candidates }.
+        apply { this.candidates = candidates.toList() }.
         computeByAlgorithmRules(votes).
         ranking
 
@@ -337,11 +337,11 @@ class MajorityVotesAndHighestScoreAlgorithmTests : StringSpec({
     }
 
     "Scores -> ties in votes, ties in score should have 3 winners, 2 in first placement, 1 in second placement" {
-        val s1 = object : Score<BestTimeInMatch> {
+        val s1 = object : Score<BestTimeInMatch>() {
             override var scoreValue: BestTimeInMatch = BestTimeInMatch(1.toDuration(DurationUnit.DAYS))
             override fun toString() : String = scoreValue.toString()
         }
-        val s2 = object : Score<BestTimeInMatch> {
+        val s2 = object : Score<BestTimeInMatch>() {
             override var scoreValue: BestTimeInMatch = BestTimeInMatch(20.toDuration(DurationUnit.DAYS))
             override fun toString() : String = scoreValue.toString()
         }
@@ -361,7 +361,7 @@ class MajorityVotesAndHighestScoreAlgorithmTests : StringSpec({
             this.scores = listOf(s2)
         }
 
-        val candidates = setOf(competitor1, competitor2, competitor3)
+        val candidates = listOf(competitor1, competitor2, competitor3)
 
         val v1 = object : SinglePreferenceVote<BestTimeInMatch> {
             override var votedCompetitor: Competitor<BestTimeInMatch> = competitor2
@@ -418,7 +418,7 @@ class MajorityVotesAndHighestScoreAlgorithmTests : StringSpec({
         val votes = listOf(v1, v2, v3, v4, v5, v6)
 
         val ranking = MajorityVotesAndHighestScoreAlgorithm<BestTimeInMatch>().
-        apply { this.candidates = candidates }.
+        apply { this.candidates = candidates.toList() }.
         computeByAlgorithmRules(votes).
         ranking
 

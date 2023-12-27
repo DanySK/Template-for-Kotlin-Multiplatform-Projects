@@ -11,9 +11,13 @@ import Entities.Types.ScoreMetrics
 
 class MyCondorcetAlgorithm<S : ScoreMetrics>(override var pollAlgorithmParameters: List<PollAlgorithmParameter> = listOf())  : PollAlgorithm<S, ListOfPreferencesVote<S>> {
 
-    lateinit var candidates: Set<Competitor<S>>
+    lateinit var candidates: List<Competitor<S>>
 
     override fun computeByAlgorithmRules(votes: List<ListOfPreferencesVote<S>>): Ranking<S> {
+
+        if(candidates.groupingBy { it.name }.eachCount().any { it.value > 1 }){
+            throw IllegalStateException("Candidate already declared")
+        }
 
         if (votes.isEmpty()) throw IllegalArgumentException("Votes list cannot be empty")
 
@@ -77,8 +81,9 @@ class MyCondorcetAlgorithm<S : ScoreMetrics>(override var pollAlgorithmParameter
                     val candidate1 = candidates[i]
                     val candidate2 = candidates[j]
 
-                    val indexCandidate1 = ballot.votedCompetitors.indexOf(candidate1)
-                    val indexCandidate2 = ballot.votedCompetitors.indexOf(candidate2)
+
+                    val indexCandidate1 = ballot.votedCompetitors.indexOfFirst {  it.name == candidate1.name  }//ballot.votedCompetitors.indexOf(candidate1)
+                    val indexCandidate2 = ballot.votedCompetitors.indexOfFirst {  it.name == candidate2.name  }//ballot.votedCompetitors.indexOf(candidate2)
 
                     if (indexCandidate1 < indexCandidate2) {
                         voteMatrix[i][j]++
@@ -119,7 +124,7 @@ class MyCondorcetAlgorithm<S : ScoreMetrics>(override var pollAlgorithmParameter
                 }
 
                 if (victories == candidates.size - 1 && defeats == 0) {
-                    if (maxVotes < voteMatrix[i].sum()) {
+                    if (maxVotes <= voteMatrix[i].sum()) {
                         maxVotes = voteMatrix[i].sum()
                         winningCandidate = candidates[i]
                     }

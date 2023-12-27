@@ -20,7 +20,7 @@ class MajorityVotesAlgorithmTests : StringSpec({
                         this.scores = listOf()
                 }
 
-        val candidates = setOf(competitor2)
+        val candidates = listOf(competitor2)
 
         val v1 = object : SinglePreferenceVote<ScoreMetrics> {
             override var votedCompetitor: Competitor<ScoreMetrics> = competitor2
@@ -52,7 +52,7 @@ class MajorityVotesAlgorithmTests : StringSpec({
 
         shouldThrowWithMessage<IllegalStateException>("Each voter can vote only once") {
             MajorityVotesAlgorithm<ScoreMetrics>().
-            apply { this.candidates = candidates }.
+            apply { this.candidates = candidates.toList() }.
             computeByAlgorithmRules(votes)
         }
 
@@ -71,7 +71,7 @@ class MajorityVotesAlgorithmTests : StringSpec({
                 this.scores = listOf()
         }
 
-        val candidates = setOf(competitor1, competitor2)
+        val candidates = listOf(competitor1, competitor2)
 
         val v1 = object : SinglePreferenceVote<ScoreMetrics> {
             override var votedCompetitor: Competitor<ScoreMetrics> = competitor2
@@ -104,7 +104,7 @@ class MajorityVotesAlgorithmTests : StringSpec({
 
         shouldThrowWithMessage <IllegalStateException>("Each voter can vote just once for each competitor"){
         MajorityVotesAlgorithm<ScoreMetrics>(listOf(ConstantParameters.MultipleVotesAllowed)).
-        apply { this.candidates = candidates }.
+        apply { this.candidates = candidates.toList() }.
         computeByAlgorithmRules(votes)  }
 
 
@@ -126,7 +126,7 @@ class MajorityVotesAlgorithmTests : StringSpec({
             this.scores = listOf()
         }
 
-        val candidates = setOf(competitor1, competitor2)
+        val candidates = listOf(competitor1, competitor2)
 
         val v1 = object : SinglePreferenceVote<ScoreMetrics> {
             override var votedCompetitor: Competitor<ScoreMetrics> = competitor2
@@ -158,7 +158,7 @@ class MajorityVotesAlgorithmTests : StringSpec({
         val votes = listOf(v1, v2, v3)
 
         val ranking = MajorityVotesAlgorithm<ScoreMetrics>().
-        apply { this.candidates = candidates }.
+        apply { this.candidates = candidates.toList() }.
         computeByAlgorithmRules(votes).
         ranking
 
@@ -187,7 +187,7 @@ class MajorityVotesAlgorithmTests : StringSpec({
             this.scores = listOf()
         }
 
-        val candidates = setOf(competitor1, competitor2, competitor3)
+        val candidates = listOf(competitor1, competitor2, competitor3)
 
         val v1 = object : SinglePreferenceVote<ScoreMetrics> {
             override var votedCompetitor: Competitor<ScoreMetrics> = competitor2
@@ -236,7 +236,7 @@ class MajorityVotesAlgorithmTests : StringSpec({
         val votes = listOf(v1, v2, v3, v4, v5)
 
         val ranking = MajorityVotesAlgorithm<ScoreMetrics>()
-            .apply { this.candidates = candidates }.
+            .apply { this.candidates = candidates.toList() }.
             computeByAlgorithmRules(votes).
             ranking
 

@@ -2,7 +2,7 @@ package Implementations
 
 import Entities.Abstract.Competitor
 import Entities.Implementations.RankingByDescendingVotes
-import Entities.Interfaces.Score
+import Entities.Abstract.Score
 import Entities.Types.ScoreMetrics
 import Entities.Types.WinsInCampionship
 import io.kotest.assertions.throwables.shouldNotThrow
@@ -72,7 +72,7 @@ class RankingByDescendingVotesTests : StringSpec(
 
         "CompetitorRankingByDescendingVotes can have empty lists of scores" {
 
-            val competitor2Score = object : Score<WinsInCampionship> {
+            val competitor2Score = object : Score<WinsInCampionship>() {
                 override var scoreValue: WinsInCampionship = WinsInCampionship(1)
             }
             val map = mapOf<Competitor<WinsInCampionship>, Int>(

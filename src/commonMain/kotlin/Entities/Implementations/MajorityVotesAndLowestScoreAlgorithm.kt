@@ -10,9 +10,13 @@ import Entities.Types.ScoreMetrics
 
 class MajorityVotesAndLowestScoreAlgorithm<S : ScoreMetrics>(override var pollAlgorithmParameters: List<PollAlgorithmParameter> = listOf()) : PollAlgorithm<S, SinglePreferenceVote<S>> {
 
-    lateinit var candidates: Set<Competitor<S>>
+    lateinit var candidates: List<Competitor<S>>
 
     override fun computeByAlgorithmRules(votes: List<SinglePreferenceVote<S>>): Ranking<S> {
+
+        if(candidates.groupingBy { it.name }.eachCount().any { it.value > 1 }){
+            throw IllegalStateException("Candidate already declared")
+        }
 
 
         if (votes.isEmpty()) throw IllegalArgumentException("Votes list cannot be empty")

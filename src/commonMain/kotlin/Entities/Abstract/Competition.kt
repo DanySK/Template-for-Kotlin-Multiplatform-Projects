@@ -16,6 +16,8 @@ import Entities.Types.ScoreMetrics
     operator fun Competitor<T>.unaryPlus(){
         if(!this@Competition::competitors.isInitialized)
             this@Competition.competitors = listOf()
+        if(this@Competition.competitors.map { it.name }.contains(this.name))
+            throw IllegalStateException("Candidate already declared")
         this@Competition.competitors += this
     }
 
@@ -24,7 +26,7 @@ import Entities.Types.ScoreMetrics
         }.apply(compInit)
     }
 
-    override fun equals(other: Any?): Boolean {
+    /*override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other == null || this::class != other::class) return false
 
@@ -41,10 +43,10 @@ import Entities.Types.ScoreMetrics
         result = 31 * result + competitors.hashCode()
         return result
     }
-
-    override fun toString(): String {
+*/
+    /*override fun toString(): String {
         return "Competition(competitionName='$competitionName', competitors=$competitors)"
-    }
+    }*/
 
 
 }

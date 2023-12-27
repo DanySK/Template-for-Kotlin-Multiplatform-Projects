@@ -2,7 +2,7 @@ package Implementations
 
 import Entities.Abstract.Competitor
 import Entities.Implementation.MyCondorcetLikeRanking
-import Entities.Interfaces.Score
+import Entities.Abstract.Score
 import Entities.Types.WinsInCampionship
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.maps.shouldHaveSize
@@ -11,7 +11,7 @@ import io.kotest.matchers.shouldBe
 class MyCondorcetLikeRankingTests : StringSpec({
 
     "Ranking shouldn't have any number of votes"{
-        val s1 = object : Score<WinsInCampionship> {
+        val s1 = object : Score<WinsInCampionship>() {
             override var scoreValue: WinsInCampionship = WinsInCampionship(1)
 
         }

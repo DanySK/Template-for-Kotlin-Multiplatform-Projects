@@ -18,13 +18,11 @@ class PollSimulation<S : ScoreMetrics, V : Vote>: Poll<S, V>(){
     }
 
 
-    operator fun PollAlgorithm<S,V>.unaryMinus(){
-        this@PollSimulation.pollAlgorithm = this@unaryMinus
-    }
+
     fun majorityVotesAlgorithm(algInit: MajorityVotesAlgorithm<S>.()->Unit) : PollAlgorithm<S,SinglePreferenceVote<S>>{
         val a = MajorityVotesAlgorithm<S>().
         apply {
-            this.candidates = this@PollSimulation.competition.competitors.toSet()
+            this.candidates = this@PollSimulation.competition.competitors
         }.
         apply(algInit)
         return a.cast<PollAlgorithm<S,SinglePreferenceVote<S>>>()!!
@@ -34,7 +32,7 @@ class PollSimulation<S : ScoreMetrics, V : Vote>: Poll<S, V>(){
     fun majorityVotesHScoreAlgorithm(algInit: MajorityVotesAndHighestScoreAlgorithm<S>.()->Unit) : PollAlgorithm<S,SinglePreferenceVote<S>>{
         val a = MajorityVotesAndHighestScoreAlgorithm<S>().
         apply {
-            this.candidates = this@PollSimulation.competition.competitors.toSet()
+            this.candidates = this@PollSimulation.competition.competitors
         }.
         apply(algInit)
         return a.cast<PollAlgorithm<S,SinglePreferenceVote<S>>>()!!
@@ -44,7 +42,7 @@ class PollSimulation<S : ScoreMetrics, V : Vote>: Poll<S, V>(){
     fun majorityVotesLScoreAlgorithm(algInit: MajorityVotesAndLowestScoreAlgorithm<S>.()->Unit) : PollAlgorithm<S,SinglePreferenceVote<S>>{
         val a = MajorityVotesAndLowestScoreAlgorithm<S>().
         apply {
-            this.candidates = this@PollSimulation.competition.competitors.toSet()
+            this.candidates = this@PollSimulation.competition.competitors
         }.
         apply(algInit)
         return a.cast<PollAlgorithm<S,SinglePreferenceVote<S>>>()!!
@@ -54,13 +52,15 @@ class PollSimulation<S : ScoreMetrics, V : Vote>: Poll<S, V>(){
     fun condorcetAlgorithm(algInit: MyCondorcetAlgorithm<S>.()->Unit) : PollAlgorithm<S,ListOfPreferencesVote<S>>{
         val a = MyCondorcetAlgorithm<S>().
         apply{
-            this.candidates = this@PollSimulation.competition.competitors.toSet()
+            this.candidates = this@PollSimulation.competition.competitors
         }.
         apply(algInit)
         return a.cast<PollAlgorithm<S,ListOfPreferencesVote<S>>>()!!
 
     }
-
+    operator fun PollAlgorithm<S,V>.unaryMinus(){
+        this@PollSimulation.pollAlgorithm = this@unaryMinus
+    }
 
     operator fun Competition<S>.unaryMinus(){
         this@PollSimulation.competition = this@unaryMinus
@@ -81,25 +81,25 @@ class PollSimulation<S : ScoreMetrics, V : Vote>: Poll<S, V>(){
 
     infix fun String.votedBy(voterIdentifier : String) : SinglePreferenceVote<S>{
 
-         return object : SinglePreferenceVote<S>{
-             override var votedCompetitor: Competitor<S> =
-                 this@PollSimulation.competition.competitors.firstOrNull {
-                     it.name == this@votedBy
-                 }.let {
-                     it ?: throw NoSuchElementException("Voted candidate doesn't exist as object")
-                 }
+        return object : SinglePreferenceVote<S>{
+            override var votedCompetitor: Competitor<S> =
+                this@PollSimulation.competition.competitors.firstOrNull {
+                    it.name == this@votedBy
+                }.let {
+                    it ?: throw NoSuchElementException("Voted candidate doesn't exist as object")
+                }
 
-             override var voter: Voter = object : Voter{
-                 override val identifier: String
-                     get() = voterIdentifier
+            override var voter: Voter = object : Voter{
+                override val identifier: String
+                    get() = voterIdentifier
 
-             }
+            }
 
 
-         }
+        }
     }
 
-    infix fun List<String>.votedBy(voterIdentifier : String) : DescendingListOfPreferencesVote<S> {
+    infix fun List<String>.votedBy(voterIdentifier : String) : ListOfPreferencesVote<S> {
 
         if (this.isEmpty()) throw IllegalArgumentException("Votes list cannot be empty")
 
@@ -147,6 +147,7 @@ class PollSimulation<S : ScoreMetrics, V : Vote>: Poll<S, V>(){
         }
 
     }
+
 
     infix fun List<String>.then(s: String)  = this + s
     infix fun String.then(s : String)  = listOf(this,s)

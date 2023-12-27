@@ -1,6 +1,6 @@
 package Entities.Types
 
-import Entities.Interfaces.Score
+import Entities.Abstract.Score
 import kotlin.time.Duration
 
 abstract class ScoreMetrics : Comparable<Any>
@@ -16,8 +16,8 @@ data class BestTimeInMatch(val timing : Duration) : ScoreMetrics() {
 
     companion object {
         infix fun Companion.realized(duration : Duration) : Score<BestTimeInMatch> =
-            object : Score<BestTimeInMatch> {
-                override var scoreValue: BestTimeInMatch = BestTimeInMatch(duration)
+            object : Score<BestTimeInMatch>() {
+                 override var scoreValue: BestTimeInMatch = BestTimeInMatch(duration)
             }
     }
 
@@ -39,7 +39,7 @@ data class WinsInCampionship(val wins : Int) : ScoreMetrics() {
 
     companion object {
         infix fun Companion.realized(wins : Int) : Score<WinsInCampionship> =
-            object : Score<WinsInCampionship> {
+            object : Score<WinsInCampionship>() {
                 override var scoreValue: WinsInCampionship = WinsInCampionship(wins)
             }
     }

@@ -1,19 +1,16 @@
 package Entities.Abstract
 
-import Entities.Interfaces.Score
 import Entities.Types.ScoreMetrics
 
 abstract class Competitor<S : ScoreMetrics> {
     lateinit var  name: String
-    lateinit var scores: List<Score<S>>
+    var scores: List<Score<S>> = listOf()
 
      operator fun String.unaryMinus(){
          this@Competitor.name = this@unaryMinus
      }
 
      operator fun Score<S>.unaryPlus(){
-         if(!this@Competitor::scores.isInitialized)
-             this@Competitor.scores = listOf()
          this@Competitor.scores += this@unaryPlus
      }
 

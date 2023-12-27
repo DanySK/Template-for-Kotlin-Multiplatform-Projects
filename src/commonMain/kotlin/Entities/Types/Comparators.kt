@@ -1,6 +1,6 @@
 package Entities.Types
 
-import Entities.Interfaces.Score
+import Entities.Abstract.Score
 
 
 sealed class Comparators {
