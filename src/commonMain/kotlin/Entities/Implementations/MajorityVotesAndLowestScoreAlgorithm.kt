@@ -23,7 +23,7 @@ class MajorityVotesAndLowestScoreAlgorithm<S : ScoreMetrics>(override var pollAl
 
 
         if (votes.map { it.votedCompetitor }.any { it !in candidates })
-            throw IllegalStateException("Invalid vote : candidate not allowed")
+            throw IllegalStateException("Voted candidate doesn't exist as object")
 
         when (pollAlgorithmParameters.count { it == ConstantParameters.MultipleVotesAllowed }){
             0 -> {

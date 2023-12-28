@@ -9,7 +9,7 @@ class DescendingListOfPreferencesVote<S : ScoreMetrics>: ListOfPreferencesVote<S
     override lateinit var votedCompetitors: List<Competitor<S>>
     override lateinit var voter: Voter
 
-    override fun equals(other: Any?): Boolean {
+   /* override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other == null || this::class != other::class) return false
 
@@ -20,6 +20,6 @@ class DescendingListOfPreferencesVote<S : ScoreMetrics>: ListOfPreferencesVote<S
 
     override fun hashCode(): Int {
         return votedCompetitors.hashCode()
-    }
+    }*/
 
 }

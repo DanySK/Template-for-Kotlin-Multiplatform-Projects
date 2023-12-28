@@ -13,6 +13,57 @@ import io.kotest.matchers.shouldBe
 
 class MajorityVotesAlgorithmTests : StringSpec({
 
+    "Majority Algorithm should throw exception when candidates are declared more than once"{
+
+        val competitor2 = object : Competitor<ScoreMetrics>(){}.
+        apply { this.name = "Competitor 2"
+            this.scores = listOf()
+        }
+
+        val competitor21 = object : Competitor<ScoreMetrics>(){}.
+        apply { this.name = "Competitor 2"
+            this.scores = listOf()
+        }
+
+        val candidates = listOf(competitor2,competitor21)
+
+        val v1 = object : SinglePreferenceVote<ScoreMetrics> {
+            override var votedCompetitor: Competitor<ScoreMetrics> = competitor2
+            override var voter: Voter = object : Voter{
+                override val identifier: String = "anonym1"
+
+            }
+
+        }
+
+        val v2 = object : SinglePreferenceVote<ScoreMetrics> {
+            override var votedCompetitor: Competitor<ScoreMetrics> = competitor2
+            override var voter: Voter = object : Voter{
+                override val identifier: String = "anonym2"
+
+            }
+
+        }
+        val v3 = object : SinglePreferenceVote<ScoreMetrics> {
+            override var votedCompetitor: Competitor<ScoreMetrics> = competitor2
+            override var voter: Voter = object : Voter{
+                override val identifier: String = "anonym1"
+
+            }
+
+        }
+
+        val votes = listOf(v1, v2, v3)
+
+        shouldThrowWithMessage<IllegalStateException>("Candidate already declared") {
+            MajorityVotesAlgorithm<ScoreMetrics>().
+            apply { this.candidates = candidates.toList() }.
+            computeByAlgorithmRules(votes)
+        }
+
+
+    }
+
     "Majority Algorithm should throw exception when multiple vote is not allowed"{
 
         val competitor2 = object : Competitor<ScoreMetrics>(){}.
@@ -55,6 +106,104 @@ class MajorityVotesAlgorithmTests : StringSpec({
             apply { this.candidates = candidates.toList() }.
             computeByAlgorithmRules(votes)
         }
+
+
+    }
+
+    "Majority Algorithm should throw exception when MultipleVotesParameter is repeated more than once"{
+
+        val competitor2 = object : Competitor<ScoreMetrics>(){}.
+        apply { this.name = "Competitor 2"
+            this.scores = listOf()
+        }
+
+        val candidates = listOf(competitor2)
+
+        val v1 = object : SinglePreferenceVote<ScoreMetrics> {
+            override var votedCompetitor: Competitor<ScoreMetrics> = competitor2
+            override var voter: Voter = object : Voter{
+                override val identifier: String = "anonym1"
+
+            }
+
+        }
+
+        val v2 = object : SinglePreferenceVote<ScoreMetrics> {
+            override var votedCompetitor: Competitor<ScoreMetrics> = competitor2
+            override var voter: Voter = object : Voter{
+                override val identifier: String = "anonym2"
+
+            }
+
+        }
+        val v3 = object : SinglePreferenceVote<ScoreMetrics> {
+            override var votedCompetitor: Competitor<ScoreMetrics> = competitor2
+            override var voter: Voter = object : Voter{
+                override val identifier: String = "anonym1"
+
+            }
+
+        }
+
+        val votes = listOf(v1, v2, v3)
+
+        shouldThrowWithMessage<IllegalArgumentException>("Parameter can't be repeated more than once") {
+            MajorityVotesAlgorithm<ScoreMetrics>(listOf(ConstantParameters.MultipleVotesAllowed,
+                                                        ConstantParameters.MultipleVotesAllowed)).
+            apply { this.candidates = candidates.toList() }.
+            computeByAlgorithmRules(votes)
+        }
+
+
+    }
+
+    "Majority Algorithm should throw exception when vote is about a not allowed candidate"{
+
+        val competitor1 = object : Competitor<ScoreMetrics>(){}.
+        apply { this.name = "Competitor 1"
+            this.scores = listOf()
+        }
+
+        val competitor2 = object : Competitor<ScoreMetrics>(){}.
+        apply { this.name = "Competitor 2"
+            this.scores = listOf()
+        }
+
+        val candidates = listOf(competitor1)
+
+        val v1 = object : SinglePreferenceVote<ScoreMetrics> {
+            override var votedCompetitor: Competitor<ScoreMetrics> = competitor2
+            override var voter: Voter = object : Voter{
+                override val identifier: String = "anonym1"
+
+            }
+
+        }
+
+        val v2 = object : SinglePreferenceVote<ScoreMetrics> {
+            override var votedCompetitor: Competitor<ScoreMetrics> = competitor2
+            override var voter: Voter = object : Voter{
+                override val identifier: String = "anonym1"
+
+            }
+
+        }
+
+        val v3 = object : SinglePreferenceVote<ScoreMetrics> {
+            override var votedCompetitor: Competitor<ScoreMetrics> = competitor1
+            override var voter: Voter = object : Voter{
+                override val identifier: String = "anonym1"
+
+            }
+
+        }
+
+        val votes = listOf(v1, v2, v3)
+
+        shouldThrowWithMessage <IllegalStateException>("Voted candidate doesn't exist as object"){
+            MajorityVotesAlgorithm<ScoreMetrics>().
+            apply { this.candidates = candidates.toList() }.
+            computeByAlgorithmRules(votes)  }
 
 
     }

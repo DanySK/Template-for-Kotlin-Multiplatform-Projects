@@ -26,27 +26,6 @@ import Entities.Types.ScoreMetrics
         }.apply(compInit)
     }
 
-    /*override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (other == null || this::class != other::class) return false
-
-        other as Competition<*>
-
-        if (competitionName != other.competitionName) return false
-        if (competitors != other.competitors) return false
-
-        return true
-    }
-
-    override fun hashCode(): Int {
-        var result = competitionName.hashCode()
-        result = 31 * result + competitors.hashCode()
-        return result
-    }
-*/
-    /*override fun toString(): String {
-        return "Competition(competitionName='$competitionName', competitors=$competitors)"
-    }*/
 
 
 }

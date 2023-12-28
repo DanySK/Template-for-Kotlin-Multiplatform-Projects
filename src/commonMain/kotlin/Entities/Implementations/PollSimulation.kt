@@ -81,13 +81,11 @@ class PollSimulation<S : ScoreMetrics, V : Vote>: Poll<S, V>(){
 
     infix fun String.votedBy(voterIdentifier : String) : SinglePreferenceVote<S>{
 
+        val comp = this@PollSimulation.competition.competitors.firstOrNull {
+            it.name == this@votedBy
+        } ?: throw NoSuchElementException("Voted candidate doesn't exist as object")
+
         return object : SinglePreferenceVote<S>{
-            override var votedCompetitor: Competitor<S> =
-                this@PollSimulation.competition.competitors.firstOrNull {
-                    it.name == this@votedBy
-                }.let {
-                    it ?: throw NoSuchElementException("Voted candidate doesn't exist as object")
-                }
 
             override var voter: Voter = object : Voter{
                 override val identifier: String
@@ -95,7 +93,8 @@ class PollSimulation<S : ScoreMetrics, V : Vote>: Poll<S, V>(){
 
             }
 
-
+            override var votedCompetitor: Competitor<S> = comp
+            
         }
     }
 

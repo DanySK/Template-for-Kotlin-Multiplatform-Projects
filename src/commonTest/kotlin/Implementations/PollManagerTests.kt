@@ -7,7 +7,11 @@ import Entities.Interfaces.ListOfPreferencesVote
 import Entities.Interfaces.SinglePreferenceVote
 import Entities.Types.BestTimeInMatch
 import Entities.Types.BestTimeInMatch.Companion.realized
+import Entities.Types.ConstantParameters
+import Entities.Types.WinsInCampionship
+import Entities.Types.WinsInCampionship.Companion.realized
 import io.kotest.assertions.throwables.shouldNotThrowAny
+import io.kotest.assertions.throwables.shouldThrowWithMessage
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.collections.shouldContainAll
 import io.kotest.matchers.collections.shouldHaveSize
@@ -17,6 +21,194 @@ import kotlin.time.DurationUnit
 import kotlin.time.toDuration
 
 class PollManagerTests : StringSpec ({
+
+    "Should  be thrown exception when candidates are declared more than once, in any algorithm"{
+
+        shouldThrowWithMessage<IllegalStateException>("Candidate already declared") {
+            object : PollManager<BestTimeInMatch, SinglePreferenceVote<BestTimeInMatch>>() {} initializedAs {
+                +poll {
+
+                    -competition {
+                        -"Sport match"
+                        +competitor {
+                            -"Competitor 1"
+                            +(BestTimeInMatch realized (1.toDuration(DurationUnit.DAYS)))
+
+                        }
+                        +competitor {
+                            -"Competitor 1"
+                            +(BestTimeInMatch realized (1.toDuration(DurationUnit.DAYS)))
+
+                        }
+                    }
+                    -majorityVotesAlgorithm {}
+                }
+            }
+        }
+        shouldThrowWithMessage<IllegalStateException>("Candidate already declared") {
+            object : PollManager<BestTimeInMatch, SinglePreferenceVote<BestTimeInMatch>>() {} initializedAs {
+                +poll {
+
+                    -competition {
+                        -"Sport match"
+                        +competitor {
+                            -"Competitor 1"
+                            + (BestTimeInMatch realized (1.toDuration(DurationUnit.DAYS)))
+
+                        }
+                        +competitor {
+                            -"Competitor 1"
+                            + (BestTimeInMatch realized (1.toDuration(DurationUnit.DAYS)))
+
+
+                        }
+                    }
+                    -majorityVotesHScoreAlgorithm {}
+                }
+            }
+        }
+        shouldThrowWithMessage<IllegalStateException>("Candidate already declared") {
+            object : PollManager<BestTimeInMatch, SinglePreferenceVote<BestTimeInMatch>>() {} initializedAs {
+                +poll {
+
+                    -competition {
+                        -"Sport match"
+                        +competitor {
+                            -"Competitor 1"
+
+                        }
+                        +competitor {
+                            -"Competitor 1"
+
+                        }
+                    }
+                    -majorityVotesLScoreAlgorithm {}
+                }
+            }
+        }
+        shouldThrowWithMessage<IllegalStateException>("Candidate already declared") {
+            object : PollManager<BestTimeInMatch, ListOfPreferencesVote<BestTimeInMatch>>() {} initializedAs {
+                +poll {
+
+                    -competition {
+                        -"Sport match"
+                        +competitor {
+                            -"C"
+                        }
+                        +competitor {
+                            -"C"
+                        }
+
+
+                    }
+                    -condorcetAlgorithm {}
+                }
+            }
+        }
+
+
+    }
+
+    "Should be thrown exception when singlepreference vote is about a not allowed candidate"{
+
+        shouldThrowWithMessage<NoSuchElementException>("Voted candidate doesn't exist as object") {
+            object : PollManager<BestTimeInMatch, SinglePreferenceVote<BestTimeInMatch>>() {} initializedAs {
+                +poll {
+
+                    -competition {
+                        -"Sport match"
+                        +competitor {
+                            -"Competitor 1"
+                            +(BestTimeInMatch realized (1.toDuration(DurationUnit.DAYS)))
+
+                        }
+                        +competitor {
+                            -"Competitor 2"
+                            +(BestTimeInMatch realized (1.toDuration(DurationUnit.DAYS)))
+
+                        }
+                    }
+                    -majorityVotesAlgorithm {}
+                    +("a" votedBy "b")
+                }
+            }
+        }
+    }
+
+    "Should be thrown exception when listofpreferences vote contains not allowed candidate"{
+        shouldThrowWithMessage<IllegalStateException>("A list of preferences contains one o more not allowed candidate") {
+            object : PollManager<BestTimeInMatch, ListOfPreferencesVote<BestTimeInMatch>>() {} initializedAs {
+                +poll {
+
+                    -competition {
+                        -"Sport match"
+                        +competitor {
+                            -"A"
+                        }
+                        +competitor {
+                            -"C"
+                        }
+
+
+                    }
+                    -condorcetAlgorithm {}
+                    +("A" then "B" votedBy "AAA")
+                }
+            }
+        }
+    }
+
+    "Should be thrown exception when listofpreferences vote doesn't contain every allowed candidate"{
+        shouldThrowWithMessage<IllegalStateException>("Every allowed candidate must be present in every list of preferences") {
+            object : PollManager<BestTimeInMatch, ListOfPreferencesVote<BestTimeInMatch>>() {} initializedAs {
+                +poll {
+
+                    -competition {
+                        -"Sport match"
+                        +competitor {
+                            -"A"
+                        }
+                        +competitor {
+                            -"B"
+                        }
+                        +competitor {
+                            -"C"
+                        }
+
+
+                    }
+                    -condorcetAlgorithm {}
+                    +("A" then "B" votedBy "AAA")
+                }
+            }
+        }
+    }
+
+    "Should be thrown exception when listofpreferences vote contains same candidate more than once"{
+        shouldThrowWithMessage<IllegalStateException>("Every allowed candidate can be present only once in the list of competitors") {
+            object : PollManager<BestTimeInMatch, ListOfPreferencesVote<BestTimeInMatch>>() {} initializedAs {
+                +poll {
+
+                    -competition {
+                        -"Sport match"
+                        +competitor {
+                            -"A"
+                        }
+                        +competitor {
+                            -"B"
+                        }
+                        +competitor {
+                            -"C"
+                        }
+
+
+                    }
+                    -condorcetAlgorithm {}
+                    +("A" then "B" then "B" then "C" votedBy "AAA")
+                }
+            }
+        }
+    }
 
     "Poll simulation should return a ranking, computed with MajorityVotesAlgorithm" {
         val a = object : PollManager<BestTimeInMatch, SinglePreferenceVote<BestTimeInMatch>>() {} initializedAs {
@@ -37,12 +229,13 @@ class PollManagerTests : StringSpec ({
                     }
                 }
                 -majorityVotesAlgorithm {
+                    +ConstantParameters.MultipleVotesAllowed
                 }
 
                 +("Competitor 2" votedBy "J")
                 +("Competitor 2" votedBy "F")
-                +("Competitor 1" votedBy "G")
-                +("Competitor 1" votedBy "V")
+                +("Competitor 1" votedBy "J")
+                +("Competitor 1" votedBy "F")
 
 
             }
@@ -147,26 +340,26 @@ class PollManagerTests : StringSpec ({
     }
 
     "Poll simulation should return a ranking, computed with MajorityVotesAndLowestScoreAlgorithm" {
-        val a = object : PollManager<BestTimeInMatch, SinglePreferenceVote<BestTimeInMatch>>() {} initializedAs {
+        val a = object : PollManager<WinsInCampionship, SinglePreferenceVote<WinsInCampionship>>() {} initializedAs {
             +poll {
 
                 -competition {
                     -"Sport match"
                     +competitor {
                         -"Competitor 1"
-                        + (BestTimeInMatch realized (20.toDuration(DurationUnit.DAYS)))
+                        + (WinsInCampionship realized 20)
 
                     }
                     +competitor {
                         -"Competitor 2"
-                        + (BestTimeInMatch realized (1.toDuration(DurationUnit.DAYS)))
-                        + (BestTimeInMatch realized (20.toDuration(DurationUnit.DAYS)))
+                        + (WinsInCampionship realized 1)
+                        + (WinsInCampionship realized 20)
 
 
                     }
                     +competitor {
                         -"Competitor 3"
-                        + (BestTimeInMatch realized (1.toDuration(DurationUnit.DAYS)))
+                        + (WinsInCampionship realized 1)
 
 
                     }
@@ -196,17 +389,17 @@ class PollManagerTests : StringSpec ({
         entries[0].key.size shouldBe 2
         entries[1].key.size shouldBe 1
 
-        val competitor1 = object : Competitor<BestTimeInMatch>() {}.apply {
+        val competitor1 = object : Competitor<WinsInCampionship>() {}.apply {
             this.name = "Competitor 1"
-            this.scores = listOf(BestTimeInMatch realized (20.toDuration(DurationUnit.DAYS)))
+            this.scores = listOf((WinsInCampionship realized 20))
         }
-        val competitor2 = object : Competitor<BestTimeInMatch>() {}.apply {
+        val competitor2 = object : Competitor<WinsInCampionship>() {}.apply {
             this.name = "Competitor 2"
-            this.scores = listOf(BestTimeInMatch realized (1.toDuration(DurationUnit.DAYS)))
+            this.scores = listOf((WinsInCampionship realized 1))
         }
-        val competitor3 = object : Competitor<BestTimeInMatch>() {}.apply {
+        val competitor3 = object : Competitor<WinsInCampionship>() {}.apply {
             this.name = "Competitor 3"
-            this.scores = listOf(BestTimeInMatch realized (1.toDuration(DurationUnit.DAYS)))
+            this.scores = listOf((WinsInCampionship realized 1))
         }
 
         entries[0].key.map{ it.name }.shouldContainAll (competitor2.name, competitor3.name)

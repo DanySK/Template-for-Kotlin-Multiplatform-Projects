@@ -15,6 +15,72 @@ import io.kotest.matchers.shouldBe
 
 class MyCondorcetAlgorithmTests : StringSpec({
 
+    "Majority Algorithm should throw exception when candidates are declared more than once"{
+
+        val competitors =  listOf(
+            object : Competitor<BestTimeInMatch>() {}.apply {
+                this.name = "A"
+                this.scores = listOf()
+            },
+            object : Competitor<BestTimeInMatch>() {}.apply {
+                this.name = "C"
+                this.scores = listOf()
+            },
+
+            object : Competitor<BestTimeInMatch>() {}.apply {
+                this.name = "B"
+                this.scores = listOf()
+            },
+            object : Competitor<BestTimeInMatch>() {}.apply {
+                this.name = "B"
+                this.scores = listOf()
+            }
+        )
+
+        val c = MyCondorcetAlgorithm<BestTimeInMatch>().
+        apply {
+            this.candidates = competitors.toList()
+            this.pollAlgorithmParameters = listOf(ConstantParameters.MultipleVotesAllowed)
+        }
+        val l = mutableListOf<ListOfPreferencesVote<BestTimeInMatch>>()
+        for(i in 1..23){
+            val dl = DescendingListOfPreferencesVote<BestTimeInMatch>().
+            apply {
+
+                votedCompetitors =
+                    listOf(
+                        object : Competitor<BestTimeInMatch>() {}.apply {
+                            this.name = "A"
+                            this.scores = listOf()
+                        },
+                        object : Competitor<BestTimeInMatch>() {}.apply {
+                            this.name = "C"
+                            this.scores = listOf()
+                        },
+
+                        object : Competitor<BestTimeInMatch>() {}.apply {
+                            this.name = "B"
+                            this.scores = listOf()
+                        },
+
+                        )
+
+                voter = object : Voter {
+                    override val identifier: String = "V1"
+                }
+
+            }
+
+            l += dl
+        }
+        shouldThrowWithMessage <IllegalStateException>("Candidate already declared")
+        { c.computeByAlgorithmRules(l)  }
+
+
+
+
+    }
+
     "Algorithm should throw exception when multiple vote is not allowed" {
 
         val competitors = listOf(
@@ -67,6 +133,69 @@ class MyCondorcetAlgorithmTests : StringSpec({
         shouldThrowWithMessage<IllegalStateException>("Each voter can vote only once") {
             c.computeByAlgorithmRules(l)
         }
+
+
+    }
+
+    "Algorithm should throw exception when MultipleVotesParameter is repeated more than once"{
+
+        val competitors =  listOf(
+            object : Competitor<BestTimeInMatch>() {}.apply {
+                this.name = "A"
+                this.scores = listOf()
+            },
+            object : Competitor<BestTimeInMatch>() {}.apply {
+                this.name = "C"
+                this.scores = listOf()
+            },
+
+            object : Competitor<BestTimeInMatch>() {}.apply {
+                this.name = "B"
+                this.scores = listOf()
+            },
+        )
+
+        val c = MyCondorcetAlgorithm<BestTimeInMatch>().
+        apply {
+            this.candidates = competitors.toList()
+            this.pollAlgorithmParameters = listOf(ConstantParameters.MultipleVotesAllowed,
+                                                  ConstantParameters.MultipleVotesAllowed)
+        }
+        val l = mutableListOf<ListOfPreferencesVote<BestTimeInMatch>>()
+        for(i in 1..1){
+            val dl = DescendingListOfPreferencesVote<BestTimeInMatch>().
+            apply {
+
+                votedCompetitors =
+                    listOf(
+                        object : Competitor<BestTimeInMatch>() {}.apply {
+                            this.name = "A"
+                            this.scores = listOf()
+                        },
+                        object : Competitor<BestTimeInMatch>() {}.apply {
+                            this.name = "C"
+                            this.scores = listOf()
+                        },
+
+                        object : Competitor<BestTimeInMatch>() {}.apply {
+                            this.name = "B"
+                            this.scores = listOf()
+                        },
+
+                        )
+
+                voter = object : Voter {
+                    override val identifier: String = "V1"
+                }
+
+            }
+
+            l += dl
+        }
+        shouldThrowWithMessage<IllegalArgumentException>("Parameter can't be repeated more than once")
+        {
+
+            c.computeByAlgorithmRules(l)  }
 
 
     }

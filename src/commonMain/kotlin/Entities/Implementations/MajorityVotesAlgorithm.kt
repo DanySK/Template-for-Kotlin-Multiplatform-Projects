@@ -22,7 +22,7 @@ class MajorityVotesAlgorithm<S : ScoreMetrics>(override var pollAlgorithmParamet
         if (votes.isEmpty()) throw IllegalArgumentException("Votes list cannot be empty")
 
         if (votes.map { it.votedCompetitor }.any { it !in candidates })
-            throw IllegalStateException("Invalid vote : candidate not allowed")
+            throw IllegalStateException("Voted candidate doesn't exist as object")
 
         when (pollAlgorithmParameters.count { it == ConstantParameters.MultipleVotesAllowed }){
             0 -> {
