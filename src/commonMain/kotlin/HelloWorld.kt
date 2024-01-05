@@ -1,78 +1,68 @@
-import Entities.Abstract.PollManager
-import Entities.Implementations.DescendingListOfPreferencesVote
-import Entities.Interfaces.*
-import Entities.Types.BestTimeInMatch
-import Entities.Types.ConstantParameters.*
-import Entities.Types.*
-import Entities.Types.BestTimeInMatch.Companion.realized
-import Entities.Types.WinsInCampionship.Companion.realized
+/*
+import entities.implementations.PollManager
+import entities.interfaces.ListOfPreferencesVote
+import entities.interfaces.SinglePreferenceVote
+import entities.types.BestTimeInMatch
+import entities.types.BestTimeInMatch.Companion.realized
+import entities.types.ConstantParameters
+import entities.types.WinsInCampionship
+import entities.types.WinsInCampionship.Companion.realized
 import kotlin.time.DurationUnit
 import kotlin.time.toDuration
 
-/**
- * Application entrypoint.
- */
-fun main() : Unit {
+
+fun main() {
     println("Hello, ${Platform.name}!")
 
-    val a = object : PollManager<BestTimeInMatch, SinglePreferenceVote<BestTimeInMatch>>(){} initializedAs {
-        +poll {
+    val a =
+        PollManager<BestTimeInMatch, SinglePreferenceVote<BestTimeInMatch>>() initializedAs {
+            +poll {
+                -competition {
+                    -"Race"
+                    +competitor {
+                        -"compname1"
+                        +(BestTimeInMatch realized (1.toDuration(DurationUnit.HOURS)))
+                    }
 
-            -competition {
-                -"Race"
-                +competitor {
-                    -"compname1"
-                    + (BestTimeInMatch realized (1.toDuration(DurationUnit.HOURS)))
-
+                    +competitor {
+                        -"compname2"
+                        +(BestTimeInMatch realized (2.toDuration(DurationUnit.HOURS)))
+                    }
+                }
+                -majorityVotesAlgorithm {
+                    +ConstantParameters.MultipleVotesAllowed
                 }
 
-                +competitor {
-                    -"compname2"
-                    + (BestTimeInMatch realized (2.toDuration(DurationUnit.HOURS)))
-
-
-                }
-            }
-            -majorityVotesAlgorithm {
-                +MultipleVotesAllowed
-            }
-
-            + ("compname1" votedBy "b")
-
+                +("compname1" votedBy "b")
             }
         }
-        println(a)
-        a.computeAllPolls().forEach { println(it.ranking) }
+    println(a)
+    a.computeAllPolls().forEach { println(it.ranking) }
 
-
-
-    val b = object : PollManager<WinsInCampionship, ListOfPreferencesVote<WinsInCampionship>>() {} initializedAs {
-        +poll {
-
-
-            -competition {
-                -"Race"
-                +competitor {
-                    -"compname1"
-                    + (WinsInCampionship realized 1)
+    val b =
+        PollManager<WinsInCampionship, ListOfPreferencesVote<WinsInCampionship>>() initializedAs {
+            +poll {
+                -competition {
+                    -"Race"
+                    +competitor {
+                        -"compname1"
+                        +(WinsInCampionship realized 1)
+                    }
+                    +competitor {
+                        -"compname2"
+                        +(WinsInCampionship realized 1)
+                    }
                 }
-                +competitor {
-                    -"compname2"
-                    + (WinsInCampionship realized 1)
+
+                -condorcetAlgorithm {
+                    +ConstantParameters.MultipleVotesAllowed
                 }
+
+                +("compname1" then "compname2" votedBy "b")
             }
-
-            - condorcetAlgorithm {
-                +MultipleVotesAllowed
-            }
-
-            + ("compname1" then "compname2"  votedBy "b")
-
-        }
-    }//.computeAllPolls()
+        } // .computeAllPolls()
     println(b)
     b.computeAllPolls().forEach { println(it.ranking) }
-    }
+}
 
-
-
+ */

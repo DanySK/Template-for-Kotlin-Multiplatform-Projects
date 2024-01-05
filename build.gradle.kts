@@ -73,7 +73,7 @@ kotlin {
         compilations["main"].defaultSourceSet.dependsOn(kotlin.sourceSets["nativeMain"])
         compilations["test"].defaultSourceSet.dependsOn(kotlin.sourceSets["nativeTest"])
         binaries {
-            executable()
+            // executable()
             sharedLib()
             staticLib()
         }
@@ -161,8 +161,8 @@ signing {
 publishOnCentral {
     projectLongName.set("Template for Kotlin Multiplatform Project")
     projectDescription.set("A template repository for Kotlin Multiplatform projects")
-    repository("https://maven.pkg.github.com/danysk/${rootProject.name}".lowercase()) {
-        user.set("DanySK")
+    repository("https://maven.pkg.github.com/futurejcorina/${rootProject.name}".lowercase()) {
+        user.set("")
         password.set(System.getenv("GITHUB_TOKEN"))
     }
     publishing {
@@ -171,9 +171,8 @@ publishOnCentral {
                 pom {
                     developers {
                         developer {
-                            name.set("Danilo Pianini")
-                            email.set("danilo.pianini@gmail.com")
-                            url.set("http://www.danilopianini.org/")
+                            name.set("Jacopo Corina")
+                            email.set("jacopo.corina@studio.unibo.it")
                         }
                     }
                 }

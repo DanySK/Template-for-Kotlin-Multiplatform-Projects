@@ -1,4 +1,6 @@
-fun main() : Unit{
+/*
+fun main() {
+
     /*val competitors =  setOf(
         HumanCompetitor<BestTimeInMatch>("A"), HumanCompetitor("C"),
         HumanCompetitor("B"))
@@ -49,8 +51,8 @@ fun main() : Unit{
     val r = c.computeByAlgorithmRules(l)
     r.printRanking()*/
 
-
-    ///
-
-
+    // /
 }
+
+
+ */
