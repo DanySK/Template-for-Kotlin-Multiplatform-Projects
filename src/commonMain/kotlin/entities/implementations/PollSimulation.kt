@@ -1,11 +1,8 @@
 package entities.implementations
 
-import entities.abstract.CompetitionAbstraction
 import entities.abstract.PollAbstraction
-import entities.interfaces.Competition
 import entities.interfaces.Competitor
 import entities.interfaces.ListOfPreferencesVote
-import entities.interfaces.PollAlgorithm
 import entities.interfaces.SinglePreferenceVote
 import entities.interfaces.Vote
 import entities.interfaces.Voter
@@ -15,108 +12,8 @@ import entities.types.ScoreMetrics
  * This class allows to create a poll with its mandatory members.
  */
 class PollSimulation<S : ScoreMetrics, V : Vote> : PollAbstraction<S, V>() {
-    override lateinit var votesList: List<V>
 
-    private inline fun <reified A> Any.cast(): A? {
-        if (this !is A) return null
-        return this
-    }
-
-    /**
-     * DSL-function which initializes [MajorityVotesAlgorithm].
-     */
-    fun majorityVotesAlgorithm(
-        algInit: MajorityVotesAlgorithm<S>.() -> Unit,
-    ): PollAlgorithm<S, SinglePreferenceVote<S>> {
-        val a =
-            MajorityVotesAlgorithm<S>()
-                .apply {
-                    this.candidates = this@PollSimulation.competition.competitors
-                }
-                .apply(algInit)
-        return a.cast<PollAlgorithm<S, SinglePreferenceVote<S>>>()!!
-    }
-
-    /**
-     * DSL-function which initializes [MajorityVotesAndHighestScoreAlgorithm].
-     */
-    fun majorityVotesHScoreAlgorithm(
-        algInit: MajorityVotesAndHighestScoreAlgorithm<S>.() -> Unit,
-    ): PollAlgorithm<S, SinglePreferenceVote<S>> {
-        val a =
-            MajorityVotesAndHighestScoreAlgorithm<S>()
-                .apply {
-                    this.candidates = this@PollSimulation.competition.competitors
-                }
-                .apply(algInit)
-        return a.cast<PollAlgorithm<S, SinglePreferenceVote<S>>>()!!
-    }
-
-    /**
-     * DSL-function which initializes [MajorityVotesAndLowestScoreAlgorithm].
-     */
-    fun majorityVotesLScoreAlgorithm(
-        algInit: MajorityVotesAndLowestScoreAlgorithm<S>.() -> Unit,
-    ): PollAlgorithm<S, SinglePreferenceVote<S>> {
-        val a =
-            MajorityVotesAndLowestScoreAlgorithm<S>()
-                .apply {
-                    this.candidates = this@PollSimulation.competition.competitors
-                }
-                .apply(algInit)
-        return a.cast<PollAlgorithm<S, SinglePreferenceVote<S>>>()!!
-    }
-
-    /**
-     * DSL-function which initializes [MyCondorcetAlgorithm].
-     */
-    fun condorcetAlgorithm(algInit: MyCondorcetAlgorithm<S>.() -> Unit): PollAlgorithm<S, ListOfPreferencesVote<S>> {
-        val a =
-            MyCondorcetAlgorithm<S>()
-                .apply {
-                    this.candidates = this@PollSimulation.competition.competitors
-                }
-                .apply(algInit)
-        return a.cast<PollAlgorithm<S, ListOfPreferencesVote<S>>>()!!
-    }
-
-    /**
-     * Shortcut which assigns the value to [pollAlgorithm].
-     */
-    operator fun PollAlgorithm<S, V>.unaryMinus() {
-        this@PollSimulation.pollAlgorithm = this@unaryMinus
-    }
-
-    /**
-     * Shortcut which assigns the value to [competition].
-     */
-    operator fun Competition<S>.unaryMinus() {
-        this@PollSimulation.competition = this@unaryMinus
-    }
-
-    /**
-     * DSL-function which initializes a [Competition].
-     */
-    fun competition(compInit: Competition<S>.() -> Unit): Competition<S> {
-        return object : CompetitionAbstraction<S>() {}
-            .apply(compInit)
-    }
-
-    /**
-     * Shortcut to add a vote in [votesList].
-     */
-    operator fun V.unaryPlus() {
-        if (!this@PollSimulation::votesList.isInitialized) {
-            this@PollSimulation.votesList = listOf()
-        }
-        this@PollSimulation.votesList += this@unaryPlus
-    }
-
-    /**
-     * This function allows a  shortcut to create a [SinglePreferenceVote],
-     * given the name of [Competitor] voted by a [Voter], distinguished by its identifier.
-     */
-    infix fun String.votedBy(voterIdentifier: String): SinglePreferenceVote<S> {
+    override infix fun String.votedBy(voterIdentifier: String): SinglePreferenceVote<S> {
         val comp =
             this@PollSimulation.competition.competitors.firstOrNull {
                 it.name == this@votedBy
@@ -133,11 +30,7 @@ class PollSimulation<S : ScoreMetrics, V : Vote> : PollAbstraction<S, V>() {
         }
     }
 
-    /**
-     * This function allows a  shortcut to create a [ListOfPreferencesVote],
-     * given the name list of [Competitor] voted by a [Voter], distinguished by its identifier.
-     */
-    infix fun List<String>.votedBy(voterIdentifier: String): ListOfPreferencesVote<S> {
+    override infix fun List<String>.votedBy(voterIdentifier: String): ListOfPreferencesVote<S> {
         if (this.isEmpty()) error("Votes list cannot be empty")
 
         val setOfCompetitors = this.toSet()
@@ -178,4 +71,8 @@ class PollSimulation<S : ScoreMetrics, V : Vote> : PollAbstraction<S, V>() {
             votedCompetitors = listOfCompetitorObject
         }
     }
+
+    override infix fun List<String>.then(s: String): List<String> = this + s
+
+    override infix fun String.then(s: String): List<String> = listOf(this, s)
 }

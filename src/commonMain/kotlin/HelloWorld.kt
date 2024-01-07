@@ -1,5 +1,5 @@
-/*
-import entities.implementations.PollManager
+
+import entities.implementations.DefaultPollManager
 import entities.interfaces.ListOfPreferencesVote
 import entities.interfaces.SinglePreferenceVote
 import entities.types.BestTimeInMatch
@@ -10,12 +10,14 @@ import entities.types.WinsInCampionship.Companion.realized
 import kotlin.time.DurationUnit
 import kotlin.time.toDuration
 
-
+/**
+ * Main fun.
+ */
 fun main() {
     println("Hello, ${Platform.name}!")
 
     val a =
-        PollManager<BestTimeInMatch, SinglePreferenceVote<BestTimeInMatch>>() initializedAs {
+        DefaultPollManager<BestTimeInMatch, SinglePreferenceVote<BestTimeInMatch>>() initializedAs {
             +poll {
                 -competition {
                     -"Race"
@@ -40,7 +42,7 @@ fun main() {
     a.computeAllPolls().forEach { println(it.ranking) }
 
     val b =
-        PollManager<WinsInCampionship, ListOfPreferencesVote<WinsInCampionship>>() initializedAs {
+        DefaultPollManager<WinsInCampionship, ListOfPreferencesVote<WinsInCampionship>>() initializedAs {
             +poll {
                 -competition {
                     -"Race"
@@ -64,5 +66,3 @@ fun main() {
     println(b)
     b.computeAllPolls().forEach { println(it.ranking) }
 }
-
- */

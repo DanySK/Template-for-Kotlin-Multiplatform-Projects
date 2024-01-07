@@ -23,7 +23,7 @@ class PollManagerTests : StringSpec({
     "Should  be thrown exception when candidates are declared more than once, in any algorithm" {
 
         shouldThrowWithMessage<IllegalStateException>("Candidate already declared") {
-            PollManager<BestTimeInMatch, SinglePreferenceVote<BestTimeInMatch>>() initializedAs {
+            DefaultPollManager<BestTimeInMatch, SinglePreferenceVote<BestTimeInMatch>>() initializedAs {
                 +poll {
 
                     -competition {
@@ -42,7 +42,7 @@ class PollManagerTests : StringSpec({
             }
         }
         shouldThrowWithMessage<IllegalStateException>("Candidate already declared") {
-            PollManager<BestTimeInMatch, SinglePreferenceVote<BestTimeInMatch>>() initializedAs {
+            DefaultPollManager<BestTimeInMatch, SinglePreferenceVote<BestTimeInMatch>>() initializedAs {
                 +poll {
 
                     -competition {
@@ -61,7 +61,7 @@ class PollManagerTests : StringSpec({
             }
         }
         shouldThrowWithMessage<IllegalStateException>("Candidate already declared") {
-            PollManager<BestTimeInMatch, SinglePreferenceVote<BestTimeInMatch>>() initializedAs {
+            DefaultPollManager<BestTimeInMatch, SinglePreferenceVote<BestTimeInMatch>>() initializedAs {
                 +poll {
 
                     -competition {
@@ -78,7 +78,7 @@ class PollManagerTests : StringSpec({
             }
         }
         shouldThrowWithMessage<IllegalStateException>("Candidate already declared") {
-            PollManager<BestTimeInMatch, ListOfPreferencesVote<BestTimeInMatch>>() initializedAs {
+            DefaultPollManager<BestTimeInMatch, ListOfPreferencesVote<BestTimeInMatch>>() initializedAs {
                 +poll {
 
                     -competition {
@@ -99,7 +99,7 @@ class PollManagerTests : StringSpec({
     "Should be thrown exception when singlepreference vote is about a not allowed candidate" {
 
         shouldThrowWithMessage<NoSuchElementException>("Voted candidate doesn't exist as object") {
-            PollManager<BestTimeInMatch, SinglePreferenceVote<BestTimeInMatch>>() initializedAs {
+            DefaultPollManager<BestTimeInMatch, SinglePreferenceVote<BestTimeInMatch>>() initializedAs {
                 +poll {
 
                     -competition {
@@ -124,7 +124,7 @@ class PollManagerTests : StringSpec({
         shouldThrowWithMessage<IllegalStateException>(
             "A list of preferences contains one o more not allowed candidate",
         ) {
-            PollManager<BestTimeInMatch, ListOfPreferencesVote<BestTimeInMatch>>() initializedAs {
+            DefaultPollManager<BestTimeInMatch, ListOfPreferencesVote<BestTimeInMatch>>() initializedAs {
                 +poll {
 
                     -competition {
@@ -147,7 +147,7 @@ class PollManagerTests : StringSpec({
         shouldThrowWithMessage<IllegalStateException>(
             "Every allowed candidate must be present in every list of preferences",
         ) {
-            PollManager<BestTimeInMatch, ListOfPreferencesVote<BestTimeInMatch>>() initializedAs {
+            DefaultPollManager<BestTimeInMatch, ListOfPreferencesVote<BestTimeInMatch>>() initializedAs {
                 +poll {
 
                     -competition {
@@ -173,7 +173,7 @@ class PollManagerTests : StringSpec({
         shouldThrowWithMessage<IllegalStateException>(
             "Every allowed candidate can be present only once in the list of competitors",
         ) {
-            PollManager<BestTimeInMatch, ListOfPreferencesVote<BestTimeInMatch>>() initializedAs {
+            DefaultPollManager<BestTimeInMatch, ListOfPreferencesVote<BestTimeInMatch>>() initializedAs {
                 +poll {
 
                     -competition {
@@ -196,7 +196,7 @@ class PollManagerTests : StringSpec({
     }
 
     "Poll simulation should return a ranking, computed with MajorityVotesAlgorithm" {
-        val a = PollManager<BestTimeInMatch, SinglePreferenceVote<BestTimeInMatch>>() initializedAs {
+        val a = DefaultPollManager<BestTimeInMatch, SinglePreferenceVote<BestTimeInMatch>>() initializedAs {
             +poll {
 
                 -competition {
@@ -245,7 +245,7 @@ class PollManagerTests : StringSpec({
     }
 
     "Poll simulation should return a ranking, computed with MajorityVotesAndHighestScoreAlgorithm" {
-        val a = PollManager<BestTimeInMatch, SinglePreferenceVote<BestTimeInMatch>>() initializedAs {
+        val a = DefaultPollManager<BestTimeInMatch, SinglePreferenceVote<BestTimeInMatch>>() initializedAs {
             +poll {
 
                 -competition {
@@ -310,7 +310,7 @@ class PollManagerTests : StringSpec({
     }
 
     "Poll simulation should return a ranking, computed with MajorityVotesAndLowestScoreAlgorithm" {
-        val a = PollManager<WinsInCampionship, SinglePreferenceVote<WinsInCampionship>>() initializedAs {
+        val a = DefaultPollManager<WinsInCampionship, SinglePreferenceVote<WinsInCampionship>>() initializedAs {
             +poll {
 
                 -competition {
@@ -376,7 +376,7 @@ class PollManagerTests : StringSpec({
 
     "Poll simulation should return a ranking, computed with MyCondorcetAlgorithm" {
         var counter = 0
-        val a = PollManager<BestTimeInMatch, ListOfPreferencesVote<BestTimeInMatch>>() initializedAs {
+        val a = DefaultPollManager<BestTimeInMatch, ListOfPreferencesVote<BestTimeInMatch>>() initializedAs {
             +poll {
 
                 -competition {
