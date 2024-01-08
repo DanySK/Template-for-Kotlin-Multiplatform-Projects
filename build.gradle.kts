@@ -14,7 +14,7 @@ plugins {
     alias(libs.plugins.taskTree)
 }
 
-group = "jcorina"//"io.github.corinz97" //"org.jacopocorina"
+group = "io.github.corinz97" //"org.jacopocorina"
 
 repositories {
     google()
