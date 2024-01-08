@@ -159,10 +159,10 @@ signing {
 }
 
 publishOnCentral {
-    projectLongName.set("Template for Kotlin Multiplatform Project")
-    projectDescription.set("A template repository for Kotlin Multiplatform projects")
-    repository("https://maven.pkg.github.com/futurejcorina/${rootProject.name}".lowercase()) {
-        user.set("")
+    projectLongName.set("Kotlin Multiplatform Thesis Project")
+    projectDescription.set("Kotlin Multiplatform thesis project")
+    repository("https://maven.pkg.github.com/${System.getenv("GITHUB_ACTOR")}/${rootProject.name}".lowercase()) {
+        user.set(System.getenv("GITHUB_ACTOR"))
         password.set(System.getenv("GITHUB_TOKEN"))
     }
     publishing {
