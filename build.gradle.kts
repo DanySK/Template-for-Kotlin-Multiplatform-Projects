@@ -14,7 +14,7 @@ plugins {
     alias(libs.plugins.taskTree)
 }
 
-group = "org.jacopocorina"
+group = "io.github.corinz97" // "org.jacopocorina"
 
 repositories {
     google()
@@ -73,7 +73,7 @@ kotlin {
         compilations["main"].defaultSourceSet.dependsOn(kotlin.sourceSets["nativeMain"])
         compilations["test"].defaultSourceSet.dependsOn(kotlin.sourceSets["nativeTest"])
         binaries {
-            executable()
+            // executable()
             sharedLib()
             staticLib()
         }
@@ -159,10 +159,11 @@ signing {
 }
 
 publishOnCentral {
-    projectLongName.set("Template for Kotlin Multiplatform Project")
-    projectDescription.set("A template repository for Kotlin Multiplatform projects")
-    repository("https://maven.pkg.github.com/danysk/${rootProject.name}".lowercase()) {
-        user.set("DanySK")
+    projectLongName.set("Kotlin Multiplatform Thesis Project")
+    projectDescription.set("Kotlin Multiplatform thesis project")
+
+    repository("https://maven.pkg.github.com/jcorina/${rootProject.name}".lowercase()) {
+        user.set("jcorina")
         password.set(System.getenv("GITHUB_TOKEN"))
     }
     publishing {
@@ -171,9 +172,8 @@ publishOnCentral {
                 pom {
                     developers {
                         developer {
-                            name.set("Danilo Pianini")
-                            email.set("danilo.pianini@gmail.com")
-                            url.set("http://www.danilopianini.org/")
+                            name.set("Jacopo Corina")
+                            email.set("jacopo.corina@studio.unibo.it")
                         }
                     }
                 }

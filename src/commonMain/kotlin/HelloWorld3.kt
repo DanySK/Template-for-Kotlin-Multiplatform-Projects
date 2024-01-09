@@ -1,14 +1,7 @@
+/*
+fun main() {
 
-
-import Entities.Implementations.DescendingListOfPreferencesVote
-import Entities.Implementations.HumanCompetitor
-import Entities.Implementations.HumanVoter
-import Entities.Implementations.MyCondorcetAlgorithm
-import Entities.Interfaces.ListOfPreferencesVote
-import Entities.Types.BestTimeInMatch
-
-fun main() : Unit{
-    val competitors =  setOf(
+    /*val competitors =  setOf(
         HumanCompetitor<BestTimeInMatch>("A"), HumanCompetitor("C"),
         HumanCompetitor("B"))
 
@@ -56,5 +49,10 @@ fun main() : Unit{
 
 
     val r = c.computeByAlgorithmRules(l)
-    r.printRanking()
+    r.printRanking()*/
+
+    // /
 }
+
+
+ */
