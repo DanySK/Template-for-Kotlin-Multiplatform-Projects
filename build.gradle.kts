@@ -161,8 +161,9 @@ signing {
 publishOnCentral {
     projectLongName.set("Kotlin Multiplatform Thesis Project")
     projectDescription.set("Kotlin Multiplatform thesis project")
-    repository("https://maven.pkg.github.com/${System.getenv("GITHUB_ACTOR")}/${rootProject.name}".lowercase()) {
-        user.set(System.getenv("GITHUB_ACTOR"))
+
+    repository("https://maven.pkg.github.com/jcorina/${rootProject.name}".lowercase()) {
+        user.set("jcorina")
         password.set(System.getenv("GITHUB_TOKEN"))
     }
     publishing {
