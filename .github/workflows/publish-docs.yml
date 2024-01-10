@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  generate-docs:
+  gen-and-public:
     runs-on: ubuntu-22.04
     steps:
 
@@ -19,15 +19,11 @@ jobs:
          echo Generating API documentation for version $VERSION
          ./gradlew -Pversion=$VERSION dokkaHtml
 
-  publish-docs:
-    runs-on: ubuntu-22.04
-    needs: generate-docs
-    # if: ${{ github.ref == 'refs/heads/master' && github.event_name != 'pull_request' }}
-    steps:
-
      - uses: JamesIves/github-pages-deploy-action@v4
+       name: Publish API documentation
        with:
-        branch: gh-pages
-        folder: build/dokka/html
-        target-folder: api
+         branch: gh-pages
+         folder: build/dokka/html
+         target-folder: api
+
 
