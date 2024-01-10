@@ -22,8 +22,6 @@ jobs:
   publish-docs:
     runs-on: ubuntu-22.04
     steps:
-
-     - name: Deploy API documentation to Github Pages
        needs: generate-docs
        # if: ${{ github.ref == 'refs/heads/master' && github.event_name != 'pull_request' }}
        uses: JamesIves/github-pages-deploy-action@v4
