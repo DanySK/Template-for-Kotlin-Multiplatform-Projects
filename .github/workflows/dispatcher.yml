@@ -12,7 +12,6 @@ on:
       - 'renovate.json'
   pull_request:
   workflow_dispatch:
-
 jobs:
   dispatcher:
     runs-on: ubuntu-22.04
@@ -27,7 +26,6 @@ jobs:
       - dispatcher
     uses: ./.github/workflows/build-and-deploy.yml
     secrets: inherit
-
   publish-docs:
     needs:
       - ci-cd
