@@ -21,12 +21,11 @@ jobs:
 
   publish-docs:
     runs-on: ubuntu-22.04
-    steps:
-       needs: generate-docs
-       # if: ${{ github.ref == 'refs/heads/master' && github.event_name != 'pull_request' }}
-       uses: JamesIves/github-pages-deploy-action@v4
-       with:
-         branch: gh-pages
-         folder: build/dokka/html
-         target-folder: api
+    needs: generate-docs
+    # if: ${{ github.ref == 'refs/heads/master' && github.event_name != 'pull_request' }}
+    uses: JamesIves/github-pages-deploy-action@v4
+    with:
+     branch: gh-pages
+     folder: build/dokka/html
+     target-folder: api
 
