@@ -1,3 +1,10 @@
+## [0.1.24](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/compare/0.1.23...0.1.24) (2024-03-07)
+
+
+### Dependency updates
+
+* **core-deps:** update kotlin monorepo to v1.9.23 ([823692f](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/823692f30887680b8c672a7cb79be2c2c1c6b814))
+
 ## [0.1.23](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/compare/0.1.22...0.1.23) (2024-03-04)
 
 
