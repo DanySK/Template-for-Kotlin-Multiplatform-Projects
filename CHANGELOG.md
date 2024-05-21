@@ -1,3 +1,30 @@
+## [0.1.26](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/compare/0.1.25...0.1.26) (2024-05-21)
+
+
+### Dependency updates
+
+* **core-deps:** update kotlin monorepo to v2 ([61235f7](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/61235f776bbbf4daf3cfa57e862c0b55d2ace0f6))
+* **deps:** update kotest to v5.9.0 ([3e725e6](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/3e725e66eb19bca3e13d74262bc693ea36b7c796))
+* **deps:** update node.js to 20.13 ([e61a8ff](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/e61a8ff0608c71d3341c67e3c8613602c37a00a8))
+* **deps:** update plugin com.gradle.enterprise to v3.17.3 ([38dfe1c](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/38dfe1c882bb7f65ef41abe6b3b69e7a74355474))
+* **deps:** update plugin com.gradle.enterprise to v3.17.4 ([dc8564d](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/dc8564d18ebfabba08b136fe2ec289cd76a77308))
+* **deps:** update plugin gitsemver to v3.1.5 ([b6a05b5](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/b6a05b59617dbdab7bfef77456fdee5962faa877))
+* **deps:** update plugin gitsemver to v3.1.6 ([4ce755b](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/4ce755b3bef1c4f7b5b0d1134b94d0bd25427a2c))
+* **deps:** update plugin kotlin-qa to v0.61.1 ([2b61fe2](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/2b61fe27c02eeba028d95ef2a003f680307f7c7e))
+* **deps:** update plugin kotlin-qa to v0.62.0 ([fbe94ff](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/fbe94ff530e0e493f07210bfe968e6836ff58a63))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.0.5 ([4686bd7](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/4686bd7352856b4296f37a4c89c85577b7f3b505))
+* **deps:** update plugin publishoncentral to v5.1.1 ([6a39369](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/6a39369636b77bb8b7affebed70a8acb3fec9822))
+
+
+### Build and continuous integration
+
+* **deps:** update actions/checkout action to v4.1.5 ([fb9f4df](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/fb9f4dfef278548d175d5d7fe57ecb0c4c69b3b9))
+* **deps:** update actions/checkout action to v4.1.6 ([ac8eb80](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/ac8eb80c22e82ec0caa33efdff05688d19e9c6f2))
+* **deps:** update danysk/action-checkout action to v0.2.17 ([e6080a8](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/e6080a88c766b8d40f39095cb87782bc18aa7b8d))
+* **deps:** update danysk/action-checkout action to v0.2.18 ([2ec20ba](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/2ec20ba9bcf26984b2b7dfe32727424816905d4c))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.4.19 ([e0f71b8](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/e0f71b8e02aa1a0a6575fc4fd23ebb354dbc76eb))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.4.20 ([9dd89cf](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/9dd89cf1ccb43b27d61d6f3a05411c776e75550d))
+
 ## [0.1.25](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/compare/0.1.24...0.1.25) (2024-05-07)
 
 
