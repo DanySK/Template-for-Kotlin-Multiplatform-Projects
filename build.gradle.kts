@@ -1,14 +1,18 @@
 import org.danilopianini.gradle.mavencentral.JavadocJar
 import org.gradle.internal.os.OperatingSystem
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.dsl.KotlinVersion.KOTLIN_2_0
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
 plugins {
+    alias(libs.plugins.android.library)
+//    alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.kotest.multiplatform)
     alias(libs.plugins.dokka)
     alias(libs.plugins.gitSemVer)
     alias(libs.plugins.kotlin.qa)
-    alias(libs.plugins.multiJvmTesting)
     alias(libs.plugins.npm.publish)
     alias(libs.plugins.publishOnCentral)
     alias(libs.plugins.taskTree)
@@ -21,10 +25,32 @@ repositories {
     mavenCentral()
 }
 
+android {
+    namespace = "org.danilopianini"
+    compileSdk = 34
+    sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
+    defaultConfig {
+        minSdk = 21
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+}
+
+@OptIn(ExperimentalKotlinGradlePluginApi::class)
 kotlin {
+    androidTarget {
+        publishAllLibraryVariants()
+    }
+
+    jvmToolchain {
+        languageVersion = JavaLanguageVersion.of(8)
+    }
+
     jvm {
-        compilations.all {
-            kotlinOptions.jvmTarget = "1.8"
+        compilerOptions {
+            jvmTarget = JvmTarget.JVM_1_8
         }
         testRuns["test"].executionTask.configure {
             useJUnitPlatform()
@@ -44,30 +70,18 @@ kotlin {
                 implementation(libs.kotest.runner.junit5)
             }
         }
-        val nativeMain by creating {
-            dependsOn(commonMain)
-        }
-        val nativeTest by creating {
-            dependsOn(commonTest)
-        }
-
-        all {
-            languageSettings.optIn("-Xexpect-actual-classes")
-        }
     }
 
     js(IR) {
         browser()
         nodejs()
         binaries.library()
-        binaries.executable()
+//        binaries.executable()
     }
 
     val nativeSetup: KotlinNativeTarget.() -> Unit = {
-        compilations["main"].defaultSourceSet.dependsOn(kotlin.sourceSets["nativeMain"])
-        compilations["test"].defaultSourceSet.dependsOn(kotlin.sourceSets["nativeTest"])
         binaries {
-            executable()
+//            executable()
             sharedLib()
             staticLib()
         }
@@ -88,17 +102,18 @@ kotlin {
      */
     macosX64(nativeSetup)
     macosArm64(nativeSetup)
-    ios(nativeSetup)
-    watchos(nativeSetup)
-    tvos(nativeSetup)
+    iosArm64(nativeSetup)
+    iosSimulatorArm64(nativeSetup)
+    watchosArm32(nativeSetup)
+    watchosArm64(nativeSetup)
+    watchosSimulatorArm64(nativeSetup)
+    tvosArm64(nativeSetup)
+    tvosSimulatorArm64(nativeSetup)
 
-    targets.all {
-        compilations.all {
-            kotlinOptions {
-                allWarningsAsErrors = true
-                freeCompilerArgs += listOf("-Xexpect-actual-classes")
-            }
-        }
+    compilerOptions {
+        allWarningsAsErrors = true
+        apiVersion = KOTLIN_2_0
+        freeCompilerArgs.add("-Xexpect-actual-classes")
     }
 
     val os = OperatingSystem.current()
@@ -190,3 +205,4 @@ publishing {
         }
     }
 }
+
