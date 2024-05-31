@@ -4,6 +4,7 @@ import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinVersion.KOTLIN_2_0
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     alias(libs.plugins.android.library)
@@ -44,14 +45,7 @@ kotlin {
         publishAllLibraryVariants()
     }
 
-    jvmToolchain {
-        languageVersion = JavaLanguageVersion.of(8)
-    }
-
     jvm {
-        compilerOptions {
-            jvmTarget = JvmTarget.JVM_1_8
-        }
         testRuns["test"].executionTask.configure {
             useJUnitPlatform()
         }
@@ -153,6 +147,12 @@ tasks.withType<JavadocJar>().configureEach {
     from(dokka.outputDirectory)
 }
 
+tasks.withType<KotlinCompile>().configureEach {
+    compilerOptions {
+        jvmTarget = JvmTarget.JVM_1_8
+    }
+}
+
 signing {
     if (System.getenv("CI") == "true") {
         val signingKey: String? by project
@@ -205,4 +205,3 @@ publishing {
         }
     }
 }
-
