@@ -1,3 +1,34 @@
+## [0.2.0](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/compare/0.1.26...0.2.0) (2024-06-08)
+
+
+### Features
+
+* enable android target and adapt the build to kotlin 2 ([7c3b359](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/7c3b35952534b276a489dc32f4e6e35ebf48a7ac))
+
+
+### Dependency updates
+
+* **deps:** update dependency gradle to v8.8 ([c377365](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/c37736559ddd3c94f44054207f9955eb6ac59685))
+* **deps:** update node.js to 20.14 ([b4eefcc](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/b4eefccf1a2ff638718cdb560ff737262c82c5cb))
+* **deps:** update plugin gitsemver to v3.1.7 ([e1533e0](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/e1533e0a01f0c7c2e5bd5bc503b08bc2fe365542))
+* **deps:** update plugin kotlin-qa to v0.62.1 ([789f346](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/789f3468e92d2f3958ba93a3d844eba935b357b3))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.0.6 ([55130d6](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/55130d614488ef9d352e8783264df74dc96e4862))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.0.7 ([487f9cb](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/487f9cbbebb64b7d30e948c339f56663061571ec))
+* **deps:** update plugin publishoncentral to v5.1.2 ([175eb2e](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/175eb2ec91a56601dd56f9c73ee590a923bc27e4))
+
+
+### Build and continuous integration
+
+* enable binary executable for native and JS ([df4b14c](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/df4b14cc7d0c9c5086cbdf8dad6f0c41be00b2af))
+* migrate to develocity plugin ([d8b977c](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/d8b977cb721c9eee247ffb68fc9c8ae1097e2092))
+* reduce boilerplate ([e31f95d](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/e31f95dee2926d69080c12b1e12e160bbc1eef2f))
+
+
+### General maintenance
+
+* exclude .kotlin folder ([a8539e9](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/a8539e9d04071265a6aa8a1e26e76caecd007c2f))
+* solve deprecation warnings and opt-in for expect/actual ([418af5c](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/commit/418af5cd374e6a0c0cb5cb2b6aebc22f88c07a56))
+
 ## [0.1.26](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects/compare/0.1.25...0.1.26) (2024-05-21)
 
 
