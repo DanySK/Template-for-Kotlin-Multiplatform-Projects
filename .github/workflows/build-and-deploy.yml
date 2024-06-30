@@ -105,7 +105,7 @@ jobs:
     steps:
       - name: Checkout the repo
         uses: actions/checkout@v4.1.7
-      - uses: DanySK/build-check-deploy-gradle-action@1.2.13
+      - uses: DanySK/build-check-deploy-gradle-action@1.2.16
         with:
           maven-central-username: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
           maven-central-password: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
