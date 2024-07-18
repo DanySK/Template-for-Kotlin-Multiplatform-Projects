@@ -47,6 +47,13 @@ kotlin {
         testRuns["test"].executionTask.configure {
             useJUnitPlatform()
         }
+        compilations.all {
+            compileTaskProvider.configure {
+                compilerOptions {
+                    jvmTarget = JvmTarget.JVM_1_8
+                }
+            }
+        }
     }
 
     sourceSets {
@@ -149,12 +156,6 @@ tasks.withType<JavadocJar>().configureEach {
     val dokka = tasks.dokkaHtml.get()
     dependsOn(dokka)
     from(dokka.outputDirectory)
-}
-
-tasks.withType<KotlinCompile>().configureEach {
-    compilerOptions {
-        jvmTarget = JvmTarget.JVM_1_8
-    }
 }
 
 signing {
