@@ -1,9 +1,7 @@
 import org.danilopianini.gradle.mavencentral.JavadocJar
 import org.gradle.internal.os.OperatingSystem
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import org.jetbrains.kotlin.gradle.dsl.KotlinVersion.KOTLIN_2_0
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     alias(libs.plugins.android.library)
@@ -32,16 +30,14 @@ android {
     defaultConfig {
         minSdk = 21
     }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
 }
 
 kotlin {
     androidTarget {
         publishAllLibraryVariants()
     }
+
+    jvmToolchain(21)
 
     jvm {
         testRuns["test"].executionTask.configure {
@@ -114,7 +110,6 @@ kotlin {
             compileTaskProvider.configure {
                 compilerOptions {
                     allWarningsAsErrors = true
-                    apiVersion = KOTLIN_2_0
                     freeCompilerArgs.add("-Xexpect-actual-classes")
                 }
             }
