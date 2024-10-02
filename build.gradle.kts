@@ -1,10 +1,7 @@
 import org.danilopianini.gradle.mavencentral.JavadocJar
 import org.gradle.internal.os.OperatingSystem
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import org.jetbrains.kotlin.gradle.dsl.KotlinVersion.KOTLIN_2_0
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     alias(libs.plugins.android.library)
@@ -33,21 +30,25 @@ android {
     defaultConfig {
         minSdk = 21
     }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
 }
 
-@OptIn(ExperimentalKotlinGradlePluginApi::class)
 kotlin {
     androidTarget {
         publishAllLibraryVariants()
     }
 
+    jvmToolchain(21)
+
     jvm {
         testRuns["test"].executionTask.configure {
             useJUnitPlatform()
+        }
+        compilations.all {
+            compileTaskProvider.configure {
+                compilerOptions {
+                    jvmTarget = JvmTarget.JVM_1_8
+                }
+            }
         }
     }
 
@@ -104,10 +105,15 @@ kotlin {
     tvosArm64(nativeSetup)
     tvosSimulatorArm64(nativeSetup)
 
-    compilerOptions {
-        allWarningsAsErrors = true
-        apiVersion = KOTLIN_2_0
-        freeCompilerArgs.add("-Xexpect-actual-classes")
+    targets.all {
+        compilations.all {
+            compileTaskProvider.configure {
+                compilerOptions {
+                    allWarningsAsErrors = true
+                    freeCompilerArgs.add("-Xexpect-actual-classes")
+                }
+            }
+        }
     }
 
     val os = OperatingSystem.current()
@@ -145,12 +151,6 @@ tasks.withType<JavadocJar>().configureEach {
     val dokka = tasks.dokkaHtml.get()
     dependsOn(dokka)
     from(dokka.outputDirectory)
-}
-
-tasks.withType<KotlinCompile>().configureEach {
-    compilerOptions {
-        jvmTarget = JvmTarget.JVM_1_8
-    }
 }
 
 signing {
