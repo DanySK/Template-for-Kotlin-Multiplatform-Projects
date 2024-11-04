@@ -130,7 +130,7 @@ kotlin {
             compileTaskProvider.get().enabled = false
             tasks[processResourcesTaskName].enabled = false
         }
-        binaries.configureEach { linkTask.enabled = false }
+        binaries.configureEach { linkTaskProvider.configure { enabled = false } }
 
         mavenPublication {
             tasks.withType<AbstractPublishToMaven>().configureEach {
