@@ -69,10 +69,12 @@ kotlin {
         browser()
         nodejs()
         d8()
+        binaries.library()
     }
 
     wasmWasi {
         nodejs()
+        binaries.library()
     }
 
     val nativeSetup: KotlinNativeTarget.() -> Unit = {
