@@ -1,5 +1,6 @@
 import org.danilopianini.gradle.mavencentral.JavadocJar
 import org.gradle.internal.os.OperatingSystem
+import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
@@ -26,6 +27,7 @@ multiJvm {
     jvmVersionForCompilation.set(21)
 }
 
+@OptIn(ExperimentalWasmDsl::class)
 kotlin {
     jvmToolchain(21)
 
@@ -62,6 +64,9 @@ kotlin {
         nodejs()
         binaries.library()
     }
+
+    wasmJs()
+    wasmWasi()
 
     val nativeSetup: KotlinNativeTarget.() -> Unit = {
         binaries {
