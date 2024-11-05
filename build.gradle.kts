@@ -4,8 +4,6 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
 plugins {
-    alias(libs.plugins.android.library)
-//    alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.kotest.multiplatform)
     alias(libs.plugins.dokka)
@@ -23,20 +21,7 @@ repositories {
     mavenCentral()
 }
 
-android {
-    namespace = "org.danilopianini"
-    compileSdk = 34
-    sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
-    defaultConfig {
-        minSdk = 21
-    }
-}
-
 kotlin {
-    androidTarget {
-        publishAllLibraryVariants()
-    }
-
     jvmToolchain(21)
 
     jvm {
