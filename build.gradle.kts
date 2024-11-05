@@ -27,7 +27,6 @@ multiJvm {
     jvmVersionForCompilation.set(21)
 }
 
-@OptIn(ExperimentalWasmDsl::class)
 kotlin {
     jvmToolchain(21)
 
