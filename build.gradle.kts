@@ -65,8 +65,15 @@ kotlin {
         binaries.library()
     }
 
-    wasmJs()
-    wasmWasi()
+    wasmJs {
+        browser()
+        nodejs()
+        d8()
+    }
+
+    wasmWasi {
+        nodejs()
+    }
 
     val nativeSetup: KotlinNativeTarget.() -> Unit = {
         binaries {
