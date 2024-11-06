@@ -1,15 +1,17 @@
 import org.danilopianini.gradle.mavencentral.JavadocJar
 import org.gradle.internal.os.OperatingSystem
+import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
 plugins {
-    alias(libs.plugins.kotlin.multiplatform)
-    alias(libs.plugins.kotest.multiplatform)
     alias(libs.plugins.dokka)
     alias(libs.plugins.gitSemVer)
+    alias(libs.plugins.kotlin.multiplatform)
+    alias(libs.plugins.kotest.multiplatform)
     alias(libs.plugins.kotlin.qa)
     alias(libs.plugins.npm.publish)
+    alias(libs.plugins.multiJvmTesting)
     alias(libs.plugins.publishOnCentral)
     alias(libs.plugins.taskTree)
 }
@@ -21,6 +23,11 @@ repositories {
     mavenCentral()
 }
 
+multiJvm {
+    jvmVersionForCompilation.set(21)
+}
+
+@OptIn(ExperimentalWasmDsl::class)
 kotlin {
     jvmToolchain(21)
 
@@ -56,12 +63,23 @@ kotlin {
         browser()
         nodejs()
         binaries.library()
-//        binaries.executable()
     }
+
+    wasmJs {
+        browser()
+        nodejs()
+        d8()
+        binaries.library()
+    }
+
+    // Temporarily disabled due to https://youtrack.jetbrains.com/issue/KT-72858
+//    wasmWasi {
+//        nodejs()
+//        binaries.library()
+//    }
 
     val nativeSetup: KotlinNativeTarget.() -> Unit = {
         binaries {
-//            executable()
             sharedLib()
             staticLib()
         }
