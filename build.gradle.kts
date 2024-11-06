@@ -72,10 +72,11 @@ kotlin {
         binaries.library()
     }
 
-    wasmWasi {
-        nodejs()
-        binaries.library()
-    }
+    // Temporarily disabled due to https://youtrack.jetbrains.com/issue/KT-72858
+//    wasmWasi {
+//        nodejs()
+//        binaries.library()
+//    }
 
     val nativeSetup: KotlinNativeTarget.() -> Unit = {
         binaries {
