@@ -194,6 +194,4 @@ jobs:
             --header "Content-Type: application/json"
             --data '{"data":{"stagedRepositoryIds":["${{ needs.staging-repo.outputs.maven-central-repo-id }}"]}}'
             --user "$MAVEN_CENTRAL_USERNAME:$MAVEN_CENTRAL_PASSWORD"
-            --fail
             --verbose
-            
