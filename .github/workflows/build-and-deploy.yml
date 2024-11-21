@@ -186,12 +186,12 @@ jobs:
       - env:
           MAVEN_CENTRAL_USERNAME: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
           MAVEN_CENTRAL_PASSWORD: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
-        run: >-
+        run: >
           curl
-            --request POST
-            --url "https://s01.oss.sonatype.org/service/local/staging/bulk/drop"
-            --header "Accept: application/json"
-            --header "Content-Type: application/json"
-            --data '{"data":{"stagedRepositoryIds":["${{ needs.staging-repo.outputs.maven-central-repo-id }}"]}}'
-            --user "$MAVEN_CENTRAL_USERNAME:$MAVEN_CENTRAL_PASSWORD"
-            --verbose
+          --request POST
+          --url "https://s01.oss.sonatype.org/service/local/staging/bulk/drop"
+          --header "Accept: application/json"
+          --header "Content-Type: application/json"
+          --data '{"data":{"stagedRepositoryIds":["${{ needs.staging-repo.outputs.maven-central-repo-id }}"]}}'
+          --user "$MAVEN_CENTRAL_USERNAME:$MAVEN_CENTRAL_PASSWORD"
+          --verbose
