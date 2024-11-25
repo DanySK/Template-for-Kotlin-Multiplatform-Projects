@@ -146,6 +146,7 @@ jobs:
         env:
           STAGING_REPO_ID: ${{ needs.staging-repo.outputs.maven-central-repo-id }}
         with:
+          retries-on-failure: '1'
           build-command: true
           check-command: true
           deploy-command: |
