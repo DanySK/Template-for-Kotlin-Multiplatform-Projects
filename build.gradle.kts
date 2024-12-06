@@ -120,12 +120,13 @@ kotlin {
     }
 
     val os = OperatingSystem.current()
-    val excludeTargets = when {
-        os.isLinux -> kotlin.targets.filterNot { "linux" in it.name }
-        os.isWindows -> kotlin.targets.filterNot { "mingw" in it.name }
-        os.isMacOsX -> kotlin.targets.filter { "linux" in it.name || "mingw" in it.name }
-        else -> emptyList()
-    }.mapNotNull { it as? KotlinNativeTarget }
+    val excludeTargets =
+        when {
+            os.isLinux -> kotlin.targets.filterNot { "linux" in it.name }
+            os.isWindows -> kotlin.targets.filterNot { "mingw" in it.name }
+            os.isMacOsX -> kotlin.targets.filter { "linux" in it.name || "mingw" in it.name }
+            else -> emptyList()
+        }.mapNotNull { it as? KotlinNativeTarget }
 
     configure(excludeTargets) {
         compilations.configureEach {
