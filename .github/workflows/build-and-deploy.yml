@@ -12,7 +12,6 @@ jobs:
   check-secrets:
     runs-on: ubuntu-24.04
     outputs:
-      next-version: ${{ steps.build.outputs.next-version }}
       run-with-secrets: ${{ steps.require-secrets.outputs.run-with-secrets }}
     steps:
       - name: Find if secrets are available
@@ -24,13 +23,19 @@ jobs:
         id: require-secrets
         run: |
           echo "run-with-secrets=${{ steps.detect-secrets.outputs.has-secrets == 'true' && !github.event.repository.fork }}" >> $GITHUB_OUTPUT
+
+  precompute-next-version:
+    runs-on: ubuntu-24.04
+    outputs:
+      next-version: ${{ steps.compute-next-version.outputs.next-version }}
+    steps:
       - name: Compute next release version
         id: compute-next-version
         uses: nicolasfara/precompute-semantic-release-version-action@2.0.2
         with:
           github-token: ${{ github.token }}
 
-#  staging-repo:
+  #  staging-repo:
 #    runs-on: ubuntu-24.04
 #    needs:
 #      - check-secrets
@@ -77,6 +82,7 @@ jobs:
   build:
     needs:
       - check-secrets
+      - precompute-next-version
 #      - staging-repo
 #    if: always() && !contains(needs.staging-repo.result, 'failure')
     strategy:
@@ -96,9 +102,9 @@ jobs:
         with:
           should-deploy: ${{ runner.os == 'macOS'}} # Deploy from macOS since it supports all the platforms
           deploy-command: |
-            NEXT_VERSION="${{ needs.check-secrets.outputs.next-version }}"
+            NEXT_VERSION="${{ needs.precompute-next-version.outputs.next-version }}"
             OVERRIDE_VERSION=$([[ "$NEXT_VERSION" != "" ]] && echo "-PforceVersion=$(echo $NEXT_VERSION)" || echo "")
-            ./gradlew $OVERRIDE_VERSION -PforceVersion="${{ steps.compute-next-version.outputs.next-version }}" createStagingRepositoryOnMavenCentral uploadAll close --parallel
+            ./gradlew $OVERRIDE_VERSION createStagingRepositoryOnMavenCentral uploadAll close --parallel
 
             [[ -f build/staging-repo-ids.properties ]] || (
               echo "Staging repositories ID file not found" &&
@@ -144,6 +150,7 @@ jobs:
       cancel-in-progress: false
     needs:
       - check-secrets
+      - precompute-next-version
 #      - staging-repo
       - build
 #      - close-staging-repos
@@ -182,6 +189,7 @@ jobs:
     needs:
       - check-secrets
       - build
+      - precompute-next-version
 #      - staging-repo
 #      - close-staging-repos
       - release
