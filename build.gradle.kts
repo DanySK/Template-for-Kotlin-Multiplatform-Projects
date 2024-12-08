@@ -1,6 +1,4 @@
 import org.danilopianini.gradle.mavencentral.JavadocJar
-import org.gradle.internal.os.OperatingSystem
-import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
@@ -118,32 +116,32 @@ kotlin {
         }
     }
 
-    val os = OperatingSystem.current()
-    val excludeTargets =
-        when {
-            os.isLinux -> kotlin.targets.filterNot { "linux" in it.name }
-            os.isWindows -> kotlin.targets.filterNot { "mingw" in it.name }
-            os.isMacOsX -> kotlin.targets.filter { "linux" in it.name || "mingw" in it.name }
-            else -> emptyList()
-        }.mapNotNull { it as? KotlinNativeTarget }
-
-    configure(excludeTargets) {
-        compilations.configureEach {
-            cinterops.configureEach { tasks[interopProcessingTaskName].enabled = false }
-            compileTaskProvider.get().enabled = false
-            tasks[processResourcesTaskName].enabled = false
-        }
-        binaries.configureEach { linkTaskProvider.configure { enabled = false } }
-
-        mavenPublication {
-            tasks.withType<AbstractPublishToMaven>().configureEach {
-                onlyIf { publication != this@mavenPublication }
-            }
-            tasks.withType<GenerateModuleMetadata>().configureEach {
-                onlyIf { publication.get() != this@mavenPublication }
-            }
-        }
-    }
+//    val os = OperatingSystem.current()
+//    val excludeTargets =
+//        when {
+//            os.isLinux -> kotlin.targets.filterNot { "linux" in it.name }
+//            os.isWindows -> kotlin.targets.filterNot { "mingw" in it.name }
+//            os.isMacOsX -> kotlin.targets.filter { "linux" in it.name || "mingw" in it.name }
+//            else -> emptyList()
+//        }.mapNotNull { it as? KotlinNativeTarget }
+//
+//    configure(excludeTargets) {
+//        compilations.configureEach {
+//            cinterops.configureEach { tasks[interopProcessingTaskName].enabled = false }
+//            compileTaskProvider.get().enabled = false
+//            tasks[processResourcesTaskName].enabled = false
+//        }
+//        binaries.configureEach { linkTaskProvider.configure { enabled = false } }
+//
+//        mavenPublication {
+//            tasks.withType<AbstractPublishToMaven>().configureEach {
+//                onlyIf { publication != this@mavenPublication }
+//            }
+//            tasks.withType<GenerateModuleMetadata>().configureEach {
+//                onlyIf { publication.get() != this@mavenPublication }
+//            }
+//        }
+//    }
 }
 
 tasks.dokkaJavadoc {
