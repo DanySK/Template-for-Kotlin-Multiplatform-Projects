@@ -12,6 +12,7 @@ jobs:
   check-secrets:
     runs-on: ubuntu-24.04
     outputs:
+      next-version: ${{ steps.build.outputs.next-version }}
       run-with-secrets: ${{ steps.require-secrets.outputs.run-with-secrets }}
     steps:
       - name: Find if secrets are available
@@ -23,6 +24,11 @@ jobs:
         id: require-secrets
         run: |
           echo "run-with-secrets=${{ steps.detect-secrets.outputs.has-secrets == 'true' && !github.event.repository.fork }}" >> $GITHUB_OUTPUT
+      - name: Compute next release version
+        id: compute-next-version
+        uses: nicolasfara/precompute-semantic-release-version-action@2.0.2
+        with:
+          github-token: ${{ github.token }}
 
 #  staging-repo:
 #    runs-on: ubuntu-24.04
@@ -79,26 +85,20 @@ jobs:
         os: [ windows-2022, macos-14, ubuntu-24.04 ]
     runs-on: ${{ matrix.os }}
     outputs:
-      next-version: ${{ steps.build.outputs.next-version }}
       staging-repo-id: ${{ steps.staging-repo.outputs.MavenCentral }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4.2.2
         with:
           fetch-depth: 0
-      - name: Compute next release version
-        id: compute-next-version
-        uses: nicolasfara/precompute-semantic-release-version-action@2.0.2
-        with:
-          github-token: ${{ github.token }}
       - uses: DanySK/build-check-deploy-gradle-action@3.5.25
         id: staging-repo
         with:
           should-deploy: ${{ runner.os == 'macOS'}} # Deploy from macOS since it supports all the platforms
           deploy-command: |
-            NEXT_VERSION="${{ needs.build.outputs.next-version }}"
+            NEXT_VERSION="${{ needs.check-secrets.outputs.next-version }}"
             OVERRIDE_VERSION=$([[ "$NEXT_VERSION" != "" ]] && echo "-PforceVersion=$(echo $NEXT_VERSION)" || echo "")
-            ./gradlew $OVERRIDE_VERSION uploadAll close --parallel
+            ./gradlew $OVERRIDE_VERSION -PforceVersion="${{ steps.compute-next-version.outputs.next-version }}" createStagingRepositoryOnMavenCentral uploadAll close --parallel
 
             [[ -f build/staging-repo-ids.properties ]] || (
               echo "Staging repositories ID file not found" &&
