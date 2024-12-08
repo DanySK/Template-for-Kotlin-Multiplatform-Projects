@@ -108,7 +108,7 @@ jobs:
           deploy-command: |
             NEXT_VERSION="${{ needs.precompute-next-version.outputs.next-version }}"
             OVERRIDE_VERSION=$([[ "$NEXT_VERSION" != "" ]] && echo "-PforceVersion=$(echo $NEXT_VERSION)" || echo "")
-            ./gradlew $OVERRIDE_VERSION createStagingRepositoryOnMavenCentral uploadAll close --parallel
+            ./gradlew createStagingRepositoryOnMavenCentral --parallel
 
             [[ -f build/staging-repo-ids.properties ]] || (
               echo "Staging repositories ID file not found" &&
@@ -117,6 +117,8 @@ jobs:
             REPO_IDS=$(cat build/staging-repo-ids.properties)
             echo "Staging repositories IDs:\n$REPO_IDS"
             echo $REPO_IDS >> $GITHUB_OUTPUT
+            
+            ./gradlew $OVERRIDE_VERSION -PstagingRepositoryId=$REPO_IDS uploadAll close --parallel
           should-run-codecov: ${{ runner.os == 'Linux' }}
           codecov-token: ${{ secrets.CODECOV_TOKEN }}
           maven-central-username: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
