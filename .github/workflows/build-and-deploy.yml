@@ -50,7 +50,7 @@ jobs:
         os: [ windows-2022, macos-14, ubuntu-24.04 ]
     runs-on: ${{ matrix.os }}
     outputs:
-      staging-repo-id: ${{ steps.staging-repo.outputs.MavenCentral }}
+      staging-repo-id: ${{ steps.staging-repo.outputs.MavenCentral || '' }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4.2.2
