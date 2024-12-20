@@ -1,2 +1,5 @@
 [*.{kt,kts}]
 max_line_length=120
+
+[**/*{t,T}est/kotlin/**.kt]
+ktlint_standard_class-signature = disabled
