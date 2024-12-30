@@ -1,4 +1,4 @@
-import org.danilopianini.gradle.mavencentral.JavadocJar
+import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
@@ -26,6 +26,11 @@ multiJvm {
 }
 
 kotlin {
+    compilerOptions {
+        // Temporarily disable warnings as errors until kotest/kotest#4521 is released
+        allWarningsAsErrors = false
+    }
+
     jvmToolchain(21)
 
     jvm {
@@ -62,6 +67,7 @@ kotlin {
         binaries.library()
     }
 
+    @OptIn(ExperimentalWasmDsl::class)
     wasmJs {
         browser()
         nodejs()
@@ -115,16 +121,6 @@ kotlin {
             }
         }
     }
-}
-
-tasks.dokkaJavadoc {
-    enabled = false
-}
-
-tasks.withType<JavadocJar>().configureEach {
-    val dokka = tasks.dokkaHtml.get()
-    dependsOn(dokka)
-    from(dokka.outputDirectory)
 }
 
 signing {
